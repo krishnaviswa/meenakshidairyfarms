@@ -1,0 +1,378 @@
+---
+import Base from "../../layouts/Base.astro";
+import { useT, localizePath, type Lang } from "../../i18n";
+import { products, WA_NUMBER } from "../../data/products";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useT(lang);
+const seo = t("seo.order");
+const cow = products.find((p) => p.key === "cow")!;
+const buf = products.find((p) => p.key === "buffalo")!;
+
+// Everything the client script needs, in one JSON blob (no define:vars so the
+// script can still be bundled with its imports).
+const cfg = {
+  lang,
+  waNumber: WA_NUMBER,
+  upiVpa: "",            // set from Supabase site_settings in Phase 2
+  upiName: t("common.brand"),
+  rates: { cow: cow.pricePerLitre, buffalo: buf.pricePerLitre },
+  s: t("order"),
+  common: { perLitre: t("common.perLitre"), cow: t("common.cow"), buffalo: t("common.buffalo") },
+};
+---
+
+<Base lang={lang} path="/order" title={seo.title} description={seo.description}>
+  <section class="wrap narrow" style="max-width:600px">
+    <p class="eyebrow">{t("order.eyebrow")}</p>
+    <h1>{t("order.title")}</h1>
+    <p class="lede">{t("order.sub")}</p>
+
+    <form id="orderForm" class="card" style="margin-top:22px;display:grid;gap:15px" novalidate>
+      <div class="field" id="f-name">
+        <label class="q" for="name">{t("order.l_name")} <span class="req">*</span></label>
+        <input type="text" id="name" name="name" autocomplete="name" placeholder={t("order.ph_name")} />
+        <div class="err">{t("order.e_name")}</div>
+      </div>
+
+      <div class="field" id="f-phone">
+        <label class="q" for="phone">{t("order.l_phone")} <span class="req">*</span>
+          <span class="hint">{t("order.h_phone")}</span></label>
+        <input type="tel" id="phone" name="phone" inputmode="numeric" autocomplete="tel" placeholder={t("order.ph_phone")} />
+        <div class="err">{t("order.e_phone")}</div>
+      </div>
+
+      <div class="field" id="f-addr1">
+        <label class="q" for="addr1">{t("order.l_addr1")} <span class="req">*</span></label>
+        <input type="text" id="addr1" name="addr1" autocomplete="address-line1" placeholder={t("order.ph_addr1")} />
+        <div class="err">{t("order.e_addr1")}</div>
+      </div>
+
+      <div class="row2">
+        <div class="field" id="f-area">
+          <label class="q" for="area">{t("order.l_area")}</label>
+          <input type="text" id="area" name="area" autocomplete="address-line2" placeholder={t("order.ph_area")} />
+        </div>
+        <div class="field" id="f-pin">
+          <label class="q" for="pin">{t("order.l_pin")}</label>
+          <input type="text" id="pin" name="pin" inputmode="numeric" autocomplete="postal-code" maxlength="6" />
+        </div>
+      </div>
+
+      <div class="field" id="f-milk">
+        <label class="q">{t("order.l_milk")} <span class="req">*</span></label>
+        <p class="hint">{t("order.milk_hint")}</p>
+        <div class="milkrows">
+          <div class="milkrow" id="mr-cow">
+            <div class="mr-info">
+              <span class="pname">{t("order.p_cow")}</span>
+              <span class="pbreed">{t("order.p_cow_b")} · ₹{cow.pricePerLitre}/{t("order.litre_word")}</span>
+            </div>
+            <div class="stepper">
+              <button type="button" data-step="cow" data-dir="-1" aria-label="−">–</button>
+              <input type="number" id="qtyCow" value="1" min="0" step="0.5" inputmode="decimal" aria-label={t("order.p_cow")} />
+              <button type="button" data-step="cow" data-dir="1" aria-label="+">+</button>
+            </div>
+          </div>
+          <div class="milkrow" id="mr-buf">
+            <div class="mr-info">
+              <span class="pname">{t("order.p_buf")}</span>
+              <span class="pbreed">{t("order.p_buf_b")} · ₹{buf.pricePerLitre}/{t("order.litre_word")}</span>
+            </div>
+            <div class="stepper">
+              <button type="button" data-step="buffalo" data-dir="-1" aria-label="−">–</button>
+              <input type="number" id="qtyBuf" value="0" min="0" step="0.5" inputmode="decimal" aria-label={t("order.p_buf")} />
+              <button type="button" data-step="buffalo" data-dir="1" aria-label="+">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="err">{t("order.e_qty")}</div>
+      </div>
+
+      <div class="field" id="f-freq">
+        <label class="q" for="freq">{t("order.l_freq")} <span class="req">*</span></label>
+        <select id="freq" name="freq">
+          <option value="daily">{t("order.fr_daily")}</option>
+          <option value="alt">{t("order.fr_alt")}</option>
+          <option value="once">{t("order.fr_once")}</option>
+        </select>
+      </div>
+
+      <div class="field" id="f-date">
+        <label class="q" for="startdate">{t("order.l_date")}</label>
+        <input type="date" id="startdate" name="startdate" />
+      </div>
+
+      <div class="field" id="f-notes">
+        <label class="q" for="notes">{t("order.l_notes")} <span class="hint">{t("order.h_notes")}</span></label>
+        <textarea id="notes" name="notes" placeholder={t("order.ph_notes")}></textarea>
+      </div>
+
+      <div class="summary">
+        <div>
+          <span class="lbl">{t("order.est_label")}</span>
+          <div class="amt" id="estAmt">₹{cow.pricePerLitre}</div>
+        </div>
+        <span class="per" id="estPer"></span>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.14c-.24.68-1.42 1.31-1.95 1.36-.5.05-1.13.07-1.83-.11-.42-.13-.96-.31-1.66-.61-2.92-1.26-4.83-4.2-4.98-4.4-.15-.2-1.19-1.58-1.19-3.02s.76-2.14 1.03-2.44c.27-.29.58-.37.78-.37l.56.01c.18.01.42-.07.66.5.24.59.82 2.03.89 2.18.07.15.12.32.02.51-.09.2-.14.32-.28.49-.14.17-.3.38-.42.51-.14.14-.29.29-.12.57.17.28.75 1.24 1.61 2 1.11.99 2.05 1.29 2.34 1.44.29.14.46.12.63-.07.17-.2.72-.84.91-1.12.19-.29.39-.24.66-.14.27.09 1.7.8 1.99.95.29.14.48.21.55.33.07.12.07.68-.17 1.36Z"/></svg>
+        <span>{t("order.cta")}</span>
+      </button>
+      <p class="fineprint">{t("order.fineprint")}</p>
+    </form>
+
+    <div class="card hidden" id="doneCard" style="margin-top:22px">
+      <div class="done">
+        <div class="mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFFDF6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h2>{t("order.done_title")}</h2>
+        <p>{t("order.done_msg")}</p>
+        <div class="relay">
+          <strong>{t("order.next_title")}</strong>
+          <ol>
+            <li>{t("order.next_1")}</li>
+            <li>{t("order.next_2")}</li>
+            <li>{t("order.next_3")}</li>
+          </ol>
+        </div>
+
+        <div class="pay hidden" id="payPanel">
+          <p class="pay-t">{t("order.pay_title")}</p>
+          <p class="pay-ref">{t("order.pay_ref")}: <span id="payRef"></span></p>
+          <a class="btn btn-primary" id="upiBtn" href="#" rel="nofollow noopener" style="width:100%"><span id="upiBtnLabel">{t("order.pay_btn")}</span></a>
+          <p class="pay-scan">{t("order.pay_scan")}</p>
+          <div class="qbox" id="upiQrBox"></div>
+          <p class="pay-fine">{t("order.pay_optional")}</p>
+        </div>
+
+        <button type="button" class="btn btn-ghost" id="reopenWa">{t("order.reopen")}</button>
+        <div><button type="button" class="btn-link" id="newOrder">{t("order.new_order")}</button></div>
+        <p class="account-nudge">{t("order.account_nudge")}</p>
+      </div>
+    </div>
+
+    <section class="recent hidden" id="recentWrap" style="margin-top:24px">
+      <h3>{t("order.recent_title")}</h3>
+      <div id="recentList"></div>
+    </section>
+  </section>
+
+  <script type="application/json" id="order-cfg" set:html={JSON.stringify(cfg)}></script>
+</Base>
+
+<style>
+  .field .q { display:block; font-size:12.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--forest); margin-bottom:6px; }
+  :root[lang="hi"] .field .q, :root[lang="ta"] .field .q { text-transform:none; letter-spacing:normal; }
+  .field .req { color:var(--danger); }
+  .field .hint { font-weight:500; text-transform:none; letter-spacing:0; color:var(--muted); font-size:12px; }
+  input[type="text"], input[type="tel"], input[type="number"], input[type="date"], textarea, select {
+    width:100%; font:inherit; color:var(--ink); background:var(--cream);
+    border:1.5px solid var(--line); border-radius:12px; padding:11px 13px;
+    font-family:"Mulish","Noto Sans Tamil","Noto Sans Devanagari",sans-serif;
+  }
+  textarea { min-height:62px; resize:vertical; }
+  input:focus, textarea:focus, select:focus { outline:none; border-color:var(--leaf); box-shadow:0 0 0 3px rgba(78,154,84,.22); }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media (max-width:430px) { .row2 { grid-template-columns:1fr; } }
+  .field.invalid input, .field.invalid textarea { border-color:var(--danger); }
+  .err { display:none; color:var(--danger); font-size:12.5px; font-weight:600; margin-top:5px; }
+  .field.invalid .err { display:block; }
+  .milkrows { display:flex; flex-direction:column; gap:10px; }
+  .milkrow { display:flex; align-items:center; justify-content:space-between; gap:12px; border:1.5px solid var(--line); border-radius:14px; padding:12px 13px; background:var(--cream); }
+  .milkrow.has-qty { border-color:var(--leaf); background:color-mix(in srgb, var(--leaf) 10%, var(--cream)); }
+  .milkrow .pname { font-weight:700; color:var(--forest); font-size:14.5px; }
+  .milkrow .pbreed { display:block; font-size:12px; color:var(--muted); margin-top:2px; }
+  .stepper { display:flex; max-width:150px; flex:none; }
+  .stepper button { width:40px; flex:none; font-size:20px; font-weight:700; background:var(--cream-sunk); color:var(--forest); border:1.5px solid var(--line); cursor:pointer; }
+  .stepper button:first-child { border-radius:12px 0 0 12px; }
+  .stepper button:last-child { border-radius:0 12px 12px 0; }
+  .stepper input { border-radius:0; border-left:none; border-right:none; text-align:center; font-weight:700; -moz-appearance:textfield; }
+  .stepper input::-webkit-outer-spin-button, .stepper input::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
+  @media (max-width:430px) { .milkrow { flex-direction:column; align-items:stretch; } .stepper { max-width:100%; } }
+  .summary { display:flex; align-items:baseline; justify-content:space-between; gap:10px; padding:13px 15px; background:var(--cream-sunk); border:1px dashed var(--gold); border-radius:13px; }
+  .summary .lbl { font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:700; }
+  :root[lang="hi"] .summary .lbl, :root[lang="ta"] .summary .lbl { text-transform:none; letter-spacing:normal; }
+  .summary .amt { font-family:"Fraunces",Georgia,serif; font-weight:700; font-size:1.5rem; color:var(--forest); }
+  .summary .per { font-size:12px; color:var(--muted); text-align:right; }
+  .fineprint { text-align:center; font-size:12px; color:var(--muted); margin:2px 0 0; }
+  .done { text-align:center; }
+  .done .mark { width:56px; height:56px; margin:0 auto 12px; border-radius:50%; background:var(--leaf); display:grid; place-items:center; }
+  .done .mark svg { width:28px; height:28px; }
+  .done .relay { background:var(--cream-sunk); border:1px solid var(--line); border-radius:13px; padding:14px; text-align:left; font-size:13.5px; margin:14px 0; }
+  .done .relay ol { margin:6px 0 0; padding-left:20px; }
+  .done .pay { background:var(--cream-sunk); border:1px solid var(--gold); border-radius:13px; padding:15px 14px; margin-bottom:14px; }
+  .done .pay .pay-t { font-weight:700; color:var(--forest); font-size:12px; text-transform:uppercase; letter-spacing:.05em; margin:0 0 4px; }
+  .done .pay .qbox { display:inline-block; background:#fff; padding:12px; border-radius:12px; border:1px solid var(--line); margin:8px 0; }
+  .done .pay .pay-scan, .done .pay .pay-fine { font-size:11.5px; color:var(--muted); }
+  .btn-link { margin-top:10px; color:var(--leaf); font-weight:700; font-size:13.5px; background:none; border:none; cursor:pointer; text-decoration:underline; font-family:inherit; }
+  .account-nudge { font-size:12.5px; color:var(--muted); margin-top:14px; }
+  .recent h3 { font-size:1.05rem; }
+  .ro { display:flex; justify-content:space-between; align-items:center; gap:10px; background:var(--cream-card); border:1px solid var(--line); border-radius:12px; padding:11px 13px; margin-bottom:8px; }
+  .ro .ro-main { font-size:13.5px; }
+  .ro .ro-main b { color:var(--forest); }
+  .ro .ro-date { display:block; font-size:11.5px; color:var(--muted); margin-top:1px; }
+  .ro button { font:inherit; font-weight:700; font-size:12.5px; color:var(--btn-text); background:var(--leaf); border:none; border-radius:9px; padding:8px 12px; cursor:pointer; flex:none; font-family:inherit; }
+</style>
+
+<script>
+  import { buildOrder, clampHalf, waLink, upiLink, orderText } from "../../lib/order.js";
+  import { drawQr } from "../../lib/qr.js";
+
+  const cfgEl = document.getElementById("order-cfg");
+  if (cfgEl) {
+    const cfg = JSON.parse(cfgEl.textContent || "{}");
+    const s = cfg.s || {};
+    const $ = (id) => document.getElementById(id);
+    const form = $("orderForm");
+    const STORE_KEY = "meenakshi_orders_v2";
+
+    // start date = tomorrow
+    try {
+      const tm = new Date(); tm.setDate(tm.getDate() + 1);
+      $("startdate").value = tm.toISOString().slice(0, 10);
+      $("startdate").min = new Date().toISOString().slice(0, 10);
+    } catch (e) {}
+
+    const qtys = () => ({ cow: clampHalf($("qtyCow").value), buffalo: clampHalf($("qtyBuf").value) });
+    const calc = (q) => Math.round(q.cow * cfg.rates.cow + q.buffalo * cfg.rates.buffalo);
+
+    function updateSummary() {
+      const q = qtys();
+      const total = calc(q);
+      $("estAmt").textContent = "₹" + total.toLocaleString("en-IN");
+      const parts = [];
+      if (q.cow > 0) parts.push(q.cow + " L " + cfg.common.cow);
+      if (q.buffalo > 0) parts.push(q.buffalo + " L " + cfg.common.buffalo);
+      const per = $("freq").value === "once" ? s.per_once : s.per_delivery;
+      $("estPer").textContent = (parts.length ? parts.join(" + ") + " · " : "") + per;
+      $("mr-cow").classList.toggle("has-qty", q.cow > 0);
+      $("mr-buf").classList.toggle("has-qty", q.buffalo > 0);
+    }
+
+    form.querySelectorAll("[data-step]").forEach((b) => {
+      b.addEventListener("click", () => {
+        const id = b.getAttribute("data-step") === "buffalo" ? "qtyBuf" : "qtyCow";
+        const dir = parseFloat(b.getAttribute("data-dir"));
+        $(id).value = Math.max(0, clampHalf($(id).value) + dir * 0.5);
+        updateSummary();
+      });
+    });
+    ["qtyCow", "qtyBuf"].forEach((id) => $(id).addEventListener("input", () => {
+      updateSummary();
+      if (qtys().cow + qtys().buffalo >= 0.5) $("f-milk").classList.remove("invalid");
+    }));
+    $("freq").addEventListener("change", updateSummary);
+
+    function setInvalid(fid, bad) { $(fid)?.classList.toggle("invalid", !!bad); return !bad; }
+    function validate() {
+      let ok = true;
+      ok = setInvalid("f-name", $("name").value.trim() === "") && ok;
+      const digits = $("phone").value.replace(/\D/g, "");
+      ok = setInvalid("f-phone", !(digits.length >= 10 && digits.length <= 13)) && ok;
+      ok = setInvalid("f-addr1", $("addr1").value.trim() === "") && ok;
+      const q = qtys();
+      ok = setInvalid("f-milk", !(q.cow + q.buffalo >= 0.5)) && ok;
+      if (!ok) {
+        const first = document.querySelector(".field.invalid");
+        first?.scrollIntoView({ behavior: "smooth", block: "center" });
+        first?.querySelector("input,select,textarea")?.focus({ preventScroll: true });
+      }
+      return ok;
+    }
+    ["name", "phone", "addr1"].forEach((id) => $(id).addEventListener("input", () => {
+      if ($("name").value.trim() !== "") $("f-name").classList.remove("invalid");
+      const d = $("phone").value.replace(/\D/g, "");
+      if (d.length >= 10 && d.length <= 13) $("f-phone").classList.remove("invalid");
+      if ($("addr1").value.trim() !== "") $("f-addr1").classList.remove("invalid");
+    }));
+
+    function currentFields() {
+      return {
+        name: $("name").value, phone: $("phone").value, addr1: $("addr1").value,
+        area: $("area").value, pin: $("pin").value,
+        qtyCow: $("qtyCow").value, qtyBuf: $("qtyBuf").value,
+        freq: $("freq").value, startdate: $("startdate").value, notes: $("notes").value,
+      };
+    }
+
+    let lastOrder = null;
+
+    function loadOrders() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch (e) { return []; } }
+    function saveOrder(o) {
+      try {
+        const all = loadOrders(); all.unshift({ ...o, ts: Date.now() });
+        localStorage.setItem(STORE_KEY, JSON.stringify(all.slice(0, 6)));
+      } catch (e) {}
+    }
+    function renderRecent() {
+      const all = loadOrders(), wrap = $("recentWrap"), list = $("recentList");
+      if (!all.length) { wrap.classList.add("hidden"); return; }
+      wrap.classList.remove("hidden");
+      list.innerHTML = "";
+      all.forEach((o) => {
+        const parts = (o.items || []).map((it) => it.litres + " L " + (it.key === "cow" ? cfg.common.cow : cfg.common.buffalo));
+        const row = document.createElement("div"); row.className = "ro";
+        const main = document.createElement("div"); main.className = "ro-main";
+        const d = new Date(o.ts);
+        main.innerHTML = "<b>" + parts.join(" + ") + "</b> · ₹" + o.total +
+          "<span class='ro-date'>" + s.ordered + " " + d.toLocaleDateString() + "</span>";
+        const btn = document.createElement("button");
+        btn.type = "button"; btn.textContent = s.reorder;
+        btn.addEventListener("click", () => {
+          const c = (o.items || []).find((i) => i.key === "cow");
+          const b = (o.items || []).find((i) => i.key === "buffalo");
+          $("name").value = o.name || ""; $("phone").value = o.phone || "";
+          $("addr1").value = o.address_line1 || ""; $("area").value = o.area || ""; $("pin").value = o.pincode || "";
+          $("qtyCow").value = c ? c.litres : 0; $("qtyBuf").value = b ? b.litres : 0;
+          $("freq").value = o.frequency || "daily"; $("notes").value = o.notes || "";
+          updateSummary();
+          $("doneCard").classList.add("hidden");
+          form.classList.remove("hidden");
+          form.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+        row.appendChild(main); row.appendChild(btn); list.appendChild(row);
+      });
+    }
+
+    function renderPay(o) {
+      const panel = $("payPanel");
+      if (!cfg.upiVpa) { panel.classList.add("hidden"); return; }
+      panel.classList.remove("hidden");
+      $("payRef").textContent = o.ref;
+      const amtStr = "₹" + o.total.toLocaleString("en-IN");
+      $("upiBtnLabel").textContent = (s.pay_btn_amt || "Pay {amt}").replace("{amt}", amtStr);
+      const link = upiLink(cfg.upiVpa, cfg.upiName, o, true);
+      $("upiBtn").setAttribute("href", link);
+      try { drawQr($("upiQrBox"), link, { px: 180, alt: "UPI payment QR code" }); } catch (e) {}
+    }
+
+    function placeOrder() {
+      if (!validate()) return;
+      const o = buildOrder(currentFields(), cfg.rates, cfg.lang);
+      lastOrder = o;
+      saveOrder(o);
+      // Phase 2: also POST to Supabase create_order here.
+      window.open(waLink(cfg.waNumber, o), "_blank");
+      form.classList.add("hidden");
+      $("doneCard").classList.remove("hidden");
+      try { renderPay(o); } catch (e) { $("payPanel").classList.add("hidden"); }
+      $("doneCard").scrollIntoView({ behavior: "smooth", block: "start" });
+      renderRecent();
+    }
+
+    form.addEventListener("submit", (e) => { e.preventDefault(); placeOrder(); });
+    $("reopenWa").addEventListener("click", () => { if (lastOrder) window.open(waLink(cfg.waNumber, lastOrder), "_blank"); });
+    $("newOrder").addEventListener("click", () => {
+      $("doneCard").classList.add("hidden");
+      form.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    updateSummary();
+    renderRecent();
+  }
+</script>

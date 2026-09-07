@@ -1,0 +1,67 @@
+---
+import Base from "../../layouts/Base.astro";
+import Check from "../Check.astro";
+import { useT, localizePath, type Lang } from "../../i18n";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useT(lang);
+const seo = t("seo.ourMilk");
+const a2Paras: string[] = t("ourMilk.a2Paras");
+const cols: string[] = t("ourMilk.nutritionCols");
+const rows: string[][] = t("ourMilk.nutritionRows");
+---
+
+<Base lang={lang} path="/our-milk" title={seo.title} description={seo.description}>
+  <section class="wrap narrow">
+    <p class="eyebrow">{t("nav.ourMilk")}</p>
+    <h1>{t("ourMilk.title")}</h1>
+    <p class="lede">{t("ourMilk.intro")}</p>
+  </section>
+
+  <section class="section-sunk">
+    <div class="wrap narrow prose">
+      <h2>{t("ourMilk.a2SectionTitle")}</h2>
+      {a2Paras.map((p) => <p>{p}</p>)}
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2>{t("ourMilk.nutritionTitle")}</h2>
+    <p class="lede">{t("ourMilk.nutritionBody")}</p>
+    <div class="table-scroll" style="margin-top:20px">
+      <table class="nutrition">
+        <thead>
+          <tr>{cols.map((c) => <th scope="col">{c}</th>)}</tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr>
+              {r.map((cell, i) => (i === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.82rem;color:var(--muted);margin-top:10px">{t("ourMilk.nutritionFoot")}</p>
+  </section>
+
+  <section class="section-sunk">
+    <div class="wrap narrow">
+      <h2>{t("ourMilk.chooseTitle")}</h2>
+      <ul class="check-list" style="margin-top:16px">
+        <li><Check /> {t("ourMilk.chooseCow")}</li>
+        <li><Check /> {t("ourMilk.chooseBuf")}</li>
+        <li><Check /> {t("ourMilk.chooseBoth")}</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap narrow">
+    <h2>{t("ourMilk.priceTitle")}</h2>
+    <p>{t("ourMilk.priceNote")}</p>
+    <div class="actions" style="margin-top:16px">
+      <a class="btn btn-primary" href={localizePath("/order", lang)}>{t("ourMilk.priceCta")}</a>
+    </div>
+  </section>
+</Base>

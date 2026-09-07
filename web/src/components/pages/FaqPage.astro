@@ -1,0 +1,42 @@
+---
+import Base from "../../layouts/Base.astro";
+import { useT, localizePath, type Lang } from "../../i18n";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useT(lang);
+const seo = t("seo.faq");
+const items: { q: string; a: string }[] = t("faq.items");
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((it) => ({
+    "@type": "Question",
+    name: it.q,
+    acceptedAnswer: { "@type": "Answer", text: it.a },
+  })),
+};
+---
+
+<Base lang={lang} path="/faq" title={seo.title} description={seo.description}>
+  <section class="wrap narrow">
+    <p class="eyebrow">{t("nav.faq")}</p>
+    <h1>{t("faq.title")}</h1>
+
+    <div style="margin-top:24px">
+      {items.map((it) => (
+        <details class="faq-item">
+          <summary>{it.q}</summary>
+          <div class="a">{it.a}</div>
+        </details>
+      ))}
+    </div>
+
+    <div class="actions" style="margin-top:26px">
+      <a class="btn btn-primary" href={localizePath("/order", lang)}>{t("common.orderCta")}</a>
+    </div>
+
+    <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+  </section>
+</Base>

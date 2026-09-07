@@ -1,0 +1,9 @@
+---
+import AccountPage from "../../components/pages/AccountPage.astro";
+import type { Lang } from "../../i18n";
+export function getStaticPaths() {
+  return [{ params: { lang: "hi" } }, { params: { lang: "ta" } }];
+}
+const lang = Astro.params.lang as Lang;
+---
+<AccountPage lang={lang} />

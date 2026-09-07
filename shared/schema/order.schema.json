@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://meenakshidairyfarms.example/schema/order.schema.json",
+  "title": "Meenakshi Dairy Farms — order",
+  "description": "Canonical shape of an order created by the website or the app. Built client-side; the wa.me message text and the Supabase orders row are both derived from this object.",
+  "type": "object",
+  "required": ["ref", "name", "phone", "address_line1", "items", "total", "frequency", "channel", "language"],
+  "additionalProperties": false,
+  "properties": {
+    "ref": {
+      "type": "string",
+      "pattern": "^MDF-[0-9]{6}-[A-Z0-9]{4}$",
+      "description": "MDF-YYMMDD-XXXX. Generated client-side; unique enough for a small operation."
+    },
+    "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "phone": {
+      "type": "string",
+      "pattern": "^[0-9+ ]{10,15}$",
+      "description": "Customer's contact number for this order. Digits (10) or with country code."
+    },
+    "address_line1": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "area": { "type": "string", "maxLength": 200, "default": "" },
+    "pincode": { "type": "string", "pattern": "^([0-9]{6})?$", "default": "" },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["key", "litres", "price_per_litre", "amount"],
+        "additionalProperties": false,
+        "properties": {
+          "key": { "type": "string", "enum": ["cow", "buffalo"] },
+          "litres": { "type": "number", "minimum": 0.5, "multipleOf": 0.5 },
+          "price_per_litre": { "type": "number", "minimum": 0 },
+          "amount": { "type": "number", "minimum": 0, "description": "round(litres * price_per_litre)" }
+        }
+      }
+    },
+    "total": { "type": "number", "minimum": 0, "description": "Sum of item amounts. Per delivery unless frequency is 'once'." },
+    "frequency": { "type": "string", "enum": ["daily", "alt", "once"] },
+    "start_date": { "type": "string", "format": "date", "description": "ISO date; omitted for 'once' with no preference." },
+    "notes": { "type": "string", "maxLength": 500, "default": "" },
+    "channel": { "type": "string", "enum": ["web", "app", "whatsapp"] },
+    "language": { "type": "string", "enum": ["en", "hi", "ta"] }
+  }
+}

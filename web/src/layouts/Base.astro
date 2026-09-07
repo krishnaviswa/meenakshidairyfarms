@@ -1,0 +1,89 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { useT, localizePath, LANGS, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+  /** canonical path, e.g. "/" or "/our-milk" */
+  path: string;
+  title: string;
+  description: string;
+}
+
+const { lang, path, title, description } = Astro.props;
+const t = useT(lang);
+
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
+const url = site + localizePath(path, lang);
+const brand = t("common.brand");
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: brand,
+  description: t("seo.home.description"),
+  url: site + "/",
+  slogan: t("common.tagline"),
+  areaServed: "IN",
+  makesOffer: [
+    { "@type": "Offer", itemOffered: { "@type": "Product", name: "A2 Cow Milk (Sahiwal breed)" } },
+    { "@type": "Offer", itemOffered: { "@type": "Product", name: "A2 Buffalo Milk (Murrah breed)" } },
+  ],
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+
+    {LANGS.map((l) => (
+      <link rel="alternate" hreflang={l} href={site + localizePath(path, l)} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={site + localizePath(path, "en")} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={brand} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:locale" content={lang === "en" ? "en_IN" : lang === "hi" ? "hi_IN" : "ta_IN"} />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#1e4a2b" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Mulish:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Sans+Tamil:wght@400;500;700&display=swap"
+    />
+
+    <script is:inline>
+      // no-flash theme
+      (function () {
+        try {
+          var s = localStorage.getItem("meenakshi_theme");
+          if (s === "dark" || s === "light") document.documentElement.setAttribute("data-theme", s);
+        } catch (e) {}
+      })();
+    </script>
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a href="#main" class="btn btn-ghost" style="position:absolute;left:-9999px;top:8px;z-index:100" onfocus="this.style.left='8px'" onblur="this.style.left='-9999px'">{t("nav.skip")}</a>
+    <Header lang={lang} path={path} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

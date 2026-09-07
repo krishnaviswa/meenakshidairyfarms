@@ -1,0 +1,9 @@
+---
+import OurFarmPage from "../../components/pages/OurFarmPage.astro";
+import type { Lang } from "../../i18n";
+export function getStaticPaths() {
+  return [{ params: { lang: "hi" } }, { params: { lang: "ta" } }];
+}
+const lang = Astro.params.lang as Lang;
+---
+<OurFarmPage lang={lang} />

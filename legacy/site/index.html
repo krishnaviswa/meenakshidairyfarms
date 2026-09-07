@@ -1,0 +1,1202 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meenakshi Dairy Farms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Mulish:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Sans+Tamil:wght@400;500;700&display=swap">
+
+<style>
+  :root {
+    --cream: #F5EFE0;
+    --cream-card: #FDFBF3;
+    --cream-sunk: #EFE7D3;
+    --forest: #1E4A2B;
+    --leaf: #3C7D45;
+    --leaf-bright: #4E9A54;
+    --gold: #BE8F35;
+    --ink: #2A2A22;
+    --muted: #6E6A5A;
+    --line: #DCD2B9;
+    --danger: #A6392B;
+    --btn-text: #FFFDF6;
+    --shadow: 0 10px 34px -14px rgba(30, 55, 31, .34);
+    --shadow-sm: 0 4px 14px -8px rgba(30, 55, 31, .3);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --cream: #101C15; --cream-card: #17271C; --cream-sunk: #12211A;
+      --forest: #DDEAD7; --leaf: #58A55E; --leaf-bright: #6DBE72;
+      --gold: #D9B267; --ink: #ECEFE4; --muted: #9AA893; --line: #2C3E30;
+      --danger: #E0796A; --btn-text: #0E1A12;
+      --shadow: 0 12px 36px -16px rgba(0,0,0,.6); --shadow-sm: 0 4px 16px -8px rgba(0,0,0,.55);
+    }
+  }
+  :root[data-theme="dark"] {
+    --cream: #101C15; --cream-card: #17271C; --cream-sunk: #12211A;
+    --forest: #DDEAD7; --leaf: #58A55E; --leaf-bright: #6DBE72;
+    --gold: #D9B267; --ink: #ECEFE4; --muted: #9AA893; --line: #2C3E30;
+    --danger: #E0796A; --btn-text: #0E1A12;
+    --shadow: 0 12px 36px -16px rgba(0,0,0,.6); --shadow-sm: 0 4px 16px -8px rgba(0,0,0,.55);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: "Mulish", "Noto Sans Tamil", "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px; line-height: 1.55;
+  }
+  .wrap { max-width: 580px; margin: 0 auto; padding: 14px 16px 108px; }
+  @media (min-width: 600px) { .wrap { padding: 16px 18px 60px; } }
+
+  /* topbar */
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; margin-bottom: 14px;
+  }
+  .langs { display: inline-flex; background: var(--cream-card); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+  .langs button {
+    font: inherit; font-size: 13px; font-weight: 700;
+    border: none; background: transparent; color: var(--muted);
+    padding: 9px 14px; border-radius: 999px; cursor: pointer;
+    min-height: 40px;
+    font-family: "Mulish", "Noto Sans Tamil", "Noto Sans Devanagari", sans-serif;
+  }
+  .langs button.active { background: var(--forest); color: var(--cream-card); }
+  .themetog {
+    font-size: 17px; line-height: 1;
+    width: 42px; height: 42px; flex: none;
+    border: 1px solid var(--line); background: var(--cream-card);
+    border-radius: 50%; cursor: pointer;
+  }
+
+  .hero {
+    position: relative; text-align: center;
+    padding: 22px 18px 22px; border-radius: 22px;
+    background: radial-gradient(120% 90% at 50% 0%, rgba(78,154,84,.16), transparent 60%), var(--cream-card);
+    border: 1px solid var(--line); box-shadow: var(--shadow-sm); overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0 0 auto 0; height: 5px;
+    background: linear-gradient(90deg, var(--leaf), var(--gold), var(--leaf));
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    font-weight: 700; color: var(--leaf); margin: 2px 0 8px;
+  }
+  .wordmark {
+    font-family: "Fraunces", "Noto Sans Tamil", "Noto Sans Devanagari", Georgia, serif;
+    font-weight: 700; color: var(--forest); line-height: 1;
+    letter-spacing: -.01em; margin: 0;
+    font-size: clamp(1.9rem, 7.2vw, 2.5rem); text-wrap: balance;
+  }
+  .wordmark span { display: block; font-size: .5em; font-weight: 600; letter-spacing: .02em; color: var(--gold); margin-top: 6px; }
+  .lede { margin: 10px auto 0; max-width: 34ch; color: var(--muted); font-size: 14.5px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 13px; }
+  .chip {
+    font-size: 11.5px; font-weight: 600; padding: 5px 10px; border-radius: 999px;
+    background: var(--cream-sunk); color: var(--forest); border: 1px solid var(--line);
+  }
+  .price-flags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 14px; }
+  .price-flag {
+    display: inline-flex; align-items: baseline; gap: 6px;
+    padding: 8px 16px; border-radius: 999px; background: var(--forest); color: var(--cream-card);
+  }
+  .price-flag b { font-family: "Fraunces", Georgia, serif; font-size: 1.35rem; font-weight: 700; }
+  .price-flag small { font-size: 12px; opacity: .85; letter-spacing: .04em; text-transform: uppercase; }
+
+  .card {
+    margin-top: 18px; background: var(--cream-card); border: 1px solid var(--line);
+    border-radius: 20px; box-shadow: var(--shadow); padding: 20px 16px 18px;
+    scroll-margin-top: 12px;
+  }
+  @media (min-width: 600px) { .card { padding: 22px 18px 20px; margin-top: 20px; } }
+  .card > h2 {
+    font-family: "Fraunces", "Noto Sans Tamil", "Noto Sans Devanagari", Georgia, serif;
+    font-weight: 600; color: var(--forest); font-size: 1.4rem; margin: 2px 0 4px;
+  }
+  .card > .sub { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+
+  .field { margin-bottom: 15px; }
+  .field .q {
+    display: block; font-size: 12.5px; font-weight: 700; letter-spacing: .03em;
+    text-transform: uppercase; color: var(--forest); margin-bottom: 6px;
+  }
+  .field .req { color: var(--danger); }
+  .field .hint { font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--muted); font-size: 12px; }
+
+  input[type="text"], input[type="tel"], input[type="number"], input[type="date"], textarea, select {
+    width: 100%; font: inherit; color: var(--ink); background: var(--cream);
+    border: 1.5px solid var(--line); border-radius: 12px; padding: 11px 13px;
+    font-family: "Mulish", "Noto Sans Tamil", "Noto Sans Devanagari", sans-serif;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  textarea { min-height: 62px; resize: vertical; }
+  input:focus, textarea:focus, select:focus {
+    outline: none; border-color: var(--leaf); box-shadow: 0 0 0 3px rgba(78,154,84,.22);
+  }
+  input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible {
+    outline: 2px solid var(--leaf); outline-offset: 2px;
+  }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .field.invalid input, .field.invalid textarea { border-color: var(--danger); }
+  .err { display: none; color: var(--danger); font-size: 12.5px; font-weight: 600; margin-top: 5px; }
+  .field.invalid .err { display: block; }
+
+  .milkrows { display: flex; flex-direction: column; gap: 10px; }
+  .milkrow {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    border: 1.5px solid var(--line); border-radius: 14px;
+    padding: 12px 13px; background: var(--cream);
+    transition: border-color .15s, background .15s;
+  }
+  .milkrow.has-qty { border-color: var(--leaf); background: color-mix(in srgb, var(--leaf) 10%, var(--cream)); }
+  .milkrow .mr-info { min-width: 0; }
+  .milkrow .pname { font-weight: 700; color: var(--forest); font-size: 14.5px; }
+  .milkrow .pbreed { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .milkrow .stepper { max-width: 148px; flex: none; }
+  .milkrow .stepper button { width: 40px; }
+  .milkrow .stepper input { width: 100%; min-width: 0; }
+  @media (max-width: 430px) {
+    .milkrow { flex-direction: column; align-items: stretch; }
+    .milkrow .stepper { max-width: 100%; }
+  }
+
+  .stepper { display: flex; max-width: 240px; width: 100%; }
+  .stepper button {
+    width: 46px; flex: none; font-size: 20px; font-weight: 700;
+    background: var(--cream-sunk); color: var(--forest); border: 1.5px solid var(--line); cursor: pointer;
+  }
+  .stepper button:first-child { border-radius: 12px 0 0 12px; }
+  .stepper button:last-child { border-radius: 0 12px 12px 0; }
+  .stepper input {
+    border-radius: 0; border-left: none; border-right: none; text-align: center;
+    font-weight: 700; font-variant-numeric: tabular-nums; -moz-appearance: textfield;
+  }
+  .stepper input::-webkit-outer-spin-button, .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+  .summary {
+    margin-top: 4px; display: flex; align-items: baseline; justify-content: space-between;
+    gap: 10px; padding: 13px 15px; background: var(--cream-sunk);
+    border: 1px dashed var(--gold); border-radius: 13px;
+  }
+  .summary .lbl { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 700; }
+  .summary .amt { font-family: "Fraunces", Georgia, serif; font-weight: 700; font-size: 1.5rem; color: var(--forest); font-variant-numeric: tabular-nums; }
+  .summary .per { font-size: 12px; color: var(--muted); text-align: right; }
+
+  .cta {
+    display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;
+    margin-top: 14px; font: inherit; font-weight: 700; font-size: 16.5px;
+    font-family: "Mulish", "Noto Sans Tamil", "Noto Sans Devanagari", sans-serif;
+    color: var(--btn-text); background: var(--leaf); border: none; border-radius: 13px;
+    padding: 15px 18px; cursor: pointer; box-shadow: 0 8px 20px -8px rgba(60,125,69,.6);
+    transition: transform .08s, background .15s;
+  }
+  a.cta { text-decoration: none; }
+  .cta:hover { background: var(--leaf-bright); }
+  .cta:active { transform: translateY(1px); }
+  .cta svg { width: 20px; height: 20px; flex: none; }
+  .fineprint { text-align: center; font-size: 12px; color: var(--muted); margin: 9px 0 0; }
+
+  .done { text-align: center; padding: 8px 6px 4px; }
+  .done .mark { width: 58px; height: 58px; margin: 0 auto 12px; border-radius: 50%; background: var(--leaf); display: grid; place-items: center; }
+  .done .mark svg { width: 30px; height: 30px; }
+  .done h2 { font-family: "Fraunces", "Noto Sans Tamil", "Noto Sans Devanagari", Georgia, serif; color: var(--forest); font-size: 1.5rem; margin: 0 0 6px; }
+  .done p { color: var(--muted); font-size: 14.5px; margin: 0 auto 14px; max-width: 38ch; }
+  .done .relay { background: var(--cream-sunk); border: 1px solid var(--line); border-radius: 13px; padding: 14px; text-align: left; font-size: 13.5px; margin-bottom: 14px; }
+  .done .relay ol { margin: 6px 0 0; padding-left: 20px; }
+  .done .relay li { margin: 3px 0; }
+  .done .pay { background: var(--cream-sunk); border: 1px solid var(--gold); border-radius: 13px; padding: 15px 14px; margin-bottom: 14px; text-align: center; }
+  .done .pay .pay-t { font-weight: 700; color: var(--forest); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; margin: 0; }
+  .done .pay .pay-amt { font-family: "Fraunces", Georgia, serif; font-weight: 700; font-size: 1.6rem; color: var(--forest); margin: 4px 0 2px; font-variant-numeric: tabular-nums; }
+  .done .pay .pay-ref { font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; margin: 2px 0 12px; }
+  .done .pay .cta { margin-top: 2px; }
+  .done .pay .pay-scan { font-size: 12px; color: var(--muted); margin: 13px 0 9px; }
+  .done .pay .qbox { display: inline-block; background: #fff; padding: 12px; border-radius: 12px; border: 1px solid var(--line); }
+  .done .pay .qbox img { display: block; width: 180px; height: 180px; image-rendering: pixelated; }
+  .done .pay .pay-fine { font-size: 11.5px; color: var(--muted); margin: 12px 0 0; }
+  .done .pay .pay-when { display: flex; gap: 8px; justify-content: center; margin-bottom: 10px; flex-wrap: wrap; }
+  .done .pay .pay-when button { font: inherit; font-weight: 700; font-size: 12.5px; font-family: "Mulish", "Noto Sans Tamil", "Noto Sans Devanagari", sans-serif; color: var(--forest); background: var(--cream-card); border: 1.5px solid var(--line); border-radius: 999px; padding: 8px 15px; cursor: pointer; }
+  .done .pay .pay-when button.on { background: var(--forest); color: var(--cream-card); border-color: var(--forest); }
+  .done .pay .pay-later-msg { font-size: 13px; color: var(--muted); margin: 0; }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px; font: inherit; font-weight: 700; font-size: 14px;
+    font-family: "Mulish", "Noto Sans Tamil", "Noto Sans Devanagari", sans-serif;
+    color: var(--forest); background: transparent; border: 1.5px solid var(--leaf);
+    border-radius: 11px; padding: 11px 18px; cursor: pointer;
+  }
+  .btn-link { display: inline-block; margin-top: 10px; color: var(--leaf); font-weight: 700; font-size: 13.5px; background: none; border: none; cursor: pointer; text-decoration: underline; font-family: inherit; }
+
+  .recent { margin-top: 20px; }
+  .recent h3 { font-family: "Fraunces", "Noto Sans Tamil", "Noto Sans Devanagari", Georgia, serif; color: var(--forest); font-size: 1.1rem; margin: 0 0 10px; }
+  .ro { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: var(--cream-card); border: 1px solid var(--line); border-radius: 12px; padding: 11px 13px; margin-bottom: 8px; }
+  .ro .ro-main { font-size: 13.5px; }
+  .ro .ro-main b { color: var(--forest); }
+  .ro .ro-date { display: block; font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+  .ro button { font: inherit; font-weight: 700; font-size: 12.5px; font-family: "Mulish", "Noto Sans Tamil", "Noto Sans Devanagari", sans-serif; color: var(--btn-text); background: var(--leaf); border: none; border-radius: 9px; padding: 8px 12px; cursor: pointer; flex: none; }
+
+  .why { margin-top: 26px; }
+  .why h3 { font-family: "Fraunces", "Noto Sans Tamil", "Noto Sans Devanagari", Georgia, serif; color: var(--forest); font-size: 1.15rem; margin: 0 0 12px; text-align: center; }
+  .why ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .why li { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: var(--ink); background: var(--cream-card); border: 1px solid var(--line); border-radius: 11px; padding: 10px 12px; }
+  .why li svg { width: 17px; height: 17px; flex: none; margin-top: 2px; color: var(--leaf); }
+
+  footer { margin-top: 28px; text-align: center; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 20px; }
+  footer .fname { font-family: "Fraunces", "Noto Sans Tamil", "Noto Sans Devanagari", Georgia, serif; color: var(--forest); font-weight: 600; font-size: 15px; }
+  footer a { color: var(--leaf); text-decoration: none; font-weight: 600; }
+  footer p { margin: 5px 0; }
+
+  details.qr { margin-top: 20px; background: var(--cream-card); border: 1px solid var(--line); border-radius: 13px; padding: 4px 14px; }
+  details.qr summary { cursor: pointer; font-weight: 700; font-size: 13px; color: var(--muted); padding: 10px 0; list-style: none; letter-spacing: .03em; text-transform: uppercase; }
+  details.qr summary::-webkit-details-marker { display: none; }
+  details.qr summary::before { content: "▸ "; }
+  details.qr[open] summary::before { content: "▾ "; }
+  .qr-body { text-align: center; padding: 6px 0 18px; }
+  .qr-body .qbox { display: inline-block; background: #fff; padding: 14px; border-radius: 12px; border: 1px solid var(--line); }
+  .qr-body .qbox svg, .qr-body .qbox img { display: block; width: 190px; height: 190px; image-rendering: pixelated; }
+  .qr-body p { font-size: 12.5px; color: var(--muted); margin: 10px 0 0; }
+  .qr-body .qr-url { font-size: 11px; word-break: break-all; color: var(--muted); margin: 8px 0 0; font-variant-numeric: tabular-nums; }
+
+  /* Indic scripts: drop Latin-style uppercasing / tracking */
+  :root[lang="hi"] .eyebrow, :root[lang="ta"] .eyebrow,
+  :root[lang="hi"] .field .q, :root[lang="ta"] .field .q,
+  :root[lang="hi"] .done .pay .pay-t, :root[lang="ta"] .done .pay .pay-t,
+  :root[lang="hi"] .summary .lbl, :root[lang="ta"] .summary .lbl,
+  :root[lang="hi"] details.qr summary, :root[lang="ta"] details.qr summary,
+  :root[lang="hi"] .price-flag small, :root[lang="ta"] .price-flag small {
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  :root[lang="hi"] .eyebrow, :root[lang="ta"] .eyebrow { line-height: 1.4; }
+
+  /* sticky order button on phones */
+  .sticky-cta {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in srgb, var(--cream) 90%, transparent);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-top: 1px solid var(--line);
+    transform: translateY(130%); transition: transform .22s ease;
+  }
+  .sticky-cta.show { transform: translateY(0); }
+  .sticky-cta .cta { margin-top: 0; box-shadow: 0 6px 18px -8px rgba(60,125,69,.7); }
+  @media (min-width: 600px) { .sticky-cta { display: none; } }
+
+  @media (max-width: 430px) { .row2 { grid-template-columns: 1fr; } }
+  @media (max-width: 360px) { .prods { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  .hidden { display: none !important; }
+</style>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="langs" role="group" aria-label="Language / भाषा / மொழி">
+      <button type="button" data-lang="en" class="active">EN</button>
+      <button type="button" data-lang="hi">हिंदी</button>
+      <button type="button" data-lang="ta">தமிழ்</button>
+    </div>
+    <button type="button" class="themetog" id="themeTog" aria-label="Toggle dark mode">🌙</button>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow" data-i18n="eyebrow">From Our Farm to Your Family</p>
+    <h1 class="wordmark">Meenakshi Dairy Farms<span data-i18n="brand_sub">Pure A2 Milk · Home Delivery</span></h1>
+    <p class="lede" data-i18n="lede">Farm-fresh A2 milk from Sahiwal cows &amp; Murrah buffaloes — order below and we deliver to your door.</p>
+    <div class="chips">
+      <span class="chip" data-i18n="chip1">Zero water mixed</span>
+      <span class="chip" data-i18n="chip2">BCM-7 free</span>
+      <span class="chip" data-i18n="chip3">No hormones · No injections</span>
+      <span class="chip" data-i18n="chip4">Green-fodder fed</span>
+      <span class="chip" data-i18n="chip5">Daily fresh milking</span>
+    </div>
+    <div class="price-flags">
+      <div class="price-flag"><b>₹85</b><small><span data-i18n="pf_cow">Cow</span> · <span data-i18n="per_litre">per litre</span></small></div>
+      <div class="price-flag"><b>₹90</b><small><span data-i18n="pf_buf">Buffalo</span> · <span data-i18n="per_litre">per litre</span></small></div>
+    </div>
+  </header>
+
+  <section class="card" id="orderCard">
+    <h2 data-i18n="form_title">Place your milk order</h2>
+    <p class="sub" data-i18n="form_sub">Takes about a minute. Your order goes straight to our farm on WhatsApp for confirmation.</p>
+
+    <form id="orderForm" novalidate>
+      <div class="field" id="f-name">
+        <label class="q" for="name"><span data-i18n="l_name">Your name</span> <span class="req">*</span></label>
+        <input type="text" id="name" name="name" autocomplete="name" data-ph="ph_name" placeholder="e.g. Priya Raman">
+        <div class="err" data-i18n="e_name">Please enter your name.</div>
+      </div>
+
+      <div class="field" id="f-phone">
+        <label class="q" for="phone"><span data-i18n="l_phone">Phone number</span> <span class="req">*</span> <span class="hint" data-i18n="h_phone">— for delivery updates</span></label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="numeric" data-ph="ph_phone" placeholder="10-digit mobile number">
+        <div class="err" data-i18n="e_phone">Please enter a valid 10-digit phone number.</div>
+      </div>
+
+      <div class="field" id="f-addr1">
+        <label class="q" for="addr1"><span data-i18n="l_addr1">Delivery address — first line</span> <span class="req">*</span></label>
+        <input type="text" id="addr1" name="addr1" autocomplete="address-line1" data-ph="ph_addr1" placeholder="Flat / house no., street">
+        <div class="err" data-i18n="e_addr1">Please enter the first line of your delivery address.</div>
+      </div>
+
+      <div class="row2">
+        <div class="field" id="f-area">
+          <label class="q" for="area"><span data-i18n="l_area">Area / landmark</span></label>
+          <input type="text" id="area" name="area" autocomplete="address-line2" data-ph="ph_area" placeholder="Locality, landmark">
+        </div>
+        <div class="field" id="f-pin">
+          <label class="q" for="pin"><span data-i18n="l_pin">Pincode</span></label>
+          <input type="text" id="pin" name="pin" inputmode="numeric" autocomplete="postal-code" placeholder="6-digit pincode">
+        </div>
+      </div>
+
+      <div class="field" id="f-milk">
+        <label class="q"><span data-i18n="l_milk">Milk &amp; litres per delivery</span> <span class="req">*</span></label>
+        <p class="hint" data-i18n="milk_hint">Set litres for one or both. Leave a milk at 0 if you don't want it.</p>
+        <div class="milkrows">
+          <div class="milkrow" id="mr-cow">
+            <div class="mr-info">
+              <span class="pname" data-i18n="p_cow">A2 Cow Milk</span>
+              <span class="pbreed"><span data-i18n="p_cow_b">Sahiwal breed</span> · ₹85/<span data-i18n="litre_word">litre</span></span>
+            </div>
+            <div class="stepper">
+              <button type="button" data-step="cow" data-dir="-1" aria-label="Decrease cow milk litres">–</button>
+              <input type="number" id="qtyCow" name="qtyCow" value="1" min="0" step="0.5" inputmode="decimal" aria-label="Cow milk litres per delivery">
+              <button type="button" data-step="cow" data-dir="1" aria-label="Increase cow milk litres">+</button>
+            </div>
+          </div>
+          <div class="milkrow" id="mr-buf">
+            <div class="mr-info">
+              <span class="pname" data-i18n="p_buf">A2 Buffalo Milk</span>
+              <span class="pbreed"><span data-i18n="p_buf_b">Murrah breed</span> · ₹90/<span data-i18n="litre_word">litre</span></span>
+            </div>
+            <div class="stepper">
+              <button type="button" data-step="buffalo" data-dir="-1" aria-label="Decrease buffalo milk litres">–</button>
+              <input type="number" id="qtyBuf" name="qtyBuf" value="0" min="0" step="0.5" inputmode="decimal" aria-label="Buffalo milk litres per delivery">
+              <button type="button" data-step="buffalo" data-dir="1" aria-label="Increase buffalo milk litres">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="err" data-i18n="e_qty">Enter at least 0.5 litre of cow or buffalo milk.</div>
+      </div>
+
+      <div class="field" id="f-freq">
+        <label class="q" for="freq"><span data-i18n="l_freq">How often</span> <span class="req">*</span></label>
+        <select id="freq" name="freq">
+          <option value="daily" data-i18n="fr_daily">Every day</option>
+          <option value="alt" data-i18n="fr_alt">Alternate days</option>
+          <option value="once" data-i18n="fr_once">One-time only</option>
+        </select>
+      </div>
+
+      <div class="field" id="f-date">
+        <label class="q" for="startdate"><span data-i18n="l_date">Start from</span></label>
+        <input type="date" id="startdate" name="startdate">
+      </div>
+
+      <div class="field" id="f-notes">
+        <label class="q" for="notes"><span data-i18n="l_notes">Notes for the farm</span> <span class="hint" data-i18n="h_notes">— optional</span></label>
+        <textarea id="notes" name="notes" data-ph="ph_notes" placeholder="Delivery time preference, gate code, glass bottle, etc."></textarea>
+      </div>
+
+      <div class="summary">
+        <div>
+          <span class="lbl" data-i18n="est_label">Estimated cost</span>
+          <div class="amt" id="estAmt">₹85</div>
+        </div>
+        <span class="per" id="estPer"></span>
+      </div>
+
+      <button type="submit" class="cta">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.14c-.24.68-1.42 1.31-1.95 1.36-.5.05-1.13.07-1.83-.11-.42-.13-.96-.31-1.66-.61-2.92-1.26-4.83-4.2-4.98-4.4-.15-.2-1.19-1.58-1.19-3.02s.76-2.14 1.03-2.44c.27-.29.58-.37.78-.37l.56.01c.18.01.42-.07.66.5.24.59.82 2.03.89 2.18.07.15.12.32.02.51-.09.2-.14.32-.28.49-.14.17-.3.38-.42.51-.14.14-.29.29-.12.57.17.28.75 1.24 1.61 2 1.11.99 2.05 1.29 2.34 1.44.29.14.46.12.63-.07.17-.2.72-.84.91-1.12.19-.29.39-.24.66-.14.27.09 1.7.8 1.99.95.29.14.48.21.55.33.07.12.07.68-.17 1.36Z"/></svg>
+        <span data-i18n="cta">Send order on WhatsApp</span>
+      </button>
+      <p class="fineprint" data-i18n="fineprint">Opens WhatsApp with your order pre-filled — just tap send.</p>
+    </form>
+  </section>
+
+  <section class="card hidden" id="doneCard">
+    <div class="done">
+      <div class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FFFDF6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <h2 data-i18n="done_title">Your order is ready to send</h2>
+      <p data-i18n="done_msg">WhatsApp is opening with your order. Tap send there to place it with us.</p>
+      <div class="relay">
+        <strong data-i18n="next_title">What happens next</strong>
+        <ol>
+          <li data-i18n="next_1">Send the pre-filled message on WhatsApp.</li>
+          <li data-i18n="next_2">Our farm confirms your order &amp; delivery slot.</li>
+          <li data-i18n="next_3">Payment details are shared on WhatsApp — pay by UPI or after delivery.</li>
+        </ol>
+      </div>
+
+      <div class="pay hidden" id="payPanel">
+        <p class="pay-t" data-i18n="pay_title">Pay now — optional</p>
+        <p class="pay-amt hidden" id="payAmt">₹0</p>
+        <p class="pay-ref"><span data-i18n="pay_ref">Order ref</span>: <span id="payRef"></span></p>
+
+        <div id="payNowWrap">
+          <a class="cta" id="upiBtn" href="#" rel="nofollow noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg>
+            <span id="upiBtnLabel">Pay by UPI</span>
+          </a>
+          <p class="pay-scan" data-i18n="pay_scan">On a computer or iPhone? Scan this with any UPI app:</p>
+          <div class="qbox" id="upiQrBox"></div>
+        </div>
+
+        <p class="pay-fine" data-i18n="pay_optional">Optional — your order is already placed. You can also pay after delivery.</p>
+      </div>
+
+      <button type="button" class="btn-ghost" id="reopenWa">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Z"/></svg>
+        <span data-i18n="reopen">Open WhatsApp again</span>
+      </button>
+      <div><button type="button" class="btn-link" id="newOrder" data-i18n="new_order">Place another order</button></div>
+    </div>
+  </section>
+
+  <section class="recent hidden" id="recentWrap">
+    <h3 data-i18n="recent_title">Your recent orders on this phone</h3>
+    <div id="recentList"></div>
+  </section>
+
+  <section class="why">
+    <h3 data-i18n="why_title">Why families choose Meenakshi</h3>
+    <ul>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_1">100% pure &amp; undiluted — zero water mixed, nothing added, nothing removed.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_2">Genuine A2 milk from Sahiwal cows &amp; Murrah buffaloes — BCM-7 free, gentle on digestion.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_3">Raised right — farm-kept cattle, green fodder, weekly herbal care, no hormones or injections.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_4">Fresh every day — milked and delivered daily, quality checked at every step.</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <p class="fname">Meenakshi Dairy Farms</p>
+    <p><span data-i18n="foot_contact">WhatsApp / Call</span> <a href="tel:+919791836836">97918 36836</a> · <a href="mailto:meenakshidairyfarms@gmail.com">meenakshidairyfarms@gmail.com</a></p>
+    <p style="margin-top:10px; font-size:12px;" data-i18n="foot_tag">Good milk · Healthy families · A better tomorrow</p>
+  </footer>
+
+  <details class="qr">
+    <summary data-i18n="qr_summary">Flyer QR code — for printing</summary>
+    <div class="qr-body">
+      <div class="qbox" id="qrBox"></div>
+      <p class="qr-url" id="qrUrl"></p>
+      <p data-i18n="qr_help">Open this page from your public link, then long-press / right-click the code to save it and add it to your flyer.</p>
+    </div>
+  </details>
+
+</div>
+
+<div class="sticky-cta" id="stickyCta" aria-hidden="true">
+  <button type="button" class="cta" id="stickyBtn">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.14c-.24.68-1.42 1.31-1.95 1.36-.5.05-1.13.07-1.83-.11-.42-.13-.96-.31-1.66-.61-2.92-1.26-4.83-4.2-4.98-4.4-.15-.2-1.19-1.58-1.19-3.02s.76-2.14 1.03-2.44c.27-.29.58-.37.78-.37l.56.01c.18.01.42-.07.66.5.24.59.82 2.03.89 2.18.07.15.12.32.02.51-.09.2-.14.32-.28.49-.14.17-.3.38-.42.51-.14.14-.29.29-.12.57.17.28.75 1.24 1.61 2 1.11.99 2.05 1.29 2.34 1.44.29.14.46.12.63-.07.17-.2.72-.84.91-1.12.19-.29.39-.24.66-.14.27.09 1.7.8 1.99.95.29.14.48.21.55.33.07.12.07.68-.17 1.36Z"/></svg>
+    <span id="stickyBtnLabel">Send order on WhatsApp</span>
+  </button>
+</div>
+
+<script>
+/* Minimal QR Code generator — byte mode, ECC level L/M. Validated bit-for-bit against a reference encoder. */
+(function (root) {
+  "use strict";
+  var EXP = new Uint8Array(512), LOG = new Uint8Array(256);
+  (function () { var x = 1; for (var i = 0; i < 255; i++) { EXP[i] = x; LOG[x] = i; x <<= 1; if (x & 0x100) x ^= 0x11D; } for (i = 255; i < 512; i++) EXP[i] = EXP[i - 255]; })();
+  function gfMul(a, b) { return (a === 0 || b === 0) ? 0 : EXP[LOG[a] + LOG[b]]; }
+  function rsGenPoly(degree) { var poly = [1]; for (var d = 0; d < degree; d++) { var np = new Array(poly.length + 1).fill(0); for (var i = 0; i < poly.length; i++) { np[i] ^= gfMul(poly[i], 1); np[i + 1] ^= gfMul(poly[i], EXP[d]); } poly = np; } return poly; }
+  function rsEncode(data, ecLen) { var gen = rsGenPoly(ecLen); var res = new Array(ecLen).fill(0); for (var i = 0; i < data.length; i++) { var factor = data[i] ^ res[0]; res.shift(); res.push(0); for (var j = 0; j < ecLen; j++) res[j] ^= gfMul(gen[j + 1], factor); } return res; }
+  var ECB = { L: [null,[7,1,19,0,0],[10,1,34,0,0],[15,1,55,0,0],[20,1,80,0,0],[26,1,108,0,0],[18,2,68,0,0],[20,2,78,0,0],[24,2,97,0,0],[30,2,116,0,0],[18,2,68,2,69],[20,4,81,0,0],[24,2,92,2,93],[26,4,107,0,0],[30,3,115,1,116],[22,5,87,1,88],[24,5,98,1,99],[28,1,107,5,108],[30,5,120,1,121],[28,3,113,4,114],[28,3,107,5,108],[28,4,116,4,117],[28,2,111,7,112],[30,4,121,5,122],[30,6,117,4,118],[26,8,106,4,107],[28,10,114,2,115],[30,8,122,4,123],[30,3,117,10,118],[30,7,116,7,117],[30,5,115,10,116],[30,13,115,3,116],[30,17,115,0,0],[30,17,115,1,116],[30,13,115,6,116],[30,12,121,7,122],[30,6,121,14,122],[30,17,122,4,123],[30,4,122,18,123],[30,20,117,4,118],[30,19,118,6,119]],
+    M: [null,[10,1,16,0,0],[16,1,28,0,0],[26,1,44,0,0],[18,2,32,0,0],[24,2,43,0,0],[16,4,27,0,0],[18,4,31,0,0],[22,2,38,2,39],[22,3,36,2,37],[26,4,43,1,44],[30,1,50,4,51],[22,6,36,2,37],[22,8,37,1,38],[24,4,40,5,41],[24,5,41,5,42],[28,7,45,3,46],[28,10,46,1,47],[26,9,43,4,44],[26,3,44,11,45],[26,3,41,13,42],[26,17,42,0,0],[28,17,46,0,0],[28,4,47,14,48],[28,6,45,14,46],[28,8,47,13,48],[28,19,46,4,47],[28,22,45,3,46],[28,3,45,23,46],[28,21,45,7,46],[28,19,47,10,48],[28,2,46,29,47],[28,10,46,23,47],[28,14,46,21,47],[28,14,46,23,47],[28,12,47,26,48],[28,6,47,34,48],[28,29,46,14,47],[28,13,46,32,47],[28,40,47,7,48],[28,18,47,31,48]] };
+  var ALIGN = [null,[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]];
+  function bch(data, poly, len) { var d = data << len; var gd = 0, t = poly; while (t) { gd++; t >>= 1; } gd--; var dd = 0; t = d; while (t) { dd++; t >>= 1; } dd--; while (dd >= gd) { d ^= poly << (dd - gd); dd = 0; t = d; while (t) { dd++; t >>= 1; } dd--; if (d === 0) break; } return d; }
+  function formatBits(e, m) { var data = (e << 3) | m; return ((data << 10) | bch(data, 0x537, 10)) ^ 0x5412; }
+  function versionBits(v) { return (v << 12) | bch(v, 0x1F25, 12); }
+  var ECC_FORMAT = { L: 1, M: 0 };
+  function chooseVersion(byteLen, ecl) { for (var v = 1; v <= 40; v++) { var row = ECB[ecl][v]; var dataCw = row[1] * row[2] + row[3] * row[4]; var cci = v <= 9 ? 8 : 16; if (4 + cci + byteLen * 8 <= dataCw * 8) return v; } throw new Error("too long"); }
+  function encode(text, opts) {
+    opts = opts || {}; var ecl = opts.ecl || "M";
+    var bytes = Array.from(new TextEncoder().encode(text));
+    var version = opts.version || chooseVersion(bytes.length, ecl);
+    var row = ECB[ecl][version], ecPerBlock = row[0], g1b = row[1], g1d = row[2], g2b = row[3], g2d = row[4];
+    var totalDataCw = g1b * g1d + g2b * g2d;
+    var bb = []; function put(val, len) { for (var k = len - 1; k >= 0; k--) bb.push((val >> k) & 1); }
+    put(4, 4); var cci = version <= 9 ? 8 : 16; put(bytes.length, cci);
+    for (var b = 0; b < bytes.length; b++) put(bytes[b], 8);
+    var cap = totalDataCw * 8;
+    for (var tz = 0; tz < 4 && bb.length < cap; tz++) bb.push(0);
+    while (bb.length % 8 !== 0) bb.push(0);
+    var pad = [0xEC, 0x11], pi = 0; while (bb.length < cap) { put(pad[pi % 2], 8); pi++; }
+    var dataCw = []; for (var q = 0; q < bb.length; q += 8) { var bv = 0; for (var r = 0; r < 8; r++) bv = (bv << 1) | bb[q + r]; dataCw.push(bv); }
+    var blocks = [], idx = 0;
+    for (var gb = 0; gb < g1b; gb++) { blocks.push(dataCw.slice(idx, idx + g1d)); idx += g1d; }
+    for (var gb2 = 0; gb2 < g2b; gb2++) { blocks.push(dataCw.slice(idx, idx + g2d)); idx += g2d; }
+    var ecBlocks = blocks.map(function (blk) { return rsEncode(blk, ecPerBlock); });
+    var finalCw = [], maxData = Math.max(g1d, g2d);
+    for (var c = 0; c < maxData; c++) for (var bl = 0; bl < blocks.length; bl++) if (c < blocks[bl].length) finalCw.push(blocks[bl][c]);
+    for (var c2 = 0; c2 < ecPerBlock; c2++) for (var bl2 = 0; bl2 < ecBlocks.length; bl2++) finalCw.push(ecBlocks[bl2][c2]);
+    var size = version * 4 + 17, mod = [], reserved = [];
+    for (var y = 0; y < size; y++) { mod.push(new Array(size).fill(0)); reserved.push(new Array(size).fill(false)); }
+    function setF(x, yy, val) { mod[yy][x] = val ? 1 : 0; reserved[yy][x] = true; }
+    function placeFinder(cx, cy) { for (var dy = -1; dy <= 7; dy++) for (var dx = -1; dx <= 7; dx++) { var xx = cx + dx, yy = cy + dy; if (xx < 0 || xx >= size || yy < 0 || yy >= size) continue; var inRing = (dx >= 0 && dx <= 6 && (dy === 0 || dy === 6)) || (dy >= 0 && dy <= 6 && (dx === 0 || dx === 6)); var inCore = (dx >= 2 && dx <= 4 && dy >= 2 && dy <= 4); setF(xx, yy, inRing || inCore); } }
+    placeFinder(0, 0); placeFinder(size - 7, 0); placeFinder(0, size - 7);
+    for (var t2 = 8; t2 < size - 8; t2++) { setF(t2, 6, t2 % 2 === 0); setF(6, t2, t2 % 2 === 0); }
+    setF(8, size - 8, 1);
+    var apos = ALIGN[version], lastA = apos.length - 1;
+    for (var a1 = 0; a1 < apos.length; a1++) for (var a2 = 0; a2 < apos.length; a2++) {
+      if ((a1 === 0 && a2 === 0) || (a1 === 0 && a2 === lastA) || (a1 === lastA && a2 === 0)) continue;
+      var ax = apos[a1], ay = apos[a2];
+      for (var ey = -2; ey <= 2; ey++) for (var ex = -2; ex <= 2; ex++) setF(ax + ex, ay + ey, Math.max(Math.abs(ex), Math.abs(ey)) !== 1);
+    }
+    for (var k1 = 0; k1 <= 8; k1++) { reserved[8][k1] = true; reserved[k1][8] = true; }
+    for (var k2 = 0; k2 < 8; k2++) { reserved[8][size - 1 - k2] = true; reserved[size - 1 - k2][8] = true; }
+    if (version >= 7) for (var vy = 0; vy < 6; vy++) for (var vx = 0; vx < 3; vx++) { reserved[vy][size - 11 + vx] = true; reserved[size - 11 + vx][vy] = true; }
+    var dataBits = []; for (var dc = 0; dc < finalCw.length; dc++) for (var db = 7; db >= 0; db--) dataBits.push((finalCw[dc] >> db) & 1);
+    var bitIdx = 0, col = size - 1, upward = true;
+    while (col > 0) {
+      if (col === 6) col--;
+      for (var rr = 0; rr < size; rr++) { var yrow = upward ? (size - 1 - rr) : rr; for (var cc = 0; cc < 2; cc++) { var xcol = col - cc; if (reserved[yrow][xcol]) continue; mod[yrow][xcol] = bitIdx < dataBits.length ? dataBits[bitIdx] : 0; bitIdx++; } }
+      col -= 2; upward = !upward;
+    }
+    function maskFn(m, x, y) { switch (m) { case 0: return (x + y) % 2 === 0; case 1: return y % 2 === 0; case 2: return x % 3 === 0; case 3: return (x + y) % 3 === 0; case 4: return (Math.floor(y / 2) + Math.floor(x / 3)) % 2 === 0; case 5: return ((x * y) % 2) + ((x * y) % 3) === 0; case 6: return (((x * y) % 2) + ((x * y) % 3)) % 2 === 0; case 7: return (((x + y) % 2) + ((x * y) % 3)) % 2 === 0; } }
+    function applyMask(m) { var out = []; for (var yy = 0; yy < size; yy++) { out.push(mod[yy].slice()); for (var xx = 0; xx < size; xx++) if (!reserved[yy][xx] && maskFn(m, xx, yy)) out[yy][xx] ^= 1; } return out; }
+    function drawFormat(grid, m) { var fmt = formatBits(ECC_FORMAT[ecl], m); for (var p = 0; p < 15; p++) { var bitv = (fmt >> p) & 1, x1, y1; if (p < 6) { x1 = 8; y1 = p; } else if (p === 6) { x1 = 8; y1 = 7; } else if (p === 7) { x1 = 8; y1 = 8; } else if (p === 8) { x1 = 7; y1 = 8; } else { x1 = 14 - p; y1 = 8; } grid[y1][x1] = bitv; var x2, y2; if (p < 8) { x2 = size - 1 - p; y2 = 8; } else { x2 = 8; y2 = size - 15 + p; } grid[y2][x2] = bitv; } grid[size - 8][8] = 1; }
+    function drawVersion(grid) { if (version < 7) return; var vb = versionBits(version); for (var p = 0; p < 18; p++) { var bitv = (vb >> p) & 1, a = Math.floor(p / 3), b2 = p % 3; grid[b2 + size - 11][a] = bitv; grid[a][b2 + size - 11] = bitv; } }
+    function penalty(grid) {
+      var score = 0, n = size;
+      for (var y1 = 0; y1 < n; y1++) { var rc = 1, rv = grid[y1][0]; for (var x1 = 1; x1 < n; x1++) { if (grid[y1][x1] === rv) rc++; else { if (rc >= 5) score += rc - 2; rc = 1; rv = grid[y1][x1]; } } if (rc >= 5) score += rc - 2; }
+      for (var x2 = 0; x2 < n; x2++) { var c3 = 1, v3 = grid[0][x2]; for (var y2 = 1; y2 < n; y2++) { if (grid[y2][x2] === v3) c3++; else { if (c3 >= 5) score += c3 - 2; c3 = 1; v3 = grid[y2][x2]; } } if (c3 >= 5) score += c3 - 2; }
+      for (var y3 = 0; y3 < n - 1; y3++) for (var x3 = 0; x3 < n - 1; x3++) { var vv = grid[y3][x3]; if (vv === grid[y3][x3 + 1] && vv === grid[y3 + 1][x3] && vv === grid[y3 + 1][x3 + 1]) score += 3; }
+      var p1 = [1,0,1,1,1,0,1,0,0,0,0], p2 = [0,0,0,0,1,0,1,1,1,0,1];
+      for (var y4 = 0; y4 < n; y4++) for (var x4 = 0; x4 <= n - 11; x4++) { var mm1 = true, mm2 = true; for (var kk = 0; kk < 11; kk++) { if (grid[y4][x4 + kk] !== p1[kk]) mm1 = false; if (grid[y4][x4 + kk] !== p2[kk]) mm2 = false; } if (mm1) score += 40; if (mm2) score += 40; }
+      for (var x5 = 0; x5 < n; x5++) for (var y5 = 0; y5 <= n - 11; y5++) { var nn1 = true, nn2 = true; for (var k3 = 0; k3 < 11; k3++) { if (grid[y5 + k3][x5] !== p1[k3]) nn1 = false; if (grid[y5 + k3][x5] !== p2[k3]) nn2 = false; } if (nn1) score += 40; if (nn2) score += 40; }
+      var dark = 0; for (var y6 = 0; y6 < n; y6++) for (var x6 = 0; x6 < n; x6++) dark += grid[y6][x6];
+      score += Math.floor(Math.abs(dark * 100 / (n * n) - 50) / 5) * 10;
+      return score;
+    }
+    var best = null, bestScore = Infinity, bestMask = 0;
+    var maskList = (opts.forceMask != null) ? [opts.forceMask] : [0,1,2,3,4,5,6,7];
+    for (var mi = 0; mi < maskList.length; mi++) { var m = maskList[mi]; var g = applyMask(m); drawFormat(g, m); drawVersion(g); var s = penalty(g); if (s < bestScore) { bestScore = s; best = g; bestMask = m; } }
+    return { matrix: best, size: size, version: version, mask: bestMask };
+  }
+  root.QRMini = { encode: encode };
+})(window);
+</script>
+
+<script>
+(function () {
+  "use strict";
+  var WA_NUMBER = "919791836836";
+  // UPI payee for the "Pay now" option on the confirmation screen.
+  // Replace UPI_VPA with the farm's real UPI ID (e.g. "name@okhdfcbank" or "9087282939@ybl").
+  // Set UPI_VPA = "" to hide the payment panel entirely.
+  var UPI_VPA  = "abc123@icici";
+  var UPI_NAME = "Meenakshi Dairy Farms";
+  // Price per litre, by product. Change these two numbers to update the whole page.
+  var RATE = { cow: 85, buffalo: 90 };
+  var STORE_KEY = "meenakshi_orders_v1";
+  var LANG_KEY = "meenakshi_lang";
+  var THEME_KEY = "meenakshi_theme";
+
+  var I18N = {
+    en: {
+      eyebrow: "From Our Farm to Your Family",
+      brand_sub: "Pure A2 Milk · Home Delivery",
+      lede: "Farm-fresh A2 milk from Sahiwal cows & Murrah buffaloes — order below and we deliver to your door.",
+      chip1: "Zero water mixed", chip2: "BCM-7 free", chip3: "No hormones · No injections",
+      chip4: "Green-fodder fed", chip5: "Daily fresh milking",
+      per_litre: "per litre", pf_cow: "Cow", pf_buf: "Buffalo", litre_word: "litre",
+      form_title: "Place your milk order",
+      form_sub: "Takes about a minute. Your order goes straight to our farm on WhatsApp for confirmation.",
+      l_name: "Your name", ph_name: "e.g. Priya Raman", e_name: "Please enter your name.",
+      l_phone: "Phone number", h_phone: "— for delivery updates", ph_phone: "10-digit mobile number",
+      e_phone: "Please enter a valid 10-digit phone number.",
+      l_addr1: "Delivery address — first line", ph_addr1: "Flat / house no., street",
+      e_addr1: "Please enter the first line of your delivery address.",
+      l_area: "Area / landmark", ph_area: "Locality, landmark", l_pin: "Pincode",
+      l_product: "Choose your milk",
+      l_milk: "Milk &amp; litres per delivery",
+      milk_hint: "Set litres for one or both. Leave a milk at 0 if you don't want it.",
+      p_cow: "A2 Cow Milk", p_cow_b: "Sahiwal breed", p_buf: "A2 Buffalo Milk", p_buf_b: "Murrah breed",
+      l_qty: "Litres per delivery", e_qty: "Enter at least 0.5 litre of cow or buffalo milk.",
+      l_freq: "How often", fr_daily: "Every day", fr_alt: "Alternate days", fr_once: "One-time only",
+      l_date: "Start from",
+      l_notes: "Notes for the farm", h_notes: "— optional",
+      ph_notes: "Delivery time preference, gate code, glass bottle, etc.",
+      est_label: "Estimated cost",
+      cta: "Send order on WhatsApp",
+      fineprint: "Opens WhatsApp with your order pre-filled — just tap send.",
+      done_title: "Your order is ready to send",
+      done_msg: "WhatsApp is opening with your order. Tap send there to place it with us.",
+      next_title: "What happens next",
+      next_1: "Send the pre-filled message on WhatsApp.",
+      next_2: "Our farm confirms your order & delivery slot.",
+      next_3: "Payment details are shared on WhatsApp — pay by UPI or after delivery.",
+      reopen: "Open WhatsApp again", new_order: "Place another order",
+      recent_title: "Your recent orders on this phone", reorder: "Reorder", ordered: "Ordered",
+      why_title: "Why families choose Meenakshi",
+      why_1: "100% pure & undiluted — zero water mixed, nothing added, nothing removed.",
+      why_2: "Genuine A2 milk from Sahiwal cows & Murrah buffaloes — BCM-7 free, gentle on digestion.",
+      why_3: "Raised right — farm-kept cattle, green fodder, weekly herbal care, no hormones or injections.",
+      why_4: "Fresh every day — milked and delivered daily, quality checked at every step.",
+      foot_contact: "WhatsApp / Call", foot_tag: "Good milk · Healthy families · A better tomorrow",
+      qr_summary: "Flyer QR code — for printing",
+      qr_help: "Open this page from your public link, then long-press / right-click the code to save it and add it to your flyer.",
+      per_delivery: "per delivery", per_once: "one-time",
+      pay_title: "Pay now — optional",
+      pay_ref: "Order ref",
+      pay_btn: "Pay by UPI", pay_btn_amt: "Pay {amt} by UPI",
+      pay_scan: "On a computer or iPhone? Scan this with any UPI app:",
+      pay_optional: "Optional — your order is already placed. You can also pay after delivery."
+    },
+    hi: {
+      eyebrow: "हमारे फार्म से आपके परिवार तक",
+      brand_sub: "शुद्ध A2 दूध · घर पहुँच सेवा",
+      lede: "साहीवाल गायों और मुर्रा भैंसों का फार्म-ताज़ा A2 दूध — नीचे ऑर्डर करें, हम आपके घर पहुँचाएँगे।",
+      chip1: "पानी बिल्कुल नहीं मिला", chip2: "BCM-7 रहित", chip3: "कोई हार्मोन नहीं · कोई इंजेक्शन नहीं",
+      chip4: "हरे चारे पर पला", chip5: "रोज़ ताज़ा दूध",
+      per_litre: "प्रति लीटर", pf_cow: "गाय", pf_buf: "भैंस", litre_word: "लीटर",
+      form_title: "अपना दूध ऑर्डर करें",
+      form_sub: "लगभग एक मिनट लगेगा। आपका ऑर्डर पुष्टि के लिए सीधे हमारे फार्म के WhatsApp पर जाता है।",
+      l_name: "आपका नाम", ph_name: "जैसे: प्रिया रमन", e_name: "कृपया अपना नाम लिखें।",
+      l_phone: "फ़ोन नंबर", h_phone: "— डिलीवरी अपडेट के लिए", ph_phone: "10 अंकों का मोबाइल नंबर",
+      e_phone: "कृपया सही 10 अंकों का फ़ोन नंबर लिखें।",
+      l_addr1: "डिलीवरी पता — पहली पंक्ति", ph_addr1: "फ्लैट / मकान नं., गली",
+      e_addr1: "कृपया डिलीवरी पते की पहली पंक्ति लिखें।",
+      l_area: "क्षेत्र / लैंडमार्क", ph_area: "मोहल्ला, लैंडमार्क", l_pin: "पिनकोड",
+      l_product: "अपना दूध चुनें",
+      l_milk: "दूध और प्रति डिलीवरी लीटर",
+      milk_hint: "एक या दोनों के लिए लीटर सेट करें। जो दूध नहीं चाहिए उसे 0 पर छोड़ें।",
+      p_cow: "A2 गाय का दूध", p_cow_b: "साहीवाल नस्ल", p_buf: "A2 भैंस का दूध", p_buf_b: "मुर्रा नस्ल",
+      l_qty: "प्रति डिलीवरी लीटर", e_qty: "गाय या भैंस का कम से कम 0.5 लीटर दूध चुनें।",
+      l_freq: "कितनी बार", fr_daily: "रोज़ाना", fr_alt: "एक दिन छोड़कर", fr_once: "सिर्फ़ एक बार",
+      l_date: "किस दिन से शुरू करें",
+      l_notes: "फार्म के लिए नोट", h_notes: "— वैकल्पिक",
+      ph_notes: "डिलीवरी समय, गेट कोड, काँच की बोतल, आदि।",
+      est_label: "अनुमानित लागत",
+      cta: "WhatsApp पर ऑर्डर भेजें",
+      fineprint: "आपका ऑर्डर WhatsApp में पहले से भरा खुलेगा — बस भेजें दबाएँ।",
+      done_title: "आपका ऑर्डर भेजने के लिए तैयार है",
+      done_msg: "WhatsApp आपके ऑर्डर के साथ खुल रहा है। ऑर्डर करने के लिए वहाँ भेजें दबाएँ।",
+      next_title: "आगे क्या होगा",
+      next_1: "WhatsApp पर पहले से भरा संदेश भेजें।",
+      next_2: "हमारा फार्म आपका ऑर्डर और डिलीवरी समय पक्का करेगा।",
+      next_3: "भुगतान की जानकारी WhatsApp पर मिलेगी — UPI से या डिलीवरी के बाद भुगतान करें।",
+      reopen: "WhatsApp फिर से खोलें", new_order: "एक और ऑर्डर करें",
+      recent_title: "इस फ़ोन पर आपके हाल के ऑर्डर", reorder: "फिर ऑर्डर करें", ordered: "ऑर्डर किया",
+      why_title: "परिवार मीनाक्षी को क्यों चुनते हैं",
+      why_1: "100% शुद्ध और बिना मिलावट — पानी नहीं मिला, कुछ नहीं मिलाया, कुछ नहीं निकाला।",
+      why_2: "साहीवाल गायों और मुर्रा भैंसों से असली A2 दूध — BCM-7 रहित, पचने में आसान।",
+      why_3: "सही देखभाल — फार्म में पली गायें, हरा चारा, हर हफ़्ते हर्बल देखभाल, कोई हार्मोन या इंजेक्शन नहीं।",
+      why_4: "रोज़ ताज़ा — रोज़ दुहा और पहुँचाया जाता है, हर कदम पर गुणवत्ता जाँच।",
+      foot_contact: "WhatsApp / कॉल", foot_tag: "अच्छा दूध · स्वस्थ परिवार · बेहतर कल",
+      qr_summary: "फ्लायर QR कोड — प्रिंट के लिए",
+      qr_help: "यह पेज अपने पब्लिक लिंक से खोलें, फिर कोड को देर तक दबाकर / राइट-क्लिक करके सेव करें और अपने फ्लायर में लगाएँ।",
+      per_delivery: "प्रति डिलीवरी", per_once: "एक बार",
+      pay_title: "अभी भुगतान करें — वैकल्पिक",
+      pay_ref: "ऑर्डर रेफ़",
+      pay_btn: "UPI से भुगतान करें", pay_btn_amt: "{amt} UPI से भुगतान करें",
+      pay_scan: "कंप्यूटर या iPhone पर हैं? किसी भी UPI ऐप से यह स्कैन करें:",
+      pay_optional: "वैकल्पिक — आपका ऑर्डर पहले ही दर्ज हो चुका है। आप डिलीवरी के बाद भी भुगतान कर सकते हैं।"
+    },
+    ta: {
+      eyebrow: "எங்கள் பண்ணையிலிருந்து உங்கள் குடும்பத்திற்கு",
+      brand_sub: "தூய A2 பால் · வீட்டு விநியோகம்",
+      lede: "சிவால் பசுக்கள் மற்றும் முர்ரா எருமைகளின் பண்ணை-புதிய A2 பால் — கீழே ஆர்டர் செய்யுங்கள், உங்கள் வீட்டிற்கே கொண்டு வருகிறோம்.",
+      chip1: "தண்ணீர் கலக்கப்படவில்லை", chip2: "BCM-7 இல்லை", chip3: "ஹார்மோன் இல்லை · ஊசி இல்லை",
+      chip4: "பசுந்தீவனம் ஊட்டப்பட்டது", chip5: "தினமும் புதிய பால்",
+      per_litre: "ஒரு லிட்டருக்கு", pf_cow: "பசு", pf_buf: "எருமை", litre_word: "லிட்டர்",
+      form_title: "உங்கள் பால் ஆர்டரை பதிவு செய்யுங்கள்",
+      form_sub: "சுமார் ஒரு நிமிடம் ஆகும். உங்கள் ஆர்டர் உறுதிப்படுத்தலுக்காக நேரடியாக எங்கள் பண்ணையின் WhatsApp-க்கு செல்கிறது.",
+      l_name: "உங்கள் பெயர்", ph_name: "எ.கா. பிரியா ராமன்", e_name: "உங்கள் பெயரை உள்ளிடவும்.",
+      l_phone: "தொலைபேசி எண்", h_phone: "— டெலிவரி புதுப்பிப்புகளுக்கு", ph_phone: "10 இலக்க மொபைல் எண்",
+      e_phone: "சரியான 10 இலக்க தொலைபேசி எண்ணை உள்ளிடவும்.",
+      l_addr1: "டெலிவரி முகவரி — முதல் வரி", ph_addr1: "வீட்டு எண், தெரு",
+      e_addr1: "டெலிவரி முகவரியின் முதல் வரியை உள்ளிடவும்.",
+      l_area: "பகுதி / அடையாளம்", ph_area: "பகுதி, அடையாளம்", l_pin: "பின்கோடு",
+      l_product: "உங்கள் பாலைத் தேர்ந்தெடுக்கவும்",
+      l_milk: "பால் &amp; ஒரு டெலிவரிக்கு லிட்டர்",
+      milk_hint: "ஒன்று அல்லது இரண்டுக்கும் லிட்டர் அமைக்கவும். வேண்டாத பாலை 0 ஆக விடவும்.",
+      p_cow: "A2 பசும் பால்", p_cow_b: "சிவால் இனம்", p_buf: "A2 எருமை பால்", p_buf_b: "முர்ரா இனம்",
+      l_qty: "ஒரு டெலிவரிக்கு லிட்டர்", e_qty: "பசு அல்லது எருமை பால் குறைந்தது 0.5 லிட்டர் தேர்வு செய்யவும்.",
+      l_freq: "எத்தனை முறை", fr_daily: "தினமும்", fr_alt: "மாற்று நாட்களில்", fr_once: "ஒரு முறை மட்டும்",
+      l_date: "எந்த நாளிலிருந்து",
+      l_notes: "பண்ணைக்கு குறிப்புகள்", h_notes: "— விருப்பமானது",
+      ph_notes: "டெலிவரி நேரம், கேட் கோடு, கண்ணாடி பாட்டில் போன்றவை.",
+      est_label: "மதிப்பிடப்பட்ட கட்டணம்",
+      cta: "WhatsApp-ல் ஆர்டரை அனுப்பவும்",
+      fineprint: "உங்கள் ஆர்டர் WhatsApp-ல் முன்பே நிரப்பப்பட்டு திறக்கும் — அனுப்பு என்பதை தட்டவும்.",
+      done_title: "உங்கள் ஆர்டர் அனுப்பத் தயார்",
+      done_msg: "WhatsApp உங்கள் ஆர்டருடன் திறக்கிறது. ஆர்டரைப் பதிவு செய்ய அங்கே அனுப்பு என்பதைத் தட்டவும்.",
+      next_title: "அடுத்து என்ன நடக்கும்",
+      next_1: "WhatsApp-ல் முன்பே நிரப்பப்பட்ட செய்தியை அனுப்பவும்.",
+      next_2: "எங்கள் பண்ணை உங்கள் ஆர்டர் மற்றும் டெலிவரி நேரத்தை உறுதிப்படுத்தும்.",
+      next_3: "பணம் செலுத்தும் விவரங்கள் WhatsApp-ல் பகிரப்படும் — UPI மூலம் அல்லது டெலிவரிக்குப் பிறகு செலுத்தவும்.",
+      reopen: "WhatsApp-ஐ மீண்டும் திறக்கவும்", new_order: "மற்றொரு ஆர்டர் பதிவு செய்யவும்",
+      recent_title: "இந்த ஃபோனில் உங்கள் சமீபத்திய ஆர்டர்கள்", reorder: "மீண்டும் ஆர்டர்", ordered: "ஆர்டர் செய்யப்பட்டது",
+      why_title: "குடும்பங்கள் மீனாட்சியை ஏன் தேர்வு செய்கிறார்கள்",
+      why_1: "100% தூய்மையான, கலப்படமற்ற பால் — தண்ணீர் இல்லை, எதுவும் சேர்க்கப்படவில்லை, எதுவும் நீக்கப்படவில்லை.",
+      why_2: "சிவால் பசுக்கள் மற்றும் முர்ரா எருமைகளிடமிருந்து உண்மையான A2 பால் — BCM-7 இல்லை, செரிமானத்திற்கு எளிது.",
+      why_3: "சரியான பராமரிப்பு — பண்ணையில் வளர்க்கப்பட்ட கால்நடைகள், பசுந்தீவனம், வாராந்திர மூலிகை பராமரிப்பு, ஹார்மோன் அல்லது ஊசி இல்லை.",
+      why_4: "தினமும் புதியது — தினமும் கறந்து விநியோகிக்கப்படுகிறது, ஒவ்வொரு கட்டத்திலும் தரச் சோதனை.",
+      foot_contact: "WhatsApp / அழைப்பு", foot_tag: "நல்ல பால் · ஆரோக்கியமான குடும்பங்கள் · சிறந்த நாளை",
+      qr_summary: "ஃபிளையர் QR குறியீடு — அச்சிடுவதற்கு",
+      qr_help: "இந்தப் பக்கத்தை உங்கள் பொது இணைப்பிலிருந்து திறந்து, குறியீட்டை நீண்ட நேரம் அழுத்தி / ரைட்-கிளிக் செய்து சேமித்து உங்கள் ஃபிளையரில் சேர்க்கவும்.",
+      per_delivery: "ஒரு டெலிவரிக்கு", per_once: "ஒரு முறை",
+      pay_title: "இப்போது பணம் செலுத்துங்கள் — விருப்பமானது",
+      pay_ref: "ஆர்டர் குறிப்பு",
+      pay_btn: "UPI மூலம் செலுத்து", pay_btn_amt: "{amt} UPI மூலம் செலுத்து",
+      pay_scan: "கம்ப்யூட்டர் அல்லது iPhone-ல் உள்ளீர்களா? எந்த UPI ஆப்பிலும் இதை ஸ்கேன் செய்யுங்கள்:",
+      pay_optional: "விருப்பமானது — உங்கள் ஆர்டர் ஏற்கனவே பதிவாகிவிட்டது. டெலிவரிக்குப் பிறகும் செலுத்தலாம்."
+    }
+  };
+
+  var PRODUCT_EN = {
+    cow: "A2 Cow Milk (Sahiwal breed)",
+    buffalo: "A2 Buffalo Milk (Murrah breed)"
+  };
+  var FREQ_EN = { daily: "Daily", alt: "Alternate days", once: "One-time" };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var form = $("orderForm");
+  var lang = "en";
+
+  function t(k) { return (I18N[lang] && I18N[lang][k] != null) ? I18N[lang][k] : I18N.en[k]; }
+
+  // ---------- language ----------
+  function applyLang(l) {
+    lang = I18N[l] ? l : "en";
+    document.documentElement.lang = lang;
+    try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var k = el.getAttribute("data-i18n");
+      if (I18N[lang][k] != null) el.innerHTML = I18N[lang][k];
+    });
+    document.querySelectorAll("[data-ph]").forEach(function (el) {
+      var k = el.getAttribute("data-ph");
+      if (I18N[lang][k] != null) el.placeholder = I18N[lang][k];
+    });
+    document.querySelectorAll(".langs button").forEach(function (b) {
+      b.classList.toggle("active", b.getAttribute("data-lang") === lang);
+    });
+    updateSummary();
+    renderRecent();
+    try {
+      if (typeof orderPlaced !== "undefined" && orderPlaced && lastOrder &&
+          !$("doneCard").classList.contains("hidden")) renderUpi(lastOrder);
+    } catch (e) {}
+  }
+  document.querySelectorAll(".langs button").forEach(function (b) {
+    b.addEventListener("click", function () { applyLang(b.getAttribute("data-lang")); });
+  });
+
+  // ---------- theme ----------
+  function prefersDark() {
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  function effectiveDark() {
+    var ex = document.documentElement.getAttribute("data-theme");
+    if (ex === "dark") return true;
+    if (ex === "light") return false;
+    return prefersDark();
+  }
+  function paintToggle() { $("themeTog").textContent = effectiveDark() ? "☀️" : "🌙"; }
+  function applyTheme(mode) {
+    if (mode === "dark" || mode === "light") {
+      document.documentElement.setAttribute("data-theme", mode);
+      try { localStorage.setItem(THEME_KEY, mode); } catch (e) {}
+    }
+    paintToggle();
+  }
+  $("themeTog").addEventListener("click", function () {
+    applyTheme(effectiveDark() ? "light" : "dark");
+  });
+
+  // ---------- init prefs ----------
+  try {
+    var sl = localStorage.getItem(LANG_KEY);
+    var st = localStorage.getItem(THEME_KEY);
+    if (st === "dark" || st === "light") document.documentElement.setAttribute("data-theme", st);
+    applyLang(sl || "en");
+  } catch (e) { applyLang("en"); }
+  paintToggle();
+  if (window.matchMedia) {
+    try {
+      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paintToggle);
+    } catch (e) {}
+  }
+
+  // ---------- start date ----------
+  try {
+    var tm = new Date(); tm.setDate(tm.getDate() + 1);
+    $("startdate").value = tm.toISOString().slice(0, 10);
+    $("startdate").min = new Date().toISOString().slice(0, 10);
+  } catch (e) {}
+
+  // ---------- quantity (cow + buffalo, each can be 0) ----------
+  function readLitres(id) {
+    var v = parseFloat($(id).value);
+    if (isNaN(v) || v < 0) v = 0;
+    return Math.round(v * 2) / 2;
+  }
+  function currentQtys() { return { cow: readLitres("qtyCow"), buffalo: readLitres("qtyBuf") }; }
+  function calcTotal(q) { return Math.round(q.cow * RATE.cow + q.buffalo * RATE.buffalo); }
+
+  function stepMilk(which, dir) {
+    var id = (which === "buffalo") ? "qtyBuf" : "qtyCow";
+    var v = Math.max(0, readLitres(id) + dir * 0.5);
+    $(id).value = v;
+    updateSummary();
+  }
+  form.querySelectorAll("[data-step]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      stepMilk(b.getAttribute("data-step"), parseFloat(b.getAttribute("data-dir")));
+    });
+  });
+  $("qtyCow").addEventListener("input", function () { updateSummary(); clearMilkError(); });
+  $("qtyBuf").addEventListener("input", function () { updateSummary(); clearMilkError(); });
+  $("freq").addEventListener("change", updateSummary);
+
+  function fmtNum(n) { return String(n); }
+  function freqKey() { return $("freq").value; }
+
+  function updateSummary() {
+    var q = currentQtys();
+    var total = calcTotal(q);
+    $("estAmt").textContent = "₹" + total.toLocaleString("en-IN");
+    var parts = [];
+    if (q.cow > 0) parts.push(fmtNum(q.cow) + " L " + t("pf_cow"));
+    if (q.buffalo > 0) parts.push(fmtNum(q.buffalo) + " L " + t("pf_buf"));
+    var per = (freqKey() === "once") ? t("per_once") : t("per_delivery");
+    $("estPer").textContent = (parts.length ? parts.join(" + ") + " · " : "") + per;
+    var sl = $("stickyBtnLabel");
+    if (sl) sl.textContent = t("cta") + " · ₹" + total.toLocaleString("en-IN");
+    var mc = $("mr-cow"), mb = $("mr-buf");
+    if (mc) mc.classList.toggle("has-qty", q.cow > 0);
+    if (mb) mb.classList.toggle("has-qty", q.buffalo > 0);
+  }
+  function clearMilkError() {
+    var q = currentQtys();
+    if ((q.cow + q.buffalo) >= 0.5) $("f-milk").classList.remove("invalid");
+  }
+
+  // ---------- validation ----------
+  function setInvalid(fid, bad) {
+    var el = $(fid);
+    if (el) el.classList.toggle("invalid", !!bad);
+    return !bad;
+  }
+  function validate() {
+    var ok = true;
+    ok = setInvalid("f-name", $("name").value.trim() === "") && ok;
+    var digits = $("phone").value.replace(/\D/g, "");
+    ok = setInvalid("f-phone", !(digits.length >= 10 && digits.length <= 13)) && ok;
+    ok = setInvalid("f-addr1", $("addr1").value.trim() === "") && ok;
+    var q = currentQtys();
+    ok = setInvalid("f-milk", !((q.cow + q.buffalo) >= 0.5)) && ok;
+    if (!ok) {
+      var first = document.querySelector(".field.invalid");
+      if (first) {
+        first.scrollIntoView({ behavior: "smooth", block: "center" });
+        var inp = first.querySelector("input, select, textarea");
+        if (inp) inp.focus({ preventScroll: true });
+      }
+    }
+    return ok;
+  }
+  ["name", "phone", "addr1"].forEach(function (id) {
+    $(id).addEventListener("input", function () {
+      if ($("name").value.trim() !== "") $("f-name").classList.remove("invalid");
+      var d = $("phone").value.replace(/\D/g, "");
+      if (d.length >= 10 && d.length <= 13) $("f-phone").classList.remove("invalid");
+      if ($("addr1").value.trim() !== "") $("f-addr1").classList.remove("invalid");
+    });
+  });
+
+  // ---------- order + whatsapp ----------
+  function makeRef() {
+    var d = new Date();
+    var p = function (x) { return (x < 10 ? "0" : "") + x; };
+    var ymd = String(d.getFullYear()).slice(2) + p(d.getMonth() + 1) + p(d.getDate());
+    var chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", s = "";
+    for (var i = 0; i < 4; i++) s += chars[Math.floor(Math.random() * chars.length)];
+    return "MDF-" + ymd + "-" + s;
+  }
+  function buildOrder() {
+    var q = currentQtys();
+    return {
+      name: $("name").value.trim(), phone: $("phone").value.trim(),
+      addr1: $("addr1").value.trim(), area: $("area").value.trim(), pin: $("pin").value.trim(),
+      cow: q.cow, buf: q.buffalo,
+      freqKey: freqKey(), startdate: $("startdate").value,
+      notes: $("notes").value.trim(), total: calcTotal(q),
+      ref: makeRef(), ts: Date.now()
+    };
+  }
+  // Line items for an order. Handles both the new {cow,buf} shape and older
+  // stored orders that used {productKey, qty}.
+  function orderLines(o) {
+    var cow = +o.cow || 0, buf = +o.buf || 0;
+    if (!cow && !buf && o.qty) {
+      if ((o.productKey || "cow") === "buffalo") buf = +o.qty || 0; else cow = +o.qty || 0;
+    }
+    var items = [];
+    if (cow > 0) items.push({ key: "cow", label: PRODUCT_EN.cow, litres: cow, rate: RATE.cow, amount: Math.round(cow * RATE.cow) });
+    if (buf > 0) items.push({ key: "buffalo", label: PRODUCT_EN.buffalo, litres: buf, rate: RATE.buffalo, amount: Math.round(buf * RATE.buffalo) });
+    return items;
+  }
+  function orderTotalOf(o) {
+    if (o.total != null) return o.total;
+    return orderLines(o).reduce(function (s, it) { return s + it.amount; }, 0);
+  }
+  // Message is always in English so the farm can process every order the same way.
+  function orderText(o) {
+    var items = orderLines(o), total = orderTotalOf(o);
+    var L = [];
+    L.push("*New Milk Order — Meenakshi Dairy Farms*");
+    L.push("*Order ref:* " + o.ref);
+    L.push("");
+    L.push("*Name:* " + o.name);
+    L.push("*Phone:* " + o.phone);
+    L.push("*Address:* " + o.addr1);
+    if (o.area) L.push("*Area / landmark:* " + o.area);
+    if (o.pin) L.push("*Pincode:* " + o.pin);
+    L.push("");
+    L.push("*Milk order" + (o.freqKey === "once" ? "" : " (per delivery)") + ":*");
+    items.forEach(function (it) {
+      L.push("• " + it.label + " — " + fmtNum(it.litres) + " L × ₹" + it.rate + " = ₹" + it.amount);
+    });
+    L.push("*Frequency:* " + FREQ_EN[o.freqKey]);
+    if (o.startdate) L.push("*Start from:* " + o.startdate);
+    L.push("*Estimated total:* ₹" + total + (o.freqKey === "once" ? "" : " per delivery"));
+    if (o.notes) { L.push(""); L.push("*Notes:* " + o.notes); }
+    L.push("");
+    L.push("_Sent from the Meenakshi order page_");
+    return L.join("\n");
+  }
+  function waLink(o) { return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(orderText(o)); }
+
+  // ---------- UPI payment link ----------
+  // withAmount = true only for one-time orders (a fixed total is knowable up front).
+  function upiLink(o, withAmount) {
+    if (!UPI_VPA) return "";
+    var q = [
+      "pa=" + encodeURIComponent(UPI_VPA),
+      "pn=" + encodeURIComponent(UPI_NAME),
+      "cu=INR",
+      "tn=" + encodeURIComponent("Milk order " + o.ref),
+      "tr=" + encodeURIComponent(o.ref)
+    ];
+    if (withAmount) q.splice(3, 0, "am=" + encodeURIComponent(String(o.total)));
+    return "upi://pay?" + q.join("&");
+  }
+  function drawQr(box, text) {
+    var enc = window.QRMini.encode(text, { ecl: "M" });
+    var m = enc.matrix, n = enc.size, quiet = 4, scale = 12;
+    var px = (n + quiet * 2) * scale;
+    var cv = document.createElement("canvas"); cv.width = px; cv.height = px;
+    var ctx = cv.getContext("2d");
+    ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, px, px);
+    ctx.fillStyle = "#1E4A2B";
+    for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) {
+      if (m[y][x]) ctx.fillRect((x + quiet) * scale, (y + quiet) * scale, scale, scale);
+    }
+    var img = new Image();
+    img.width = 180; img.height = 180; img.alt = "UPI payment QR code";
+    img.src = cv.toDataURL("image/png");
+    box.innerHTML = ""; box.appendChild(img);
+  }
+  function renderUpi(o) {
+    var panel = $("payPanel");
+    if (!UPI_VPA) { panel.classList.add("hidden"); return; }
+    panel.classList.remove("hidden");
+    $("payRef").textContent = o.ref;
+    var recurring = (o.freqKey !== "once");
+    var amtStr = "₹" + o.total.toLocaleString("en-IN");
+
+    $("payNowWrap").classList.remove("hidden");
+    $("payAmt").classList.remove("hidden");
+    $("payAmt").textContent = recurring ? (amtStr + " " + t("per_delivery")) : amtStr;
+    $("upiBtnLabel").textContent = t("pay_btn_amt").replace("{amt}", amtStr);
+    var link = upiLink(o, true);
+    $("upiBtn").setAttribute("href", link);
+    drawQr($("upiQrBox"), link);
+  }
+
+  // Paste the Google Apps Script Web App URL (ending /exec) here to log every order
+  // into a Google Sheet in your Drive. Leave "" to disable that path.
+  var GSHEET_URL = "https://script.google.com/macros/s/AKfycby_bAqOEcQq1VEqOK4Box8t718oSwE9YWJVxmWVUc3GEuAC70Y_z6qujXitunVG4_Cc/exec";
+
+  // Record every order for the farm's own history: a fire-and-forget POST to the
+  // Google Apps Script above, which appends a row to a Sheet in your Drive (no cap)
+  // and emails the farm. WhatsApp stays the primary channel so nothing is lost.
+  function logOrder(o) {
+    var cowL = +o.cow || 0, bufL = +o.buf || 0;
+    if (!cowL && !bufL && o.qty) {                 // migrate older stored shape
+      if ((o.productKey || "cow") === "buffalo") bufL = +o.qty || 0; else cowL = +o.qty || 0;
+    }
+    var cowAmt = Math.round(cowL * RATE.cow);
+    var bufAmt = Math.round(bufL * RATE.buffalo);
+    var rec = {
+      ref: o.ref,
+      name: o.name, phone: o.phone, address: o.addr1, area: o.area, pincode: o.pin,
+      cow_litres: cowL, cow_amount: cowAmt,
+      buffalo_litres: bufL, buffalo_amount: bufAmt,
+      total_amount: cowAmt + bufAmt,
+      frequency: FREQ_EN[o.freqKey],
+      start_date: o.startdate,
+      notes: o.notes, language: lang
+    };
+    if (GSHEET_URL) {
+      try {
+        fetch(GSHEET_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(rec)
+        }).catch(function () {});
+      } catch (e) {}
+    }
+  }
+
+  var lastOrder = null, orderPlaced = false;
+  function placeOrder() {
+    if (!validate()) return;
+    var o = buildOrder();
+    lastOrder = o;
+    orderPlaced = true;
+    saveOrder(o);
+    logOrder(o);
+    window.open(waLink(o), "_blank");
+    $("orderCard").classList.add("hidden");
+    $("doneCard").classList.remove("hidden");
+    try { renderUpi(o); } catch (e) { $("payPanel").classList.add("hidden"); }
+    refreshStickyCta();
+    $("doneCard").scrollIntoView({ behavior: "smooth", block: "start" });
+    renderRecent();
+  }
+  form.addEventListener("submit", function (e) { e.preventDefault(); placeOrder(); });
+  $("stickyBtn").addEventListener("click", placeOrder);
+  $("reopenWa").addEventListener("click", function () { if (lastOrder) window.open(waLink(lastOrder), "_blank"); });
+  $("newOrder").addEventListener("click", function () {
+    $("doneCard").classList.add("hidden");
+    $("orderCard").classList.remove("hidden");
+    orderPlaced = false;
+    refreshStickyCta();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // ---------- sticky order button (phones) ----------
+  var realCtaVisible = false, heroVisible = true;
+  function refreshStickyCta() {
+    var show = !orderPlaced && !realCtaVisible && !heroVisible &&
+               !$("orderCard").classList.contains("hidden");
+    var el = $("stickyCta");
+    el.classList.toggle("show", show);
+    el.setAttribute("aria-hidden", show ? "false" : "true");
+  }
+  if ("IntersectionObserver" in window) {
+    var realCta = form.querySelector(".cta");
+    if (realCta) new IntersectionObserver(function (e) {
+      realCtaVisible = e[0].isIntersecting; refreshStickyCta();
+    }, { rootMargin: "0px 0px -40px 0px" }).observe(realCta);
+    new IntersectionObserver(function (e) {
+      heroVisible = e[0].isIntersecting; refreshStickyCta();
+    }, { threshold: 0.15 }).observe(document.querySelector(".hero"));
+  }
+  window.addEventListener("resize", refreshStickyCta);
+
+  // ---------- local history ----------
+  function loadOrders() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch (e) { return []; } }
+  function saveOrder(o) {
+    try {
+      var all = loadOrders(); all.unshift(o);
+      localStorage.setItem(STORE_KEY, JSON.stringify(all.slice(0, 6)));
+    } catch (e) {}
+  }
+  function fmtDate(ts) {
+    try {
+      var loc = lang === "hi" ? "hi-IN" : (lang === "ta" ? "ta-IN" : "en-IN");
+      return new Date(ts).toLocaleDateString(loc, { day: "numeric", month: "short", year: "numeric" });
+    } catch (e) { return ""; }
+  }
+  function freqLabel(key) { return key === "once" ? t("fr_once") : (key === "alt" ? t("fr_alt") : t("fr_daily")); }
+  function milkSummary(o) {
+    var parts = orderLines(o).map(function (it) {
+      return fmtNum(it.litres) + " L " + (it.key === "cow" ? t("pf_cow") : t("pf_buf"));
+    });
+    return parts.join(" + ") || "—";
+  }
+  function renderRecent() {
+    var all = loadOrders(), wrap = $("recentWrap"), list = $("recentList");
+    if (!all.length) { wrap.classList.add("hidden"); return; }
+    wrap.classList.remove("hidden");
+    list.innerHTML = "";
+    all.forEach(function (o) {
+      var fk = o.freqKey || "daily";
+      var row = document.createElement("div"); row.className = "ro";
+      var main = document.createElement("div"); main.className = "ro-main";
+      main.innerHTML = "<b>" + escapeHtml(milkSummary(o)) + "</b> · ₹" + orderTotalOf(o) + " · " +
+        escapeHtml(freqLabel(fk)) + "<span class='ro-date'>" + escapeHtml(t("ordered")) + " " + fmtDate(o.ts) + "</span>";
+      var btn = document.createElement("button");
+      btn.type = "button"; btn.textContent = t("reorder");
+      btn.addEventListener("click", function () { reorder(o); });
+      row.appendChild(main); row.appendChild(btn); list.appendChild(row);
+    });
+  }
+  function reorder(o) {
+    $("name").value = o.name || ""; $("phone").value = o.phone || "";
+    $("addr1").value = o.addr1 || ""; $("area").value = o.area || ""; $("pin").value = o.pin || "";
+    var cow = +o.cow || 0, buf = +o.buf || 0;
+    if (!cow && !buf && o.qty) {
+      if ((o.productKey || "cow") === "buffalo") buf = +o.qty || 0; else cow = +o.qty || 0;
+    }
+    $("qtyCow").value = cow; $("qtyBuf").value = buf;
+    $("freq").value = o.freqKey || "daily"; $("notes").value = o.notes || "";
+    updateSummary();
+    orderPlaced = false;
+    $("doneCard").classList.add("hidden");
+    $("orderCard").classList.remove("hidden");
+    refreshStickyCta();
+    $("orderCard").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  updateSummary();
+  renderRecent();
+  refreshStickyCta();
+
+  // ---------- flyer QR (encodes this page's own address) ----------
+  (function renderFlyerQR() {
+    try {
+      var url = location.origin + location.pathname;
+      var enc = window.QRMini.encode(url, { ecl: "M" });
+      var m = enc.matrix, n = enc.size, quiet = 4, scale = 18;
+      var px = (n + quiet * 2) * scale;
+      var cv = document.createElement("canvas");
+      cv.width = px; cv.height = px;
+      var ctx = cv.getContext("2d");
+      ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, px, px);
+      ctx.fillStyle = "#1E4A2B";
+      for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) {
+        if (m[y][x]) ctx.fillRect((x + quiet) * scale, (y + quiet) * scale, scale, scale);
+      }
+      var img = new Image();
+      img.width = 190; img.height = 190;
+      img.alt = "QR code linking to " + url;
+      img.src = cv.toDataURL("image/png");
+      var box = $("qrBox");
+      box.innerHTML = "";
+      box.appendChild(img);
+      $("qrUrl").textContent = url;
+    } catch (e) {
+      var d = document.querySelector("details.qr");
+      if (d) d.style.display = "none";
+    }
+  })();
+})();
+</script>

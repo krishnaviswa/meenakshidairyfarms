@@ -1,0 +1,258 @@
+{
+  "meta": { "locale": "en", "name": "English", "dir": "ltr" },
+
+  "nav": {
+    "home": "Home",
+    "ourMilk": "Our Milk",
+    "ourFarm": "Our Farm",
+    "faq": "FAQ",
+    "order": "Order",
+    "account": "My Account",
+    "menu": "Menu",
+    "skip": "Skip to content"
+  },
+
+  "common": {
+    "brand": "Meenakshi Dairy Farms",
+    "brandSub": "Pure A2 Milk · Home Delivery",
+    "tagline": "Good milk · Healthy families · A better tomorrow",
+    "orderCta": "Order milk",
+    "subscribeCta": "Start a subscription",
+    "learnMore": "Learn more",
+    "perLitre": "per litre",
+    "perDelivery": "per delivery",
+    "cow": "Cow",
+    "buffalo": "Buffalo",
+    "themeToggle": "Toggle dark mode",
+    "langLabel": "Language",
+    "footerNote": "No number, address or email is published here on purpose. Every order goes through the order page, which hands your details straight to the farm on WhatsApp."
+  },
+
+  "home": {
+    "eyebrow": "From our farm to your family",
+    "heroTitle": "Pure A2 milk, from two of India's finest dairy breeds",
+    "heroBody": "Farm-fresh, undiluted A2 milk from Sahiwal cows and Murrah buffaloes — raised on green fodder, no hormones, no injections, milked and delivered every day.",
+    "heroCta": "Order milk",
+    "heroSecondary": "Why A2 milk",
+    "chips": [
+      "Zero water mixed",
+      "BCM-7 free",
+      "No hormones · No injections",
+      "Green-fodder fed",
+      "Daily fresh milking"
+    ],
+
+    "breedsTitle": "Two herds, two milks",
+    "breedsBody": "We keep only indigenous dairy breeds — the animals whose milk is naturally A2.",
+    "cowCardTitle": "A2 Cow Milk",
+    "cowCardBreed": "Sahiwal breed",
+    "cowCardBody": "Light and gentle, easy to digest — for everyday drinking, tea and coffee, and children.",
+    "bufCardTitle": "A2 Buffalo Milk",
+    "bufCardBreed": "Murrah breed",
+    "bufCardBody": "Thick and rich — naturally higher in protein, fat and calcium. For curd, ghee, growing children and anyone who wants a fuller glass.",
+    "breedsLink": "Meet the breeds",
+
+    "a2Title": "What makes it A2 — and why that matters",
+    "a2Body": "Ordinary milk carries a mix of A1 and A2 beta-casein protein. When A1 is digested it releases BCM-7, a peptide linked to bloating and discomfort in people who are sensitive to it. Milk from desi cows and from all buffaloes is A2 only — no BCM-7. People who feel heavy after regular milk often find A2 sits easier.",
+    "a2Link": "Read the full explanation",
+
+    "agesTitle": "Good for every age",
+    "ages": [
+      { "who": "Young children", "what": "Complete protein and calcium for growing bones; A2 is gentle on small stomachs." },
+      { "who": "Women", "what": "Calcium and protein to support bone strength through every stage of life." },
+      { "who": "Adults", "what": "A clean, filling glass with nothing added and nothing skimmed out." },
+      { "who": "Elders", "what": "Easy to digest, rich in calcium — supports everyday nutrition and bone health." }
+    ],
+
+    "howTitle": "How ordering works",
+    "how": [
+      { "n": "1", "t": "Place your order", "d": "Fill the short form — cow milk, buffalo milk or both, and how often you want it." },
+      { "n": "2", "t": "We confirm on WhatsApp", "d": "Your order opens pre-filled in WhatsApp. Tap send; the farm confirms your delivery slot." },
+      { "n": "3", "t": "Fresh milk, every morning", "d": "Pay by UPI or after delivery. Manage a subscription any time from My Account." }
+    ],
+    "howCta": "Order milk",
+
+    "closingTitle": "Milk you can trust, from a farm you can see",
+    "closingBody": "Farm-kept cattle, no stray animals, green fodder and silage, weekly herbal care, and a quality check at every step.",
+    "closingCta": "Start a subscription"
+  },
+
+  "ourMilk": {
+    "title": "Our Milk",
+    "intro": "Two milks from two breeds — both naturally A2, both delivered fresh every day.",
+
+    "a2SectionTitle": "A1, A2 and BCM-7 — in plain words",
+    "a2Paras": [
+      "About 30% of the protein in milk is beta-casein. It comes in two main forms, A1 and A2, that differ by a single amino acid at one position in the chain.",
+      "When your body digests the A1 form, it releases a fragment called beta-casomorphin-7 (BCM-7). In people who are sensitive to it, BCM-7 has been linked in trials to bloating, softer stools and general gut discomfort. The A2 form does not release BCM-7.",
+      "Indigenous humped cattle — Sahiwal, Gir, Rathi, Tharparkar — mostly carry only the A2 gene. High-yield crossbred and exotic cows often carry A1. All buffalo milk is A2, because buffaloes do not carry the A1 gene at all.",
+      "This is why many people who feel heavy or bloated after ordinary milk can drink A2 comfortably. It is a digestion difference, not a cure — A2 milk still contains lactose, and we make no claims about disease."
+    ],
+
+    "nutritionTitle": "Protein and nutrition",
+    "nutritionBody": "Buffalo milk is naturally higher in protein, fat and calcium than cow milk — with no fortification. A 250 ml glass of our buffalo milk is roughly 9–11 g of complete protein.",
+    "nutritionCols": ["Per 100 ml", "Typical packet milk (toned)", "Our A2 Cow (Sahiwal)", "Our A2 Buffalo (Murrah)"],
+    "nutritionRows": [
+      ["Protein", "~3.0 g", "~3.2–3.4 g", "~3.7–4.3 g"],
+      ["Fat", "~3.0 g", "~4.5–5.0 g", "~7 g"],
+      ["Calcium", "~120 mg", "~120 mg", "~180–210 mg"]
+    ],
+    "nutritionFoot": "Indicative ranges for whole, unprocessed milk; exact values vary by animal, season and feed.",
+
+    "chooseTitle": "Which milk is for you?",
+    "chooseCow": "Choose Sahiwal cow milk for everyday drinking, tea and coffee, young children, and anyone who prefers a lighter glass.",
+    "chooseBuf": "Choose Murrah buffalo milk for curd and ghee, growing children and teenagers, physically active people, and a richer, more filling glass.",
+    "chooseBoth": "Many families take both — cow milk for drinking, buffalo milk for the kitchen.",
+
+    "priceTitle": "Price",
+    "priceNote": "Current per-litre prices are shown on the order page and update automatically.",
+    "priceCta": "See prices and order"
+  },
+
+  "ourFarm": {
+    "title": "Our Farm",
+    "intro": "We keep two indigenous dairy breeds and raise them the way that keeps their milk clean and A2 — on land you are welcome to visit.",
+
+    "sahiwalTitle": "Sahiwal — our A2 cow",
+    "sahiwalBody": [
+      "The Sahiwal is India's finest indigenous dairy cow, from the Sahiwal tract of the Punjab. Reddish-brown with loose skin, it tolerates heat and ticks, stays calm and healthy on green fodder, and needs little input.",
+      "A well-kept Sahiwal gives about 8–12 litres a day, with butterfat around 4.5–5%. Genetically it is A2A2 at the beta-casein gene — which is the whole reason we keep Sahiwals rather than high-yield crossbreds."
+    ],
+    "sahiwalFacts": [
+      ["Yield", "~8–12 L / day"],
+      ["Fat", "~4.5–5.0%"],
+      ["Beta-casein", "A2A2"],
+      ["Temperament", "Calm, hardy, heat-tolerant"]
+    ],
+
+    "murrahTitle": "Murrah — our A2 buffalo",
+    "murrahBody": [
+      "The Murrah is the world's benchmark dairy buffalo, from Haryana — jet-black, with tightly coiled horns. It is exported around the world to improve buffalo herds.",
+      "A Murrah gives roughly 8–16 litres a day, with butterfat around 7% and very high total solids — that is what makes buffalo milk thick and rich. All buffalo milk is naturally A2; buffaloes do not carry the A1 gene."
+    ],
+    "murrahFacts": [
+      ["Yield", "~8–16 L / day"],
+      ["Fat", "~7%"],
+      ["Beta-casein", "A2 (no A1 gene)"],
+      ["Best for", "Curd, ghee, a richer glass"]
+    ],
+
+    "practicesTitle": "How we raise them",
+    "practices": [
+      { "t": "Green fodder and silage", "d": "A steady diet of green fodder and farm-made silage — nutritious feed that keeps the animals healthy and the milk consistent through the year." },
+      { "t": "Farm-kept, no stray cattle", "d": "Our animals live on the farm under our care. No roadside grazing, no stray cattle mixed into the herd." },
+      { "t": "Weekly herbal care", "d": "A weekly herbal health routine to support immunity and keep the animals well — prevention before treatment." },
+      { "t": "No hormones, no injections", "d": "We never use hormones or yield-boosting injections. Nothing that does not belong in milk goes into our animals." },
+      { "t": "Daily fresh milking", "d": "Milked every day and moved quickly to delivery — not stored, not pooled from many sources." },
+      { "t": "Quality checked at every step", "d": "From milking to the bottle at your door, the milk is checked at each stage. Zero water mixed, nothing added, nothing removed." }
+    ],
+
+    "visitTitle": "Come and see",
+    "visitBody": "Trust is easier when you can see the farm. If you would like to visit before you subscribe, ask on the order page and we will arrange it."
+  },
+
+  "faq": {
+    "title": "Questions families ask",
+    "items": [
+      { "q": "What does A2 milk actually mean?", "a": "It refers to the type of beta-casein protein in the milk. A2 milk has only the A2 form, so it does not release BCM-7 during digestion. Milk from our Sahiwal cows and Murrah buffaloes is naturally A2." },
+      { "q": "Is A2 milk lactose-free?", "a": "No. A2 milk still contains lactose. A2 is about the protein, not the sugar. If you are lactose intolerant, A2 milk will not change that." },
+      { "q": "Is buffalo milk better than cow milk?", "a": "Neither is 'better' — they are different. Buffalo milk is thicker and higher in protein, fat and calcium; cow milk is lighter and easier for some people to drink daily. Many families take both." },
+      { "q": "Do you add anything to the milk?", "a": "No. Nothing is added and nothing is removed. No water, no preservatives, no powder. It is whole milk exactly as it comes from the animal, after filtering and a quality check." },
+      { "q": "How do I place an order?", "a": "Use the order page. Fill the short form, choose cow milk, buffalo milk or both, and how often you want it. It opens WhatsApp with your order ready to send; the farm confirms your delivery slot." },
+      { "q": "How does payment work?", "a": "You can pay by UPI or after delivery. For a running subscription, the farm shares a monthly amount that you can pay by UPI." },
+      { "q": "Can I pause or change my subscription?", "a": "Yes. From My Account you can pause for a holiday, skip a day, change the quantity, or switch between cow and buffalo milk at any time." },
+      { "q": "Which areas do you deliver to?", "a": "Delivery areas are confirmed when you order. Enter your area and pincode on the order form and the farm will tell you the delivery slot for your locality." }
+    ]
+  },
+
+  "order": {
+    "eyebrow": "From our farm to your family",
+    "title": "Place your milk order",
+    "sub": "Takes about a minute. Your order goes straight to our farm on WhatsApp for confirmation.",
+    "l_name": "Your name", "ph_name": "e.g. Priya Raman", "e_name": "Please enter your name.",
+    "l_phone": "Phone number", "h_phone": "— for delivery updates", "ph_phone": "10-digit mobile number",
+    "e_phone": "Please enter a valid 10-digit phone number.",
+    "l_addr1": "Delivery address — first line", "ph_addr1": "Flat / house no., street",
+    "e_addr1": "Please enter the first line of your delivery address.",
+    "l_area": "Area / landmark", "ph_area": "Locality, landmark", "l_pin": "Pincode",
+    "l_milk": "Milk & litres per delivery",
+    "milk_hint": "Set litres for one or both. Leave a milk at 0 if you don't want it.",
+    "p_cow": "A2 Cow Milk", "p_cow_b": "Sahiwal breed", "p_buf": "A2 Buffalo Milk", "p_buf_b": "Murrah breed",
+    "litre_word": "litre",
+    "e_qty": "Enter at least 0.5 litre of cow or buffalo milk.",
+    "l_freq": "How often", "fr_daily": "Every day", "fr_alt": "Alternate days", "fr_once": "One-time only",
+    "l_date": "Start from",
+    "l_notes": "Notes for the farm", "h_notes": "— optional",
+    "ph_notes": "Delivery time preference, gate code, glass bottle, etc.",
+    "est_label": "Estimated cost",
+    "per_delivery": "per delivery", "per_once": "one-time",
+    "cta": "Send order on WhatsApp",
+    "fineprint": "Opens WhatsApp with your order pre-filled — just tap send.",
+    "done_title": "Your order is ready to send",
+    "done_msg": "WhatsApp is opening with your order. Tap send there to place it with us.",
+    "next_title": "What happens next",
+    "next_1": "Send the pre-filled message on WhatsApp.",
+    "next_2": "Our farm confirms your order & delivery slot.",
+    "next_3": "Payment details are shared on WhatsApp — pay by UPI or after delivery.",
+    "reopen": "Open WhatsApp again", "new_order": "Place another order",
+    "recent_title": "Your recent orders on this device", "reorder": "Reorder", "ordered": "Ordered",
+    "pay_title": "Pay now — optional",
+    "pay_ref": "Order ref",
+    "pay_btn": "Pay by UPI", "pay_btn_amt": "Pay {amt} by UPI",
+    "pay_scan": "On a computer or iPhone? Scan this with any UPI app:",
+    "pay_optional": "Optional — your order is already placed. You can also pay after delivery.",
+    "account_nudge": "Want to pause deliveries, skip a day or see your history? Create an account."
+  },
+
+  "account": {
+    "title": "My Account",
+    "loginTitle": "Sign in",
+    "loginBody": "Enter your mobile number and we'll send a one-time code.",
+    "phoneLabel": "Mobile number",
+    "sendCode": "Send code",
+    "codeLabel": "Enter the 6-digit code",
+    "verify": "Verify",
+    "resend": "Send a new code",
+    "signOut": "Sign out",
+    "subTitle": "My subscription",
+    "noSub": "You don't have a subscription yet.",
+    "createSub": "Set up a subscription",
+    "statusActive": "Active", "statusPaused": "Paused", "statusCancelled": "Cancelled",
+    "pause": "Pause deliveries", "resume": "Resume", "skipDay": "Skip a day", "editSub": "Change quantity",
+    "deliveriesTitle": "Deliveries",
+    "upcoming": "Upcoming", "past": "Past",
+    "paymentsTitle": "Payments",
+    "due": "Due", "paid": "Paid",
+    "payNow": "Pay by UPI",
+    "profileTitle": "Profile & address",
+    "save": "Save",
+    "comingSoon": "Accounts and subscriptions are coming soon. For now, order on WhatsApp from the order page."
+  },
+
+  "seo": {
+    "home": {
+      "title": "Meenakshi Dairy Farms — Pure A2 Milk from Sahiwal Cows & Murrah Buffaloes",
+      "description": "Farm-fresh, undiluted A2 milk delivered daily. Sahiwal cow milk and Murrah buffalo milk — green-fodder fed, no hormones, no injections, BCM-7 free."
+    },
+    "ourMilk": {
+      "title": "Our Milk — A2 Cow & Buffalo Milk, Protein & Nutrition | Meenakshi Dairy Farms",
+      "description": "What A2, A1 and BCM-7 mean in plain words, and how our Sahiwal cow milk and Murrah buffalo milk compare on protein, fat and calcium."
+    },
+    "ourFarm": {
+      "title": "Our Farm — Sahiwal Cows, Murrah Buffaloes & How We Raise Them | Meenakshi Dairy Farms",
+      "description": "Meet the Sahiwal and Murrah breeds and see how we raise them: green fodder and silage, weekly herbal care, no hormones or injections, daily fresh milking."
+    },
+    "faq": {
+      "title": "FAQ — A2 Milk, Delivery & Subscriptions | Meenakshi Dairy Farms",
+      "description": "Answers to the questions families ask about A2 milk, buffalo vs cow milk, purity, ordering, payment and pausing a subscription."
+    },
+    "order": {
+      "title": "Order Milk — Home Delivery | Meenakshi Dairy Farms",
+      "description": "Order A2 cow milk, buffalo milk or both for daily home delivery. Fill the short form and confirm on WhatsApp."
+    },
+    "account": {
+      "title": "My Account | Meenakshi Dairy Farms",
+      "description": "Manage your milk subscription, deliveries and payments."
+    }
+  }
+}

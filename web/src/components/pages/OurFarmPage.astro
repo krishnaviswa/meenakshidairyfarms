@@ -1,0 +1,78 @@
+---
+import Base from "../../layouts/Base.astro";
+import { useT, localizePath, type Lang } from "../../i18n";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useT(lang);
+const seo = t("seo.ourFarm");
+const sahiwalBody: string[] = t("ourFarm.sahiwalBody");
+const sahiwalFacts: string[][] = t("ourFarm.sahiwalFacts");
+const murrahBody: string[] = t("ourFarm.murrahBody");
+const murrahFacts: string[][] = t("ourFarm.murrahFacts");
+const practices: { t: string; d: string }[] = t("ourFarm.practices");
+---
+
+<Base lang={lang} path="/our-farm" title={seo.title} description={seo.description}>
+  <section class="wrap narrow">
+    <p class="eyebrow">{t("nav.ourFarm")}</p>
+    <h1>{t("ourFarm.title")}</h1>
+    <p class="lede">{t("ourFarm.intro")}</p>
+  </section>
+
+  <section class="section-sunk">
+    <div class="wrap">
+      <div class="grid cols-2">
+        <div class="prose">
+          <h2>{t("ourFarm.sahiwalTitle")}</h2>
+          {sahiwalBody.map((p) => <p>{p}</p>)}
+        </div>
+        <div class="card">
+          <ul class="facts">
+            {sahiwalFacts.map((f) => (
+              <li><span>{f[0]}</span><b>{f[1]}</b></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="grid cols-2">
+      <div class="card">
+        <ul class="facts">
+          {murrahFacts.map((f) => (
+            <li><span>{f[0]}</span><b>{f[1]}</b></li>
+          ))}
+        </ul>
+      </div>
+      <div class="prose">
+        <h2>{t("ourFarm.murrahTitle")}</h2>
+        {murrahBody.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sunk">
+    <div class="wrap">
+      <h2>{t("ourFarm.practicesTitle")}</h2>
+      <div class="grid cols-3" style="margin-top:24px">
+        {practices.map((pr) => (
+          <div class="card">
+            <h3 style="font-size:1.05rem">{pr.t}</h3>
+            <p style="margin:0;font-size:0.92rem;color:var(--muted)">{pr.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap narrow">
+    <h2>{t("ourFarm.visitTitle")}</h2>
+    <p>{t("ourFarm.visitBody")}</p>
+    <div class="actions" style="margin-top:16px">
+      <a class="btn btn-primary" href={localizePath("/order", lang)}>{t("common.orderCta")}</a>
+    </div>
+  </section>
+</Base>

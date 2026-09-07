@@ -1,0 +1,19 @@
+# build output
+dist/
+.astro/
+
+# generated
+src/i18n/en.json
+src/i18n/hi.json
+src/i18n/ta.json
+
+# deps
+node_modules/
+
+# env
+.env
+.env.production
+
+# misc
+.DS_Store
+npm-debug.log*

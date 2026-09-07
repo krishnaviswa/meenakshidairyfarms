@@ -1,0 +1,236 @@
+/* Meenakshi Dairy Farms — site styles. Tokens mirror shared/BRAND.md. */
+
+:root {
+  --cream: #f5efe0;
+  --cream-card: #fdfbf3;
+  --cream-sunk: #efe7d3;
+  --forest: #1e4a2b;
+  --leaf: #3c7d45;
+  --leaf-bright: #4e9a54;
+  --gold: #be8f35;
+  --ink: #2a2a22;
+  --muted: #6e6a5a;
+  --line: #dcd2b9;
+  --danger: #a6392b;
+  --btn-text: #fffdf6;
+  --shadow: 0 10px 34px -14px rgba(30, 55, 31, 0.34);
+  --shadow-sm: 0 4px 14px -8px rgba(30, 55, 31, 0.3);
+  --maxw: 1080px;
+  --gut: clamp(16px, 4vw, 32px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --cream: #101c15; --cream-card: #17271c; --cream-sunk: #12211a;
+    --forest: #ddead7; --leaf: #58a55e; --leaf-bright: #6dbe72;
+    --gold: #d9b267; --ink: #ecefe4; --muted: #9aa893; --line: #2c3e30;
+    --danger: #e0796a; --btn-text: #0e1a12;
+    --shadow: 0 12px 36px -16px rgba(0, 0, 0, 0.6);
+    --shadow-sm: 0 4px 16px -8px rgba(0, 0, 0, 0.55);
+  }
+}
+:root[data-theme="dark"] {
+  --cream: #101c15; --cream-card: #17271c; --cream-sunk: #12211a;
+  --forest: #ddead7; --leaf: #58a55e; --leaf-bright: #6dbe72;
+  --gold: #d9b267; --ink: #ecefe4; --muted: #9aa893; --line: #2c3e30;
+  --danger: #e0796a; --btn-text: #0e1a12;
+  --shadow: 0 12px 36px -16px rgba(0, 0, 0, 0.6);
+  --shadow-sm: 0 4px 16px -8px rgba(0, 0, 0, 0.55);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; animation: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Mulish", "Noto Sans Tamil", "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Fraunces", "Noto Sans Tamil", "Noto Sans Devanagari", Georgia, serif;
+  color: var(--forest);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin: 0 0 0.4em;
+}
+h1 { font-size: clamp(2rem, 6vw, 3.1rem); font-weight: 700; }
+h2 { font-size: clamp(1.5rem, 4vw, 2.1rem); }
+h3 { font-size: 1.2rem; }
+p { margin: 0 0 1rem; }
+a { color: var(--leaf); }
+img { max-width: 100%; height: auto; display: block; }
+:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; border-radius: 3px; }
+
+/* Indic scripts: drop Latin-style uppercasing / tracking */
+:root[lang="hi"] .eyebrow, :root[lang="ta"] .eyebrow,
+:root[lang="hi"] .kicker, :root[lang="ta"] .kicker {
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* ---------- layout ---------- */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--gut); }
+.narrow { max-width: 720px; }
+section { padding-block: clamp(48px, 8vw, 88px); }
+.section-sunk { background: var(--cream-sunk); }
+.eyebrow {
+  font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  font-weight: 700; color: var(--leaf); margin: 0 0 10px;
+}
+.lede { font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--muted); max-width: 52ch; }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font: inherit; font-weight: 700; font-size: 1rem;
+  padding: 14px 22px; border-radius: 12px; border: 1.5px solid transparent;
+  cursor: pointer; text-decoration: none; transition: background 0.15s, transform 0.08s;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--leaf); color: var(--btn-text); box-shadow: 0 8px 20px -8px rgba(60, 125, 69, 0.6); }
+.btn-primary:hover { background: var(--leaf-bright); }
+.btn-ghost { background: transparent; color: var(--forest); border-color: var(--leaf); }
+.btn-ghost:hover { background: color-mix(in srgb, var(--leaf) 12%, transparent); }
+.btn svg { width: 20px; height: 20px; flex: none; }
+
+/* ---------- header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 40;
+  background: color-mix(in srgb, var(--cream) 92%, transparent);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .bar {
+  display: flex; align-items: center; gap: 14px;
+  max-width: var(--maxw); margin: 0 auto; padding: 10px var(--gut);
+}
+.brand {
+  font-family: "Fraunces", "Noto Sans Tamil", "Noto Sans Devanagari", Georgia, serif;
+  font-weight: 700; color: var(--forest); font-size: 1.15rem; text-decoration: none;
+  line-height: 1.05; margin-right: auto; display: flex; flex-direction: column;
+}
+.brand span { font-size: 0.62rem; font-weight: 600; color: var(--gold); letter-spacing: 0.02em; }
+.nav { display: flex; gap: 4px; align-items: center; }
+.nav a {
+  font-size: 0.92rem; font-weight: 600; color: var(--ink); text-decoration: none;
+  padding: 8px 11px; border-radius: 9px;
+}
+.nav a:hover { background: var(--cream-sunk); }
+.nav a[aria-current="page"] { color: var(--forest); background: var(--cream-sunk); }
+.nav a.cta { background: var(--leaf); color: var(--btn-text); }
+.nav a.cta:hover { background: var(--leaf-bright); }
+
+.langs { display: inline-flex; background: var(--cream-card); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.langs a {
+  font-size: 0.78rem; font-weight: 700; color: var(--muted); text-decoration: none;
+  padding: 6px 10px; border-radius: 999px; line-height: 1;
+  font-family: "Mulish", "Noto Sans Tamil", "Noto Sans Devanagari", sans-serif;
+}
+.langs a[aria-current="true"] { background: var(--forest); color: var(--cream-card); }
+.themetog {
+  font-size: 1rem; width: 38px; height: 38px; flex: none;
+  border: 1px solid var(--line); background: var(--cream-card); border-radius: 50%; cursor: pointer;
+}
+
+.menu-btn { display: none; width: 40px; height: 40px; border: 1px solid var(--line); background: var(--cream-card); border-radius: 10px; cursor: pointer; }
+.menu-btn svg { width: 20px; height: 20px; margin: 0 auto; color: var(--forest); }
+
+@media (max-width: 860px) {
+  .menu-btn { display: block; }
+  .nav {
+    display: none;
+    position: absolute; inset: 100% 0 auto 0; flex-direction: column; align-items: stretch;
+    background: var(--cream-card); border-bottom: 1px solid var(--line); padding: 8px var(--gut) 14px;
+    gap: 2px; box-shadow: var(--shadow-sm);
+  }
+  .nav.open { display: flex; }
+  .nav a { padding: 12px 10px; font-size: 1rem; }
+}
+
+/* ---------- hero ---------- */
+.hero { padding-block: clamp(40px, 7vw, 76px); }
+.hero .eyebrow { color: var(--leaf); }
+.hero h1 { margin-bottom: 0.35em; }
+.hero .lede { margin-bottom: 22px; }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+.chip {
+  font-size: 0.8rem; font-weight: 600; padding: 6px 12px; border-radius: 999px;
+  background: var(--cream-card); color: var(--forest); border: 1px solid var(--line);
+}
+
+/* ---------- cards / grids ---------- */
+.grid { display: grid; gap: 20px; }
+.grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 860px) { .grid.cols-3, .grid.cols-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--cream-card); border: 1px solid var(--line); border-radius: 16px;
+  padding: 22px; box-shadow: var(--shadow-sm);
+}
+.card h3 { margin-bottom: 0.3em; }
+.card .kicker { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+
+.breed-card { display: flex; flex-direction: column; gap: 6px; }
+.breed-card .price { font-family: "Fraunces", Georgia, serif; font-weight: 700; color: var(--forest); font-size: 1.5rem; margin-top: auto; }
+.breed-card .price small { font-size: 0.7rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+.facts { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
+.facts li { display: flex; justify-content: space-between; gap: 12px; font-size: 0.9rem; border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
+.facts li b { color: var(--forest); }
+
+.steps { counter-reset: step; }
+.step .n {
+  font-family: "Fraunces", Georgia, serif; font-weight: 700; font-size: 1.4rem;
+  color: var(--btn-text); background: var(--leaf); width: 44px; height: 44px;
+  border-radius: 50%; display: grid; place-items: center; margin-bottom: 12px;
+}
+
+.check-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.check-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.95rem; }
+.check-list svg { width: 18px; height: 18px; flex: none; margin-top: 3px; color: var(--leaf); }
+
+/* ---------- table ---------- */
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
+table.nutrition { border-collapse: collapse; width: 100%; min-width: 520px; background: var(--cream-card); }
+table.nutrition th, table.nutrition td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--line); font-size: 0.92rem; }
+table.nutrition thead th { background: var(--cream-sunk); color: var(--forest); font-weight: 700; }
+table.nutrition tbody th { color: var(--forest); font-weight: 700; }
+table.nutrition td:last-child { color: var(--forest); font-weight: 600; }
+
+/* ---------- prose ---------- */
+.prose p { max-width: 62ch; }
+.prose h2 { margin-top: 1.4em; }
+
+/* ---------- faq ---------- */
+.faq-item { border: 1px solid var(--line); border-radius: 12px; background: var(--cream-card); margin-bottom: 10px; padding: 4px 16px; }
+.faq-item summary { cursor: pointer; font-weight: 700; color: var(--forest); padding: 14px 0; list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; float: inline-end; font-weight: 400; font-size: 1.3rem; line-height: 1; color: var(--gold); }
+.faq-item[open] summary::after { content: "–"; }
+.faq-item .a { padding: 0 0 14px; color: var(--ink); max-width: 64ch; }
+
+/* ---------- footer ---------- */
+.site-footer { border-top: 1px solid var(--line); background: var(--cream-sunk); padding-block: 34px; }
+.site-footer .fbar { display: flex; flex-wrap: wrap; gap: 18px 30px; align-items: flex-start; }
+.site-footer .fname { font-family: "Fraunces", "Noto Sans Tamil", "Noto Sans Devanagari", Georgia, serif; color: var(--forest); font-weight: 700; font-size: 1.05rem; }
+.site-footer nav { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.site-footer nav a { font-size: 0.9rem; color: var(--ink); text-decoration: none; font-weight: 600; }
+.site-footer .note { flex-basis: 100%; font-size: 0.8rem; color: var(--muted); max-width: 60ch; margin-top: 6px; }
+.site-footer .tag { flex-basis: 100%; font-size: 0.85rem; color: var(--muted); }
+
+.hidden { display: none !important; }

@@ -1,0 +1,101 @@
+---
+import Base from "../../layouts/Base.astro";
+import { useT, localizePath, type Lang } from "../../i18n";
+import { products } from "../../data/products";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useT(lang);
+const seo = t("seo.home");
+const chips: string[] = t("home.chips");
+const ages: { who: string; what: string }[] = t("home.ages");
+const how: { n: string; t: string; d: string }[] = t("home.how");
+const cow = products.find((p) => p.key === "cow")!;
+const buf = products.find((p) => p.key === "buffalo")!;
+---
+
+<Base lang={lang} path="/" title={seo.title} description={seo.description}>
+  <section class="hero wrap">
+    <p class="eyebrow">{t("home.eyebrow")}</p>
+    <h1>{t("home.heroTitle")}</h1>
+    <p class="lede">{t("home.heroBody")}</p>
+    <div class="actions">
+      <a class="btn btn-primary" href={localizePath("/order", lang)}>{t("home.heroCta")}</a>
+      <a class="btn btn-ghost" href={localizePath("/our-milk", lang)}>{t("home.heroSecondary")}</a>
+    </div>
+    <div class="chips">
+      {chips.map((c) => <span class="chip">{c}</span>)}
+    </div>
+  </section>
+
+  <section class="section-sunk">
+    <div class="wrap">
+      <h2>{t("home.breedsTitle")}</h2>
+      <p class="lede">{t("home.breedsBody")}</p>
+      <div class="grid cols-2" style="margin-top:26px">
+        <div class="card breed-card">
+          <span class="kicker">{t("home.cowCardBreed")}</span>
+          <h3>{t("home.cowCardTitle")}</h3>
+          <p>{t("home.cowCardBody")}</p>
+          <div class="price">₹{cow.pricePerLitre} <small>/ {t("common.perLitre")}</small></div>
+        </div>
+        <div class="card breed-card">
+          <span class="kicker">{t("home.bufCardBreed")}</span>
+          <h3>{t("home.bufCardTitle")}</h3>
+          <p>{t("home.bufCardBody")}</p>
+          <div class="price">₹{buf.pricePerLitre} <small>/ {t("common.perLitre")}</small></div>
+        </div>
+      </div>
+      <p style="margin-top:18px">
+        <a href={localizePath("/our-farm", lang)}>{t("home.breedsLink")} &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="wrap narrow">
+    <h2>{t("home.a2Title")}</h2>
+    <p>{t("home.a2Body")}</p>
+    <p><a href={localizePath("/our-milk", lang)}>{t("home.a2Link")} &rarr;</a></p>
+  </section>
+
+  <section class="section-sunk">
+    <div class="wrap">
+      <h2>{t("home.agesTitle")}</h2>
+      <div class="grid cols-4" style="margin-top:24px">
+        {ages.map((a) => (
+          <div class="card">
+            <h3 style="font-size:1.05rem">{a.who}</h3>
+            <p style="margin:0;font-size:0.92rem;color:var(--muted)">{a.what}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2>{t("home.howTitle")}</h2>
+    <div class="grid cols-3 steps" style="margin-top:24px">
+      {how.map((s) => (
+        <div class="step">
+          <div class="n">{s.n}</div>
+          <h3 style="font-size:1.1rem">{s.t}</h3>
+          <p style="margin:0;color:var(--muted)">{s.d}</p>
+        </div>
+      ))}
+    </div>
+    <div class="actions" style="margin-top:28px">
+      <a class="btn btn-primary" href={localizePath("/order", lang)}>{t("home.howCta")}</a>
+    </div>
+  </section>
+
+  <section class="section-sunk">
+    <div class="wrap narrow" style="text-align:center">
+      <h2>{t("home.closingTitle")}</h2>
+      <p class="lede" style="margin-inline:auto">{t("home.closingBody")}</p>
+      <div class="actions" style="justify-content:center;margin-top:22px">
+        <a class="btn btn-primary" href={localizePath("/order", lang)}>{t("common.orderCta")}</a>
+        <a class="btn btn-ghost" href={localizePath("/account", lang)}>{t("home.closingCta")}</a>
+      </div>
+    </div>
+  </section>
+</Base>

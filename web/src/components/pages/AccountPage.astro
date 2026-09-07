@@ -1,0 +1,29 @@
+---
+import Base from "../../layouts/Base.astro";
+import { useT, localizePath, type Lang } from "../../i18n";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useT(lang);
+const seo = t("seo.account");
+---
+
+<Base lang={lang} path="/account" title={seo.title} description={seo.description}>
+  <section class="wrap narrow">
+    <p class="eyebrow">{t("nav.account")}</p>
+    <h1>{t("account.title")}</h1>
+
+    <div class="card" style="margin-top:20px">
+      <p style="margin:0">{t("account.comingSoon")}</p>
+      <div class="actions" style="margin-top:16px">
+        <a class="btn btn-primary" href={localizePath("/order", lang)}>{t("common.orderCta")}</a>
+      </div>
+    </div>
+  </section>
+  <!--
+    Phase 2/3: this page becomes a client island using @supabase/supabase-js:
+    phone-OTP login → subscription (create / pause / skip / resume) →
+    deliveries (upcoming / past) → payments (due / paid, UPI) → profile & address.
+    It reads/writes the same Supabase project as the Flutter app.
+  -->
+</Base>

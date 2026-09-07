@@ -1,0 +1,36 @@
+# dependencies
+node_modules/
+web/node_modules/
+.pnp
+.pnp.js
+
+# build output
+web/dist/
+web/.astro/
+app/build/
+app/.dart_tool/
+
+# env / secrets
+.env
+.env.*
+!.env.example
+web/.env
+web/.env.*
+!web/.env.example
+supabase/.env
+supabase/.branches/
+supabase/.temp/
+
+# flutter
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/ios/Pods/
+app/**/GeneratedPluginRegistrant.*
+
+# editor / os
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
+!.vscode/extensions.json

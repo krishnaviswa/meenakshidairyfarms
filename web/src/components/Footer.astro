@@ -1,0 +1,24 @@
+---
+import { useT, localizePath, NAV, type Lang } from "../i18n";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useT(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap fbar">
+    <div>
+      <div class="fname">{t("common.brand")}</div>
+      <div class="tag">{t("common.tagline")}</div>
+    </div>
+    <nav aria-label={t("nav.menu")}>
+      {NAV.map((item) => (
+        <a href={localizePath(item.path, lang)}>{t(`nav.${item.key}`)}</a>
+      ))}
+      <a href={localizePath("/account", lang)}>{t("nav.account")}</a>
+    </nav>
+    <p class="note">{t("common.footerNote")}</p>
+    <p class="tag">© {year} {t("common.brand")}</p>
+  </div>
+</footer>

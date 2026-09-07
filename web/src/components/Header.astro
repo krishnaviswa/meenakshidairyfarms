@@ -1,0 +1,79 @@
+---
+import { useT, localizePath, canonicalPath, NAV, LANGS, langShort, type Lang } from "../i18n";
+
+interface Props { lang: Lang; path: string; }
+const { lang, path } = Astro.props;
+const t = useT(lang);
+const current = canonicalPath(path);
+---
+
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href={localizePath("/", lang)}>
+      {t("common.brand")}
+      <span>{t("common.brandSub")}</span>
+    </a>
+
+    <button class="menu-btn" type="button" aria-label={t("nav.menu")} aria-expanded="false" data-menu-btn>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    </button>
+
+    <nav class="nav" data-menu>
+      {NAV.map((item) => (
+        <a
+          href={localizePath(item.path, lang)}
+          class={item.key === "order" ? "cta" : undefined}
+          aria-current={item.path === current ? "page" : undefined}
+        >
+          {t(`nav.${item.key}`)}
+        </a>
+      ))}
+    </nav>
+
+    <div class="langs" role="group" aria-label={t("common.langLabel")}>
+      {LANGS.map((l) => (
+        <a href={localizePath(current, l)} aria-current={l === lang ? "true" : undefined} lang={l}>
+          {langShort[l]}
+        </a>
+      ))}
+    </div>
+
+    <button class="themetog" type="button" aria-label={t("common.themeToggle")} data-theme-toggle>🌙</button>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var mq = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+    function effectiveDark() {
+      var ex = document.documentElement.getAttribute("data-theme");
+      if (ex === "dark") return true;
+      if (ex === "light") return false;
+      return mq ? mq.matches : false;
+    }
+    var tog = document.querySelector("[data-theme-toggle]");
+    function paint() { if (tog) tog.textContent = effectiveDark() ? "☀️" : "🌙"; }
+    paint();
+    if (tog) tog.addEventListener("click", function () {
+      var next = effectiveDark() ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("meenakshi_theme", next); } catch (e) {}
+      paint();
+    });
+    if (mq) { try { mq.addEventListener("change", paint); } catch (e) {} }
+
+    var btn = document.querySelector("[data-menu-btn]");
+    var menu = document.querySelector("[data-menu]");
+    function setOpen(open) {
+      if (!menu || !btn) return;
+      menu.classList.toggle("open", open);
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    window.addEventListener("resize", function () { if (window.innerWidth > 860) setOpen(false); });
+    if (btn) btn.addEventListener("click", function () {
+      setOpen(!menu.classList.contains("open"));
+    });
+  })();
+</script>
