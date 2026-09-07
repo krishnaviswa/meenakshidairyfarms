@@ -7,8 +7,8 @@ Marketing website + customer app for a farm selling **A2 milk** from
 
 | Path | What |
 |---|---|
-| `web/` | Astro static marketing site — EN / HI / TA. Home, Our Milk, Our Farm, FAQ, Order, Account. Deploys as static files. |
-| `app/` | Flutter customer app (Android / iOS) — phone-OTP login, milk subscriptions, deliveries, payments. *(Phase 3)* |
+| `web/` | Astro marketing site — EN / HI / TA. Home, Our Milk, Our Farm, FAQ, Order, Account. Reads local Docker Postgres. |
+| `app/` | Flutter customer app (Android / iOS) — same catalog + WhatsApp orders. Download APK/IPA from GitHub Actions artifacts. |
 | `supabase/` | Postgres schema, RLS, Edge Functions, seed data — the single source of truth for products, orders, subscriptions. |
 | `shared/` | `BRAND.md` design tokens · canonical `i18n/` strings · `schema/order.schema.json` order contract · build scripts. |
 | `legacy/` | The original single-page `site/index.html` + `google-sheet-script.gs`, kept for reference during cutover. |
@@ -38,4 +38,11 @@ npm run dev                # http://localhost:4321
 
 Prices, WhatsApp number and orders live in Postgres. If the database is down, the site still renders with the same fallback prices.
 
-The website and a future Flutter app should read and write this **same** database.
+The website and the Flutter app share this **same** database when the API is reachable.
+
+```bash
+# 3. Flutter app
+cd app && flutter pub get && flutter run
+```
+
+Phone installers: GitHub → Actions → **Android APK** or **iOS IPA** → Artifacts. Android APK installs directly. The iOS IPA is unsigned and needs AltStore / Sideloadly or an Apple Ad Hoc profile.

@@ -1,9 +1,12 @@
 import type { APIRoute } from "astro";
 import { getCatalog, ratesFromCatalog } from "../../lib/catalog";
+import { corsPreflight, json } from "../../lib/cors";
 import { query } from "../../lib/db";
 import { buildOrder, waLink } from "../../lib/order.js";
 
 export const prerender = false;
+
+export const OPTIONS: APIRoute = () => corsPreflight();
 
 function asLang(v: unknown): "en" | "hi" | "ta" {
   return v === "hi" || v === "ta" ? v : "en";
@@ -40,6 +43,7 @@ export const POST: APIRoute = async ({ request }) => {
       freq: body.freq ?? body.frequency ?? "daily",
       startdate: body.startdate ?? body.start_date ?? "",
       notes: String(body.notes ?? ""),
+      channel: body.channel === "app" ? "app" : "web",
     },
     rates,
     lang,
@@ -82,10 +86,3 @@ export const POST: APIRoute = async ({ request }) => {
     waUrl: waLink(catalog.settings.waNumber, order),
   });
 };
-
-function json(data: unknown, status = 200) {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: { "Content-Type": "application/json; charset=utf-8" },
-  });
-}
