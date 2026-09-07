@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import Check from "../Check.astro";
 import { useT, localizePath, type Lang } from "../../i18n";
+import { getCatalog, formatInr } from "../../lib/catalog";
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
@@ -10,9 +11,12 @@ const seo = t("seo.ourMilk");
 const a2Paras: string[] = t("ourMilk.a2Paras");
 const cols: string[] = t("ourMilk.nutritionCols");
 const rows: string[][] = t("ourMilk.nutritionRows");
+const catalog = await getCatalog(lang);
+const cow = catalog.products.find((p) => p.key === "cow");
+const buf = catalog.products.find((p) => p.key === "buffalo");
 ---
 
-<Base lang={lang} path="/our-milk" title={seo.title} description={seo.description}>
+<Base lang={lang} path="/our-milk" title={seo.title} description={seo.description} settings={catalog.settings}>
   <section class="wrap narrow">
     <p class="eyebrow">{t("nav.ourMilk")}</p>
     <h1>{t("ourMilk.title")}</h1>
@@ -60,6 +64,18 @@ const rows: string[][] = t("ourMilk.nutritionRows");
   <section class="wrap narrow">
     <h2>{t("ourMilk.priceTitle")}</h2>
     <p>{t("ourMilk.priceNote")}</p>
+    {cow && buf && (
+      <div class="price-flags" style="justify-content:flex-start;margin-top:14px">
+        <div class="price-flag">
+          <b>{formatInr(cow.pricePerHalfLitre)}</b>
+          <small>{cow.name} · {t("common.perHalfLitre")}</small>
+        </div>
+        <div class="price-flag">
+          <b>{formatInr(buf.pricePerHalfLitre)}</b>
+          <small>{buf.name} · {t("common.perHalfLitre")}</small>
+        </div>
+      </div>
+    )}
     <div class="actions" style="margin-top:16px">
       <a class="btn btn-primary" href={localizePath("/order", lang)}>{t("ourMilk.priceCta")}</a>
     </div>

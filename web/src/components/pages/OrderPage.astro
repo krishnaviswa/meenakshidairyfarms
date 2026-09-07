@@ -1,29 +1,29 @@
 ---
 import Base from "../../layouts/Base.astro";
-import { useT, localizePath, type Lang } from "../../i18n";
-import { products, WA_NUMBER } from "../../data/products";
+import { useT, type Lang } from "../../i18n";
+import { getCatalog, ratesFromCatalog } from "../../lib/catalog";
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useT(lang);
 const seo = t("seo.order");
-const cow = products.find((p) => p.key === "cow")!;
-const buf = products.find((p) => p.key === "buffalo")!;
+const catalog = await getCatalog(lang);
+const cow = catalog.products.find((p) => p.key === "cow")!;
+const buf = catalog.products.find((p) => p.key === "buffalo")!;
+const rates = ratesFromCatalog(catalog);
 
-// Everything the client script needs, in one JSON blob (no define:vars so the
-// script can still be bundled with its imports).
 const cfg = {
   lang,
-  waNumber: WA_NUMBER,
-  upiVpa: "",            // set from Supabase site_settings in Phase 2
-  upiName: t("common.brand"),
-  rates: { cow: cow.pricePerLitre, buffalo: buf.pricePerLitre },
+  waNumber: catalog.settings.waNumber,
+  upiVpa: catalog.settings.upiVpa,
+  upiName: catalog.settings.upiName,
+  rates,
   s: t("order"),
   common: { perLitre: t("common.perLitre"), cow: t("common.cow"), buffalo: t("common.buffalo") },
 };
 ---
 
-<Base lang={lang} path="/order" title={seo.title} description={seo.description}>
+<Base lang={lang} path="/order" title={seo.title} description={seo.description} settings={catalog.settings}>
   <section class="wrap narrow" style="max-width:600px">
     <p class="eyebrow">{t("order.eyebrow")}</p>
     <h1>{t("order.title")}</h1>
@@ -66,8 +66,8 @@ const cfg = {
         <div class="milkrows">
           <div class="milkrow" id="mr-cow">
             <div class="mr-info">
-              <span class="pname">{t("order.p_cow")}</span>
-              <span class="pbreed">{t("order.p_cow_b")} · ₹{cow.pricePerLitre}/{t("order.litre_word")}</span>
+              <span class="pname">{cow.name}</span>
+              <span class="pbreed">{cow.breed} · ₹{cow.pricePerLitre}/{t("order.litre_word")}</span>
             </div>
             <div class="stepper">
               <button type="button" data-step="cow" data-dir="-1" aria-label="−">–</button>
@@ -77,8 +77,8 @@ const cfg = {
           </div>
           <div class="milkrow" id="mr-buf">
             <div class="mr-info">
-              <span class="pname">{t("order.p_buf")}</span>
-              <span class="pbreed">{t("order.p_buf_b")} · ₹{buf.pricePerLitre}/{t("order.litre_word")}</span>
+              <span class="pname">{buf.name}</span>
+              <span class="pbreed">{buf.breed} · ₹{buf.pricePerLitre}/{t("order.litre_word")}</span>
             </div>
             <div class="stepper">
               <button type="button" data-step="buffalo" data-dir="-1" aria-label="−">–</button>
@@ -355,7 +355,19 @@ const cfg = {
       const o = buildOrder(currentFields(), cfg.rates, cfg.lang);
       lastOrder = o;
       saveOrder(o);
-      // Phase 2: also POST to Supabase create_order here.
+      fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...currentFields(), language: cfg.lang }),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          if (data && data.ok && data.order) {
+            lastOrder = data.order;
+            saveOrder(data.order);
+          }
+        })
+        .catch(() => {});
       window.open(waLink(cfg.waNumber, o), "_blank");
       form.classList.add("hidden");
       $("doneCard").classList.remove("hidden");

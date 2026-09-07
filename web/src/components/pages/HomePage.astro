@@ -1,7 +1,8 @@
 ---
 import Base from "../../layouts/Base.astro";
+import Check from "../Check.astro";
 import { useT, localizePath, type Lang } from "../../i18n";
-import { products } from "../../data/products";
+import { getCatalog, formatInr } from "../../lib/catalog";
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
@@ -10,21 +11,33 @@ const seo = t("seo.home");
 const chips: string[] = t("home.chips");
 const ages: { who: string; what: string }[] = t("home.ages");
 const how: { n: string; t: string; d: string }[] = t("home.how");
-const cow = products.find((p) => p.key === "cow")!;
-const buf = products.find((p) => p.key === "buffalo")!;
+const catalog = await getCatalog(lang);
+const cow = catalog.products.find((p) => p.key === "cow")!;
+const buf = catalog.products.find((p) => p.key === "buffalo")!;
+const orderHref = localizePath("/order", lang);
 ---
 
-<Base lang={lang} path="/" title={seo.title} description={seo.description}>
+<Base lang={lang} path="/" title={seo.title} description={seo.description} settings={catalog.settings}>
   <section class="hero wrap">
     <p class="eyebrow">{t("home.eyebrow")}</p>
     <h1>{t("home.heroTitle")}</h1>
     <p class="lede">{t("home.heroBody")}</p>
     <div class="actions">
-      <a class="btn btn-primary" href={localizePath("/order", lang)}>{t("home.heroCta")}</a>
+      <a class="btn btn-primary" href={orderHref}>{t("home.heroCta")}</a>
       <a class="btn btn-ghost" href={localizePath("/our-milk", lang)}>{t("home.heroSecondary")}</a>
     </div>
     <div class="chips">
       {chips.map((c) => <span class="chip">{c}</span>)}
+    </div>
+    <div class="price-flags">
+      <div class="price-flag">
+        <b>{formatInr(cow.pricePerHalfLitre)}</b>
+        <small>{t("common.cow")} · {t("common.perHalfLitre")}</small>
+      </div>
+      <div class="price-flag">
+        <b>{formatInr(buf.pricePerHalfLitre)}</b>
+        <small>{t("common.buffalo")} · {t("common.perHalfLitre")}</small>
+      </div>
     </div>
   </section>
 
@@ -33,69 +46,94 @@ const buf = products.find((p) => p.key === "buffalo")!;
       <h2>{t("home.breedsTitle")}</h2>
       <p class="lede">{t("home.breedsBody")}</p>
       <div class="grid cols-2" style="margin-top:26px">
-        <div class="card breed-card">
-          <span class="kicker">{t("home.cowCardBreed")}</span>
-          <h3>{t("home.cowCardTitle")}</h3>
-          <p>{t("home.cowCardBody")}</p>
-          <div class="price">₹{cow.pricePerLitre} <small>/ {t("common.perLitre")}</small></div>
-        </div>
-        <div class="card breed-card">
-          <span class="kicker">{t("home.bufCardBreed")}</span>
-          <h3>{t("home.bufCardTitle")}</h3>
-          <p>{t("home.bufCardBody")}</p>
-          <div class="price">₹{buf.pricePerLitre} <small>/ {t("common.perLitre")}</small></div>
-        </div>
+        <article class="card breed-card">
+          <span class="kicker">{cow.breed}</span>
+          <h3>{cow.name}</h3>
+          <p>{cow.tagline}</p>
+          <ul class="prod-bullets">
+            {cow.bullets.map((b) => <li><Check /> {b}</li>)}
+          </ul>
+          <div class="price">
+            {formatInr(cow.pricePerHalfLitre)} <small>/ {t("common.perHalfLitre")}</small>
+          </div>
+          <p class="price-eq">{formatInr(cow.pricePerLitre)} / {t("common.perLitre")}</p>
+          <a class="btn btn-primary" href={orderHref}>{t("common.orderCta")}</a>
+        </article>
+        <article class="card breed-card">
+          <span class="kicker">{buf.breed}</span>
+          <h3>{buf.name}</h3>
+          <p>{buf.tagline}</p>
+          <ul class="prod-bullets">
+            {buf.bullets.map((b) => <li><Check /> {b}</li>)}
+          </ul>
+          <div class="price">
+            {formatInr(buf.pricePerHalfLitre)} <small>/ {t("common.perHalfLitre")}</small>
+          </div>
+          <p class="price-eq">{formatInr(buf.pricePerLitre)} / {t("common.perLitre")}</p>
+          <a class="btn btn-primary" href={orderHref}>{t("common.orderCta")}</a>
+        </article>
       </div>
+      <p class="commitment">{t("home.commitment")}</p>
       <p style="margin-top:18px">
         <a href={localizePath("/our-farm", lang)}>{t("home.breedsLink")} &rarr;</a>
       </p>
     </div>
   </section>
 
-  <section class="wrap narrow">
-    <h2>{t("home.a2Title")}</h2>
-    <p>{t("home.a2Body")}</p>
-    <p><a href={localizePath("/our-milk", lang)}>{t("home.a2Link")} &rarr;</a></p>
+  <section class="wrap">
+    <h2 class="center">{t("home.whyTitle")}</h2>
+    <ul class="usp-grid">
+      {catalog.usps.map((u) => (
+        <li><Check /> {u}</li>
+      ))}
+    </ul>
   </section>
 
   <section class="section-sunk">
-    <div class="wrap">
-      <h2>{t("home.agesTitle")}</h2>
-      <div class="grid cols-4" style="margin-top:24px">
-        {ages.map((a) => (
-          <div class="card">
-            <h3 style="font-size:1.05rem">{a.who}</h3>
-            <p style="margin:0;font-size:0.92rem;color:var(--muted)">{a.what}</p>
-          </div>
-        ))}
-      </div>
+    <div class="wrap narrow">
+      <h2>{t("home.a2Title")}</h2>
+      <p>{t("home.a2Body")}</p>
+      <p><a href={localizePath("/our-milk", lang)}>{t("home.a2Link")} &rarr;</a></p>
     </div>
   </section>
 
   <section class="wrap">
-    <h2>{t("home.howTitle")}</h2>
-    <div class="grid cols-3 steps" style="margin-top:24px">
-      {how.map((s) => (
-        <div class="step">
-          <div class="n">{s.n}</div>
-          <h3 style="font-size:1.1rem">{s.t}</h3>
-          <p style="margin:0;color:var(--muted)">{s.d}</p>
+    <h2>{t("home.agesTitle")}</h2>
+    <div class="grid cols-4" style="margin-top:24px">
+      {ages.map((a) => (
+        <div class="card">
+          <h3 style="font-size:1.05rem">{a.who}</h3>
+          <p style="margin:0;font-size:0.92rem;color:var(--muted)">{a.what}</p>
         </div>
       ))}
-    </div>
-    <div class="actions" style="margin-top:28px">
-      <a class="btn btn-primary" href={localizePath("/order", lang)}>{t("home.howCta")}</a>
     </div>
   </section>
 
   <section class="section-sunk">
-    <div class="wrap narrow" style="text-align:center">
-      <h2>{t("home.closingTitle")}</h2>
-      <p class="lede" style="margin-inline:auto">{t("home.closingBody")}</p>
-      <div class="actions" style="justify-content:center;margin-top:22px">
-        <a class="btn btn-primary" href={localizePath("/order", lang)}>{t("common.orderCta")}</a>
-        <a class="btn btn-ghost" href={localizePath("/account", lang)}>{t("home.closingCta")}</a>
+    <div class="wrap">
+      <h2>{t("home.howTitle")}</h2>
+      <div class="grid cols-3 steps" style="margin-top:24px">
+        {how.map((s) => (
+          <div class="step">
+            <div class="n">{s.n}</div>
+            <h3 style="font-size:1.1rem">{s.t}</h3>
+            <p style="margin:0;color:var(--muted)">{s.d}</p>
+          </div>
+        ))}
       </div>
+      <div class="actions" style="margin-top:28px">
+        <a class="btn btn-primary" href={orderHref}>{t("home.howCta")}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap narrow" style="text-align:center">
+    <h2>{t("home.closingTitle")}</h2>
+    <p class="lede" style="margin-inline:auto">{t("home.closingBody")}</p>
+    <p class="delivery-note">{t("home.deliveryNote")}</p>
+    <div class="actions" style="justify-content:center;margin-top:22px">
+      <a class="btn btn-primary" href={orderHref}>{t("common.orderCta")}</a>
+      <a class="btn btn-ghost" href={localizePath("/our-farm", lang)}>{t("nav.ourFarm")}</a>
     </div>
   </section>
 </Base>

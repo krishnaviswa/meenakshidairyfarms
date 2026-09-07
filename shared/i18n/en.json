@@ -20,12 +20,14 @@
     "subscribeCta": "Start a subscription",
     "learnMore": "Learn more",
     "perLitre": "per litre",
+    "perHalfLitre": "per half litre",
     "perDelivery": "per delivery",
     "cow": "Cow",
     "buffalo": "Buffalo",
     "themeToggle": "Toggle dark mode",
     "langLabel": "Language",
-    "footerNote": "No number, address or email is published here on purpose. Every order goes through the order page, which hands your details straight to the farm on WhatsApp."
+    "callWhatsApp": "WhatsApp / Call",
+    "footerNote": "Fresh A2 milk, delivered to your doorstep. Every order goes to the farm on WhatsApp for confirmation."
   },
 
   "home": {
@@ -51,6 +53,10 @@
     "bufCardBreed": "Murrah breed",
     "bufCardBody": "Thick and rich — naturally higher in protein, fat and calcium. For curd, ghee, growing children and anyone who wants a fuller glass.",
     "breedsLink": "Meet the breeds",
+
+    "whyTitle": "Why families choose Meenakshi",
+    "commitment": "Raised with love · No hormones · No injections · No compromises",
+    "deliveryNote": "Fresh A2 milk, delivered to your doorstep.",
 
     "a2Title": "What makes it A2 — and why that matters",
     "a2Body": "Ordinary milk carries a mix of A1 and A2 beta-casein protein. When A1 is digested it releases BCM-7, a peptide linked to bloating and discomfort in people who are sensitive to it. Milk from desi cows and from all buffaloes is A2 only — no BCM-7. People who feel heavy after regular milk often find A2 sits easier.",
@@ -105,7 +111,7 @@
     "chooseBoth": "Many families take both — cow milk for drinking, buffalo milk for the kitchen.",
 
     "priceTitle": "Price",
-    "priceNote": "Current per-litre prices are shown on the order page and update automatically.",
+    "priceNote": "Current prices, from the farm: ₹40 per half litre for Sahiwal cow milk, ₹45 per half litre for Murrah buffalo milk.",
     "priceCta": "See prices and order"
   },
 
