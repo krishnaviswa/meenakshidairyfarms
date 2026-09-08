@@ -41,7 +41,7 @@ export function buildOrder(fields, rates, lang) {
     frequency: fields.freq,
     start_date: fields.startdate || undefined,
     notes: (fields.notes || "").trim(),
-    channel: "web",
+    channel: fields.channel === "app" ? "app" : "web",
     language: lang,
   };
 }
@@ -73,7 +73,7 @@ export function orderText(o) {
   L.push("*Estimated total:* ₹" + o.total + (o.frequency === "once" ? "" : " per delivery"));
   if (o.notes) { L.push(""); L.push("*Notes:* " + o.notes); }
   L.push("");
-  L.push("_Sent from the Meenakshi order page_");
+  L.push(o.channel === "app" ? "_Sent from the Meenakshi app_" : "_Sent from the Meenakshi order page_");
   return L.join("\n");
 }
 

@@ -1,9 +1,13 @@
 ---
 import { useT, localizePath, NAV, type Lang } from "../i18n";
-interface Props { lang: Lang; }
-const { lang } = Astro.props;
+import { displayPhone, type SiteSettings } from "../lib/catalog";
+
+interface Props { lang: Lang; settings: SiteSettings; }
+const { lang, settings } = Astro.props;
 const t = useT(lang);
 const year = new Date().getFullYear();
+const waHref = "https://wa.me/" + settings.waNumber;
+const phoneLabel = displayPhone(settings.waNumber);
 ---
 
 <footer class="site-footer">
@@ -16,8 +20,16 @@ const year = new Date().getFullYear();
       {NAV.map((item) => (
         <a href={localizePath(item.path, lang)}>{t(`nav.${item.key}`)}</a>
       ))}
-      <a href={localizePath("/account", lang)}>{t("nav.account")}</a>
     </nav>
+    <p class="contact">
+      <span>{t("common.callWhatsApp")}</span>
+      <a href={waHref} rel="nofollow noopener">{phoneLabel}</a>
+      {settings.contactEmail && (
+        <>
+          · <a href={"mailto:" + settings.contactEmail}>{settings.contactEmail}</a>
+        </>
+      )}
+    </p>
     <p class="note">{t("common.footerNote")}</p>
     <p class="tag">© {year} {t("common.brand")}</p>
   </div>
