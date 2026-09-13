@@ -20,15 +20,46 @@ class FarmState extends ChangeNotifier {
   bool loading = true;
   int tab = 0;
 
+  String? authToken;
+  AuthUser? authUser;
+  bool get isLoggedIn => authToken != null;
+
   Future<void> boot() async {
     final prefs = await SharedPreferences.getInstance();
     lang = prefs.getString("meenakshi_lang") ?? "en";
     final theme = prefs.getString("meenakshi_theme");
     if (theme == "dark") themeMode = ThemeMode.dark;
     if (theme == "light") themeMode = ThemeMode.light;
+    authToken = prefs.getString("meenakshi_auth_token");
+    final userRaw = prefs.getString("meenakshi_auth_user");
+    if (userRaw != null) {
+      try {
+        authUser = AuthUser.fromJson(Map<String, dynamic>.from(jsonDecode(userRaw) as Map));
+      } catch (_) {
+        authUser = null;
+      }
+    }
     await _reloadContent();
     await _loadRecent(prefs);
     loading = false;
+    notifyListeners();
+  }
+
+  Future<void> setAuth(String token, AuthUser user) async {
+    authToken = token;
+    authUser = user;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("meenakshi_auth_token", token);
+    await prefs.setString("meenakshi_auth_user", jsonEncode(user.toJson()));
+    notifyListeners();
+  }
+
+  Future<void> logout() async {
+    authToken = null;
+    authUser = null;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove("meenakshi_auth_token");
+    await prefs.remove("meenakshi_auth_user");
     notifyListeners();
   }
 

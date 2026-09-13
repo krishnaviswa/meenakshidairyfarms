@@ -79,6 +79,67 @@ class Catalog {
       );
 }
 
+class AuthUser {
+  const AuthUser({required this.id, required this.phone});
+
+  final String id;
+  final String phone;
+
+  Map<String, dynamic> toJson() => {"id": id, "phone": phone};
+
+  factory AuthUser.fromJson(Map<String, dynamic> j) => AuthUser(
+        id: j["id"] as String,
+        phone: j["phone"] as String,
+      );
+}
+
+class AccountOrder {
+  const AccountOrder({
+    required this.ref,
+    required this.items,
+    required this.total,
+    required this.status,
+    required this.createdAt,
+  });
+
+  final String ref;
+  final List<OrderItem> items;
+  final double total;
+  final String status;
+  final String createdAt;
+
+  factory AccountOrder.fromJson(Map<String, dynamic> j) => AccountOrder(
+        ref: j["ref"] as String,
+        items: (j["items"] as List<dynamic>? ?? const [])
+            .map((e) => OrderItem.fromJson(Map<String, dynamic>.from(e as Map)))
+            .toList(),
+        total: double.tryParse("${j["total"]}") ?? 0,
+        status: (j["status"] as String?) ?? "pending",
+        createdAt: (j["created_at"] as String?) ?? "",
+      );
+}
+
+class BillingPayment {
+  const BillingPayment({
+    required this.id,
+    required this.orderRef,
+    required this.amount,
+    required this.status,
+  });
+
+  final String id;
+  final String orderRef;
+  final double amount;
+  final String status;
+
+  factory BillingPayment.fromJson(Map<String, dynamic> j) => BillingPayment(
+        id: j["id"] as String,
+        orderRef: (j["order_ref"] as String?) ?? "",
+        amount: double.tryParse("${j["amount"]}") ?? 0,
+        status: (j["status"] as String?) ?? "due",
+      );
+}
+
 class OrderItem {
   const OrderItem({
     required this.key,

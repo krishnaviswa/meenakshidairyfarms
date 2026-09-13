@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import Check from "../Check.astro";
+import HeroScene from "../../assets/illustrations/HeroScene.astro";
 import { useT, localizePath, type Lang } from "../../i18n";
 import { getCatalog, formatInr } from "../../lib/catalog";
 
@@ -19,6 +20,7 @@ const orderHref = localizePath("/order", lang);
 
 <Base lang={lang} path="/" title={seo.title} description={seo.description} settings={catalog.settings}>
   <section class="hero wrap">
+    <HeroScene />
     <p class="eyebrow">{t("home.eyebrow")}</p>
     <h1>{t("home.heroTitle")}</h1>
     <p class="lede">{t("home.heroBody")}</p>

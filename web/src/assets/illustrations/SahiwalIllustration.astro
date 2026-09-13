@@ -1,0 +1,41 @@
+---
+/* Illustrated Sahiwal cow scene for the Our Farm page. Original SVG art,
+ * theme-aware via the sky/pasture CSS tokens. Swap-in point for a real
+ * photo later — same <SahiwalIllustration /> usage site in OurFarmPage.astro.
+ */
+---
+
+<svg class="breed-illustration" viewBox="0 0 500 340" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a Sahiwal cow">
+  <defs>
+    <linearGradient id="skyGradSahiwal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="var(--sky-top)" />
+      <stop offset="1" stop-color="var(--sky-bottom)" />
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="500" height="340" fill="url(#skyGradSahiwal)" />
+  <ellipse cx="410" cy="70" rx="42" ry="42" fill="var(--gold)" opacity="0.3" />
+  <ellipse cx="110" cy="90" rx="55" ry="14" fill="#ffffff" opacity="0.3" />
+  <path d="M0,210 C110,180 220,208 340,190 C400,182 460,196 500,190 L500,340 L0,340 Z" fill="var(--pasture-far)" />
+  <path d="M0,255 C130,225 260,258 380,238 C430,230 470,244 500,238 L500,340 L0,340 Z" fill="var(--pasture)" />
+
+  <g transform="translate(250,175) scale(1.5)">
+    <ellipse cx="0" cy="80" rx="86" ry="20" fill="#000000" opacity="0.1" />
+    <rect x="-58" y="26" width="15" height="48" rx="7" fill="#a9583a" />
+    <rect x="-22" y="30" width="15" height="48" rx="7" fill="#a9583a" />
+    <rect x="18" y="30" width="15" height="48" rx="7" fill="#a9583a" />
+    <rect x="50" y="26" width="15" height="48" rx="7" fill="#a9583a" />
+    <ellipse cx="0" cy="10" rx="82" ry="42" fill="#bd6a45" />
+    <ellipse cx="-22" cy="-4" rx="20" ry="13" fill="#f1e6d8" opacity="0.55" />
+    <ellipse cx="28" cy="16" rx="24" ry="15" fill="#f1e6d8" opacity="0.5" />
+    <path d="M64,16 Q92,34 82,58 Q74,44 62,36Z" fill="#a9583a" />
+    <g transform="translate(-76,-24)">
+      <circle cx="0" cy="0" r="26" fill="#bd6a45" />
+      <path d="M-18,-22 C-9,-34 3,-34 7,-25" stroke="#8a4a2c" stroke-width="4.5" fill="none" stroke-linecap="round" />
+      <path d="M11,-22 C20,-34 29,-29 29,-20" stroke="#8a4a2c" stroke-width="4.5" fill="none" stroke-linecap="round" />
+      <path d="M-27,-4 C-38,-2 -40,11 -31,18 C-29,7 -27,1 -27,-4Z" fill="#bd6a45" />
+      <ellipse cx="-9" cy="2" rx="3.4" ry="4" fill="#2a2a22" />
+      <ellipse cx="8" cy="2" rx="3.4" ry="4" fill="#2a2a22" />
+      <path d="M-5,16 Q0,20 5,16" stroke="#5c3320" stroke-width="2.2" fill="none" stroke-linecap="round" />
+    </g>
+  </g>
+</svg>

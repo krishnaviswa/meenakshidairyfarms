@@ -3,6 +3,7 @@ import { getCatalog, ratesFromCatalog } from "../../lib/catalog";
 import { corsPreflight, json } from "../../lib/cors";
 import { query } from "../../lib/db";
 import { buildOrder, waLink } from "../../lib/order.js";
+import { getUserFromRequest } from "../../lib/auth";
 
 export const prerender = false;
 
@@ -53,12 +54,15 @@ export const POST: APIRoute = async ({ request }) => {
     return json({ ok: false, error: "Enter at least 0.5 litre of milk." }, 400);
   }
 
+  const user = getUserFromRequest(request);
+
   try {
-    await query(
+    const rows = await query<{ id: string }>(
       `insert into orders
          (ref, name, phone, address_line1, area, pincode, items, total,
-          frequency, start_date, notes, channel, language)
-       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)`,
+          frequency, start_date, notes, channel, language, user_id)
+       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
+       returning id`,
       [
         order.ref,
         order.name,
@@ -73,8 +77,16 @@ export const POST: APIRoute = async ({ request }) => {
         order.notes || "",
         order.channel,
         order.language,
+        user?.id || null,
       ],
     );
+
+    if (user) {
+      await query(
+        `insert into payments (user_id, order_id, amount) values ($1, $2, $3)`,
+        [user.id, rows[0].id, order.total],
+      );
+    }
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Could not save order";
     return json({ ok: false, error: msg }, 503);

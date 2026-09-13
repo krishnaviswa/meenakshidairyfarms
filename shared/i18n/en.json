@@ -122,10 +122,10 @@
     "sahiwalTitle": "Sahiwal — our A2 cow",
     "sahiwalBody": [
       "The Sahiwal is India's finest indigenous dairy cow, from the Sahiwal tract of the Punjab. Reddish-brown with loose skin, it tolerates heat and ticks, stays calm and healthy on green fodder, and needs little input.",
-      "A well-kept Sahiwal gives about 8–12 litres a day, with butterfat around 4.5–5%. Genetically it is A2A2 at the beta-casein gene — which is the whole reason we keep Sahiwals rather than high-yield crossbreds."
+      "A well-kept Sahiwal is a steady, dependable milker, with butterfat around 4.5–5%. Genetically it is A2A2 at the beta-casein gene — which is the whole reason we keep Sahiwals rather than high-yield crossbreds."
     ],
     "sahiwalFacts": [
-      ["Yield", "~8–12 L / day"],
+      ["Origin", "Sahiwal tract, Punjab"],
       ["Fat", "~4.5–5.0%"],
       ["Beta-casein", "A2A2"],
       ["Temperament", "Calm, hardy, heat-tolerant"]
@@ -134,10 +134,10 @@
     "murrahTitle": "Murrah — our A2 buffalo",
     "murrahBody": [
       "The Murrah is the world's benchmark dairy buffalo, from Haryana — jet-black, with tightly coiled horns. It is exported around the world to improve buffalo herds.",
-      "A Murrah gives roughly 8–16 litres a day, with butterfat around 7% and very high total solids — that is what makes buffalo milk thick and rich. All buffalo milk is naturally A2; buffaloes do not carry the A1 gene."
+      "A Murrah is a generous, steady milker, with butterfat around 7% and very high total solids — that is what makes buffalo milk thick and rich. All buffalo milk is naturally A2; buffaloes do not carry the A1 gene."
     ],
     "murrahFacts": [
-      ["Yield", "~8–16 L / day"],
+      ["Origin", "Haryana, India"],
       ["Fat", "~7%"],
       ["Beta-casein", "A2 (no A1 gene)"],
       ["Best for", "Curd, ghee, a richer glass"]
@@ -232,7 +232,22 @@
     "payNow": "Pay by UPI",
     "profileTitle": "Profile & address",
     "save": "Save",
-    "comingSoon": "Accounts and subscriptions are coming soon. For now, order on WhatsApp from the order page."
+    "comingSoon": "Accounts and subscriptions are coming soon. For now, order on WhatsApp from the order page.",
+
+    "ordersTitle": "My Orders",
+    "noOrders": "You haven't placed an order yet.",
+    "orderedOn": "Ordered",
+    "paidSelfReported": "Paid (marked by you)",
+    "markPaid": "I've paid",
+    "markingPaid": "Marking as paid…",
+    "noPayments": "Nothing due right now.",
+    "invalidPhone": "Enter a valid 10-digit mobile number.",
+    "sendingCode": "Sending…",
+    "verifying": "Verifying…",
+    "invalidCode": "Incorrect or expired code.",
+    "changeNumber": "Use a different number",
+    "loadError": "Couldn't load your account right now. Please try again.",
+    "devCodeHint": "Testing mode — code:"
   },
 
   "seo": {

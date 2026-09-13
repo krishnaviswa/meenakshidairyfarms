@@ -12,6 +12,11 @@ export function getPool(): Pool | null {
       max: 5,
       idleTimeoutMillis: 10_000,
     });
+    // Without this, an idle client error (e.g. the DB restarting) is an
+    // unhandled 'error' event and crashes the whole Node process.
+    pool.on("error", (err) => {
+      console.warn("[db] idle client error —", err instanceof Error ? err.message : err);
+    });
   }
   return pool;
 }

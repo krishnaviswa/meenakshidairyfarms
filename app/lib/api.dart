@@ -145,6 +145,7 @@ class FarmApi {
     required String startDate,
     required String notes,
     required String lang,
+    String? token,
   }) async {
     final base = AppConfig.apiBase();
     if (base.isEmpty) return null;
@@ -152,7 +153,10 @@ class FarmApi {
       final res = await http
           .post(
             Uri.parse("$base/api/orders"),
-            headers: {"Content-Type": "application/json"},
+            headers: {
+              "Content-Type": "application/json",
+              if (token != null) "Authorization": "Bearer $token",
+            },
             body: jsonEncode({
               "name": name,
               "phone": phone,
@@ -177,6 +181,98 @@ class FarmApi {
       );
     } catch (_) {
       return null;
+    }
+  }
+
+  Future<({int expiresInSec, String? devCode})?> requestOtp(String phone) async {
+    final base = AppConfig.apiBase();
+    if (base.isEmpty) return null;
+    try {
+      final res = await http
+          .post(
+            Uri.parse("$base/api/auth/request-otp"),
+            headers: {"Content-Type": "application/json"},
+            body: jsonEncode({"phone": phone}),
+          )
+          .timeout(const Duration(seconds: 8));
+      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      if (data["ok"] != true) return null;
+      return (expiresInSec: (data["expiresInSec"] as num?)?.toInt() ?? 300, devCode: data["devCode"] as String?);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<({String token, AuthUser user})?> verifyOtp(String phone, String code) async {
+    final base = AppConfig.apiBase();
+    if (base.isEmpty) return null;
+    try {
+      final res = await http
+          .post(
+            Uri.parse("$base/api/auth/verify-otp"),
+            headers: {"Content-Type": "application/json"},
+            body: jsonEncode({"phone": phone, "code": code}),
+          )
+          .timeout(const Duration(seconds: 8));
+      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      if (data["ok"] != true || data["token"] == null) return null;
+      return (
+        token: data["token"] as String,
+        user: AuthUser.fromJson(Map<String, dynamic>.from(data["user"] as Map)),
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<List<AccountOrder>?> fetchOrderHistory(String token) async {
+    final base = AppConfig.apiBase();
+    if (base.isEmpty) return null;
+    try {
+      final res = await http
+          .get(Uri.parse("$base/api/account/orders"), headers: {"Authorization": "Bearer $token"})
+          .timeout(const Duration(seconds: 8));
+      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      if (data["ok"] != true) return null;
+      return (data["orders"] as List<dynamic>)
+          .map((e) => AccountOrder.fromJson(Map<String, dynamic>.from(e as Map)))
+          .toList();
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<List<BillingPayment>?> fetchPayments(String token) async {
+    final base = AppConfig.apiBase();
+    if (base.isEmpty) return null;
+    try {
+      final res = await http
+          .get(Uri.parse("$base/api/account/payments"), headers: {"Authorization": "Bearer $token"})
+          .timeout(const Duration(seconds: 8));
+      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      if (data["ok"] != true) return null;
+      return (data["payments"] as List<dynamic>)
+          .map((e) => BillingPayment.fromJson(Map<String, dynamic>.from(e as Map)))
+          .toList();
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<bool> markPaid(String token, String paymentId) async {
+    final base = AppConfig.apiBase();
+    if (base.isEmpty) return false;
+    try {
+      final res = await http
+          .post(
+            Uri.parse("$base/api/account/payments/$paymentId/mark-paid"),
+            headers: {"Authorization": "Bearer $token"},
+          )
+          .timeout(const Duration(seconds: 8));
+      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      return data["ok"] == true;
+    } catch (_) {
+      return false;
     }
   }
 }

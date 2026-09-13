@@ -355,9 +355,14 @@ const cfg = {
       const o = buildOrder(currentFields(), cfg.rates, cfg.lang);
       lastOrder = o;
       saveOrder(o);
+      const headers = { "Content-Type": "application/json" };
+      try {
+        const token = localStorage.getItem("meenakshi_token");
+        if (token) headers["Authorization"] = "Bearer " + token;
+      } catch (e) {}
       fetch("/api/orders", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers,
         body: JSON.stringify({ ...currentFields(), language: cfg.lang }),
       })
         .then((r) => r.json())

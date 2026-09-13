@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:url_launcher/url_launcher.dart";
 
-import "api.dart";
+import "config.dart";
 import "models.dart";
 import "screens/home_screen.dart";
 import "screens/more_screens.dart";
@@ -128,9 +128,9 @@ class _FarmShellState extends State<FarmShell> {
               PopupMenuItem(value: 3, child: Text(state.t("nav.faq"))),
               PopupMenuItem(
                 value: 0,
-                child: Text(displayPhone(state.catalog?.settings.waNumber ?? "919087282939")),
+                child: Text(state.t("common.callWhatsApp")),
                 onTap: () => launchUrl(
-                  Uri.parse("https://wa.me/${state.catalog?.settings.waNumber ?? "919087282939"}"),
+                  Uri.parse("https://wa.me/${state.catalog?.settings.waNumber ?? AppConfig.fallbackWa}"),
                   mode: LaunchMode.externalApplication,
                 ),
               ),

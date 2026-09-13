@@ -1,6 +1,8 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { useT, localizePath, type Lang } from "../../i18n";
+import SahiwalIllustration from "../../assets/illustrations/SahiwalIllustration.astro";
+import MurrahIllustration from "../../assets/illustrations/MurrahIllustration.astro";
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
@@ -28,6 +30,7 @@ const practices: { t: string; d: string }[] = t("ourFarm.practices");
           {sahiwalBody.map((p) => <p>{p}</p>)}
         </div>
         <div class="card">
+          <SahiwalIllustration />
           <ul class="facts">
             {sahiwalFacts.map((f) => (
               <li><span>{f[0]}</span><b>{f[1]}</b></li>
@@ -41,6 +44,7 @@ const practices: { t: string; d: string }[] = t("ourFarm.practices");
   <section class="wrap">
     <div class="grid cols-2">
       <div class="card">
+        <MurrahIllustration />
         <ul class="facts">
           {murrahFacts.map((f) => (
             <li><span>{f[0]}</span><b>{f[1]}</b></li>

@@ -91,6 +91,7 @@ class _OrderScreenState extends State<OrderScreen> {
       startDate: startStr,
       notes: _notes.text,
       lang: state.lang,
+      token: state.authToken,
     );
     final order = posted?.order ??
         buildOrder(
