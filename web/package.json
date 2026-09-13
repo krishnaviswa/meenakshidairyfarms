@@ -4,10 +4,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "sync-images": "node ../shared/sync-visual-assets.mjs",
     "sync-i18n": "node scripts/sync-i18n.mjs",
-    "predev": "npm run sync-i18n",
+    "predev": "npm run sync-images && npm run sync-i18n",
     "dev": "astro dev",
-    "prebuild": "npm run sync-i18n",
+    "prebuild": "npm run sync-images && npm run sync-i18n",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

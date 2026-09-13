@@ -60,10 +60,21 @@ class FarmColors {
 
 ThemeData farmTheme(Brightness brightness) {
   final c = brightness == Brightness.dark ? FarmColors.dark : FarmColors.light;
-  final display = GoogleFonts.frauncesTextTheme();
-  final body = GoogleFonts.mulishTextTheme();
+  final body = GoogleFonts.mulishTextTheme(
+    ThemeData(brightness: brightness).textTheme,
+  ).apply(bodyColor: c.ink, displayColor: c.ink);
+  final serif = GoogleFonts.frauncesTextTheme(body);
+  final textTheme = body.copyWith(
+    displayLarge: serif.displayLarge?.copyWith(color: c.forest),
+    displayMedium: serif.displayMedium?.copyWith(color: c.forest),
+    displaySmall: serif.displaySmall?.copyWith(color: c.forest),
+    headlineLarge: serif.headlineLarge?.copyWith(color: c.forest),
+    headlineMedium: serif.headlineMedium?.copyWith(color: c.forest),
+    headlineSmall: serif.headlineSmall?.copyWith(color: c.forest),
+    titleLarge: serif.titleLarge?.copyWith(color: c.forest),
+  );
 
-  final base = ThemeData(
+  return ThemeData(
     useMaterial3: true,
     brightness: brightness,
     scaffoldBackgroundColor: c.cream,
@@ -78,33 +89,71 @@ ThemeData farmTheme(Brightness brightness) {
       surface: c.creamCard,
       onSurface: c.ink,
     ),
+    textTheme: textTheme,
     dividerColor: c.line,
     cardTheme: CardThemeData(
       color: c.creamCard,
-      elevation: 0,
+      elevation: brightness == Brightness.light ? 1 : 0,
+      shadowColor: c.forest.withValues(alpha: 0.12),
+      margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         side: BorderSide(color: c.line),
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: c.cream,
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+      fillColor: c.creamCard,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
+      labelStyle: TextStyle(color: c.muted, fontWeight: FontWeight.w600),
+      hintStyle: TextStyle(color: c.muted.withValues(alpha: 0.75)),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(14),
+        borderSide: BorderSide(color: c.line),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(14),
+        borderSide: BorderSide(color: c.leaf, width: 1.6),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(14),
+        borderSide: BorderSide(color: c.danger),
+      ),
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
         backgroundColor: c.leaf,
         foregroundColor: c.btnText,
-        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        minimumSize: const Size(0, 50),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
       ),
     ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: c.forest,
+        side: BorderSide(color: c.leaf),
+        minimumSize: const Size(0, 50),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+      ),
+    ),
+    chipTheme: ChipThemeData(
+      backgroundColor: c.creamCard,
+      side: BorderSide(color: c.line),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+      labelStyle: TextStyle(color: c.forest, fontWeight: FontWeight.w600),
+    ),
     appBarTheme: AppBarTheme(
-      backgroundColor: c.cream,
+      backgroundColor: c.cream.withValues(alpha: 0.96),
       foregroundColor: c.forest,
       elevation: 0,
+      scrolledUnderElevation: 1,
+      shadowColor: c.forest.withValues(alpha: 0.12),
+      surfaceTintColor: Colors.transparent,
+      toolbarHeight: 68,
       titleTextStyle: GoogleFonts.fraunces(
         color: c.forest,
         fontWeight: FontWeight.w700,
@@ -113,13 +162,18 @@ ThemeData farmTheme(Brightness brightness) {
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: c.creamCard,
-      indicatorColor: c.creamSunk,
+      elevation: 4,
+      shadowColor: c.forest.withValues(alpha: 0.12),
+      indicatorColor: c.gold.withValues(alpha: 0.22),
+      labelTextStyle: WidgetStateProperty.resolveWith(
+        (states) => TextStyle(
+          color: states.contains(WidgetState.selected) ? c.forest : c.muted,
+          fontWeight: states.contains(WidgetState.selected)
+              ? FontWeight.w700
+              : FontWeight.w600,
+          fontSize: 12,
+        ),
+      ),
     ),
-  );
-
-  return base.copyWith(
-    textTheme: body
-        .apply(bodyColor: c.ink, displayColor: c.forest)
-        .merge(display.apply(bodyColor: c.ink, displayColor: c.forest)),
   );
 }

@@ -6,6 +6,8 @@ on:
     branches: [main, feat/docker-postgres-frontend]
     paths:
       - "app/**"
+      - "shared/assets/images/**"
+      - "shared/sync-visual-assets.mjs"
       - ".github/workflows/android-apk.yml"
 
 jobs:
@@ -26,6 +28,8 @@ jobs:
           flutter-version: "3.44.9"
           channel: stable
           cache: true
+      - name: Sync shared visual assets
+        run: node ../shared/sync-visual-assets.mjs
       - run: flutter pub get
       - run: flutter test
       - run: flutter build apk --release --no-tree-shake-icons

@@ -397,73 +397,161 @@ class FarmScreen extends StatelessWidget {
         ? FarmColors.dark
         : FarmColors.light;
     return ListView(
-      padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 40),
       children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(22),
+          child: Image.asset(
+            "assets/images/hero-natural.webp",
+            width: double.infinity,
+            height: 190,
+            fit: BoxFit.cover,
+            alignment: const Alignment(0.25, 0),
+            semanticLabel: state.t("ourFarm.title"),
+          ),
+        ),
+        const SizedBox(height: 22),
         Text(
           state.t("ourFarm.title"),
-          style: Theme.of(
-            context,
-          ).textTheme.headlineSmall?.copyWith(color: c.forest),
-        ),
-        Text(state.t("ourFarm.intro"), style: TextStyle(color: c.muted)),
-        const SizedBox(height: 16),
-        Text(
-          state.t("ourFarm.sahiwalTitle"),
-          style: Theme.of(
-            context,
-          ).textTheme.titleLarge?.copyWith(color: c.forest),
-        ),
-        const SizedBox(height: 10),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: Image.asset(
-            "assets/images/sahiwal-natural.webp",
-            width: double.infinity,
-            height: 220,
-            fit: BoxFit.cover,
-            alignment: Alignment.center,
-            semanticLabel: state.t("ourFarm.sahiwalTitle"),
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            color: c.forest,
+            fontWeight: FontWeight.w700,
           ),
         ),
-        const SizedBox(height: 12),
-        for (final p
-            in state.i18n?.strings("ourFarm.sahiwalBody") ?? const <String>[])
-          Padding(padding: const EdgeInsets.only(top: 8), child: Text(p)),
-        const SizedBox(height: 20),
         Text(
-          state.t("ourFarm.murrahTitle"),
-          style: Theme.of(
-            context,
-          ).textTheme.titleLarge?.copyWith(color: c.forest),
+          state.t("ourFarm.intro"),
+          style: TextStyle(color: c.muted, height: 1.5),
         ),
-        const SizedBox(height: 10),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: Image.asset(
-            "assets/images/murrah-natural.webp",
-            width: double.infinity,
-            height: 220,
-            fit: BoxFit.cover,
-            alignment: Alignment.center,
-            semanticLabel: state.t("ourFarm.murrahTitle"),
+        const SizedBox(height: 24),
+        _FarmBreedCard(
+          title: state.t("ourFarm.sahiwalTitle"),
+          image: "assets/images/sahiwal-natural.webp",
+          body: state.i18n?.strings("ourFarm.sahiwalBody") ?? const <String>[],
+          colors: c,
+        ),
+        const SizedBox(height: 16),
+        _FarmBreedCard(
+          title: state.t("ourFarm.murrahTitle"),
+          image: "assets/images/murrah-natural.webp",
+          body: state.i18n?.strings("ourFarm.murrahBody") ?? const <String>[],
+          colors: c,
+        ),
+        const SizedBox(height: 28),
+        Container(
+          width: 44,
+          height: 4,
+          margin: const EdgeInsets.only(bottom: 10),
+          decoration: BoxDecoration(
+            color: c.gold,
+            borderRadius: BorderRadius.circular(999),
           ),
         ),
-        const SizedBox(height: 12),
-        for (final p
-            in state.i18n?.strings("ourFarm.murrahBody") ?? const <String>[])
-          Padding(padding: const EdgeInsets.only(top: 8), child: Text(p)),
-        const SizedBox(height: 16),
         Text(
           state.t("ourFarm.practicesTitle"),
-          style: Theme.of(
-            context,
-          ).textTheme.titleLarge?.copyWith(color: c.forest),
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            color: c.forest,
+            fontWeight: FontWeight.w700,
+          ),
         ),
+        const SizedBox(height: 12),
         for (final p
             in state.i18n?.maps("ourFarm.practices") ??
                 const <Map<String, dynamic>>[])
-          ListTile(title: Text("${p["t"]}"), subtitle: Text("${p["d"]}")),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: c.creamCard,
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(color: c.line),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(Icons.eco_rounded, color: c.leaf, size: 22),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${p["t"]}",
+                          style: TextStyle(
+                            color: c.forest,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        const SizedBox(height: 3),
+                        Text(
+                          "${p["d"]}",
+                          style: TextStyle(color: c.muted, height: 1.4),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
       ],
+    );
+  }
+}
+
+class _FarmBreedCard extends StatelessWidget {
+  const _FarmBreedCard({
+    required this.title,
+    required this.image,
+    required this.body,
+    required this.colors,
+  });
+
+  final String title;
+  final String image;
+  final List<String> body;
+  final FarmColors colors;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset(
+            image,
+            width: double.infinity,
+            height: 230,
+            fit: BoxFit.cover,
+            alignment: Alignment.center,
+            semanticLabel: title,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(18, 16, 18, 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: colors.forest,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                for (final paragraph in body)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Text(
+                      paragraph,
+                      style: TextStyle(color: colors.muted, height: 1.45),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -21,44 +21,10 @@ class HomeScreen extends StatelessWidget {
         : FarmColors.light;
 
     return ListView(
-      padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 40),
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Image.asset(
-            "assets/images/hero-natural.webp",
-            width: double.infinity,
-            height: 220,
-            fit: BoxFit.cover,
-            alignment: Alignment.center,
-            semanticLabel: state.t("home.eyebrow"),
-          ),
-        ),
-        const SizedBox(height: 18),
-        Text(
-          state.t("home.eyebrow"),
-          style: TextStyle(
-            color: c.leaf,
-            fontWeight: FontWeight.w700,
-            fontSize: 12,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          state.t("home.heroTitle"),
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            color: c.forest,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(height: 10),
-        Text(
-          state.t("home.heroBody"),
-          style: TextStyle(color: c.muted, height: 1.5),
-        ),
-        const SizedBox(height: 16),
-        FilledButton(onPressed: onOrder, child: Text(state.t("home.heroCta"))),
-        const SizedBox(height: 14),
+        _HeroPanel(state: state, colors: c, onOrder: onOrder),
+        const SizedBox(height: 22),
         Wrap(
           spacing: 8,
           runSpacing: 8,
@@ -68,7 +34,7 @@ class HomeScreen extends StatelessWidget {
               Chip(label: Text(chip), visualDensity: VisualDensity.compact),
           ],
         ),
-        const SizedBox(height: 14),
+        const SizedBox(height: 16),
         if (cow != null && buf != null)
           Wrap(
             spacing: 8,
@@ -88,16 +54,12 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-        const SizedBox(height: 28),
-        Text(
-          state.t("home.breedsTitle"),
-          style: Theme.of(
-            context,
-          ).textTheme.headlineSmall?.copyWith(color: c.forest),
+        const SizedBox(height: 36),
+        _SectionHeading(
+          title: state.t("home.breedsTitle"),
+          body: state.t("home.breedsBody"),
         ),
-        const SizedBox(height: 6),
-        Text(state.t("home.breedsBody"), style: TextStyle(color: c.muted)),
-        const SizedBox(height: 14),
+        const SizedBox(height: 16),
         if (cow != null)
           _ProductCard(
             state: state,
@@ -114,50 +76,277 @@ class HomeScreen extends StatelessWidget {
             asset: "assets/images/murrah-natural.webp",
             onOrder: onOrder,
           ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
+        Container(
+          margin: const EdgeInsets.only(top: 8, bottom: 32),
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            color: c.creamSunk,
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: c.line),
+          ),
           child: Text(
             state.t("home.commitment"),
             textAlign: TextAlign.center,
             style: TextStyle(color: c.forest, fontWeight: FontWeight.w700),
           ),
         ),
-        Text(
-          state.t("home.whyTitle"),
-          style: Theme.of(
-            context,
-          ).textTheme.headlineSmall?.copyWith(color: c.forest),
-        ),
-        const SizedBox(height: 10),
+        _SectionHeading(title: state.t("home.whyTitle")),
+        const SizedBox(height: 14),
         for (final u in cat.usps)
-          Card(
-            child: ListTile(
-              leading: Icon(Icons.check_circle, color: c.leaf),
-              title: Text(u),
-            ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: _BenefitTile(text: u, colors: c),
           ),
-        const SizedBox(height: 18),
-        Text(
-          state.t("home.howTitle"),
-          style: Theme.of(
-            context,
-          ).textTheme.headlineSmall?.copyWith(color: c.forest),
-        ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 26),
+        _SectionHeading(title: state.t("home.howTitle")),
+        const SizedBox(height: 14),
         for (final step
             in state.i18n?.maps("home.how") ?? const <Map<String, dynamic>>[])
-          ListTile(
-            leading: CircleAvatar(
-              backgroundColor: c.leaf,
-              foregroundColor: c.btnText,
-              child: Text("${step["n"]}"),
-            ),
-            title: Text("${step["t"]}"),
-            subtitle: Text("${step["d"]}"),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: _StepTile(step: step, colors: c),
           ),
-        const SizedBox(height: 8),
-        FilledButton(onPressed: onOrder, child: Text(state.t("home.howCta"))),
+        const SizedBox(height: 6),
+        SizedBox(
+          width: double.infinity,
+          child: FilledButton(
+            onPressed: onOrder,
+            child: Text(state.t("home.howCta")),
+          ),
+        ),
       ],
+    );
+  }
+}
+
+class _HeroPanel extends StatelessWidget {
+  const _HeroPanel({
+    required this.state,
+    required this.colors,
+    required this.onOrder,
+  });
+
+  final FarmState state;
+  final FarmColors colors;
+  final VoidCallback onOrder;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 510,
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        color: colors.forest,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: colors.forest.withValues(alpha: 0.2),
+            blurRadius: 28,
+            offset: const Offset(0, 12),
+          ),
+        ],
+      ),
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            "assets/images/hero-natural.webp",
+            fit: BoxFit.cover,
+            alignment: const Alignment(0.2, 0),
+            semanticLabel:
+                "Representative farm scene with a Sahiwal cow and Murrah buffalo",
+          ),
+          const DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0x150D1D13),
+                  Color(0x66101F16),
+                  Color(0xED102319),
+                ],
+                stops: [0, 0.42, 1],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(22, 24, 22, 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  state.t("home.eyebrow"),
+                  style: TextStyle(
+                    color: const Color(0xFFF3D488),
+                    fontWeight: FontWeight.w800,
+                    fontSize: 11,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  state.t("home.heroTitle"),
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    color: const Color(0xFFFFFAF4),
+                    fontWeight: FontWeight.w700,
+                    height: 1.08,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  state.t("home.heroBody"),
+                  maxLines: 5,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Color(0xE8FFFAF4),
+                    height: 1.42,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                FilledButton(
+                  onPressed: onOrder,
+                  style: FilledButton.styleFrom(
+                    backgroundColor: colors.leaf,
+                    foregroundColor: colors.btnText,
+                  ),
+                  child: Text(state.t("home.heroCta")),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionHeading extends StatelessWidget {
+  const _SectionHeading({required this.title, this.body});
+
+  final String title;
+  final String? body;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = Theme.of(context).brightness == Brightness.dark
+        ? FarmColors.dark
+        : FarmColors.light;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 44,
+          height: 4,
+          margin: const EdgeInsets.only(bottom: 10),
+          decoration: BoxDecoration(
+            color: c.gold,
+            borderRadius: BorderRadius.circular(999),
+          ),
+        ),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            color: c.forest,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        if (body != null) ...[
+          const SizedBox(height: 4),
+          Text(body!, style: TextStyle(color: c.muted, height: 1.45)),
+        ],
+      ],
+    );
+  }
+}
+
+class _BenefitTile extends StatelessWidget {
+  const _BenefitTile({required this.text, required this.colors});
+
+  final String text;
+  final FarmColors colors;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
+      decoration: BoxDecoration(
+        color: colors.creamCard,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: colors.line),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 32,
+            height: 32,
+            decoration: BoxDecoration(
+              color: colors.leaf.withValues(alpha: 0.12),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(Icons.check_rounded, color: colors.leaf, size: 20),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StepTile extends StatelessWidget {
+  const _StepTile({required this.step, required this.colors});
+
+  final Map<String, dynamic> step;
+  final FarmColors colors;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: colors.creamCard,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: colors.line),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CircleAvatar(
+            radius: 22,
+            backgroundColor: colors.leaf,
+            foregroundColor: colors.btnText,
+            child: Text(
+              "${step["n"]}",
+              style: const TextStyle(fontWeight: FontWeight.w800),
+            ),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${step["t"]}",
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: colors.forest,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Text("${step["d"]}", style: TextStyle(color: colors.muted)),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

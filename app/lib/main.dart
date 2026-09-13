@@ -83,7 +83,11 @@ class _FarmShellState extends State<FarmShell> {
   Widget build(BuildContext context) {
     final pages = [
       HomeScreen(state: state, onOrder: _goOrder),
-      OrderScreen(key: ValueKey(prefill?.ref ?? "new"), state: state, prefill: prefill),
+      OrderScreen(
+        key: ValueKey(prefill?.ref ?? "new"),
+        state: state,
+        prefill: prefill,
+      ),
       AccountScreen(state: state, onReorder: _goOrder),
     ];
     final extras = [
@@ -94,11 +98,48 @@ class _FarmShellState extends State<FarmShell> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        titleSpacing: 16,
+        title: Row(
           children: [
-            Text(state.t("common.brand"), style: const TextStyle(fontSize: 18)),
-            Text(state.t("common.brandSub"), style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.secondary)),
+            Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: Theme.of(
+                  context,
+                ).colorScheme.primary.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(11),
+              ),
+              child: Icon(
+                Icons.local_drink_rounded,
+                color: Theme.of(context).colorScheme.primary,
+                size: 21,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    state.t("common.brand"),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 17),
+                  ),
+                  Text(
+                    state.t("common.brandSub"),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
         actions: [
@@ -111,14 +152,26 @@ class _FarmShellState extends State<FarmShell> {
               PopupMenuItem(value: "ta", child: Text("தமிழ்")),
             ],
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Center(child: Text(state.lang.toUpperCase(), style: const TextStyle(fontWeight: FontWeight.w700))),
+              padding: const EdgeInsets.symmetric(horizontal: 6),
+              child: Center(
+                child: Text(
+                  state.lang.toUpperCase(),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
             ),
           ),
           IconButton(
             tooltip: state.t("common.themeToggle"),
             onPressed: state.cycleTheme,
-            icon: Icon(state.themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode),
+            icon: Icon(
+              state.themeMode == ThemeMode.dark
+                  ? Icons.light_mode
+                  : Icons.dark_mode,
+            ),
           ),
           PopupMenuButton<int>(
             onSelected: (v) => setState(() => extra = v),
@@ -130,7 +183,9 @@ class _FarmShellState extends State<FarmShell> {
                 value: 0,
                 child: Text(state.t("common.callWhatsApp")),
                 onTap: () => launchUrl(
-                  Uri.parse("https://wa.me/${state.catalog?.settings.waNumber ?? AppConfig.fallbackWa}"),
+                  Uri.parse(
+                    "https://wa.me/${state.catalog?.settings.waNumber ?? AppConfig.fallbackWa}",
+                  ),
                   mode: LaunchMode.externalApplication,
                 ),
               ),
@@ -140,15 +195,28 @@ class _FarmShellState extends State<FarmShell> {
       ),
       body: extra == 0 ? pages[state.tab] : extras[extra - 1],
       bottomNavigationBar: NavigationBar(
+        height: 72,
         selectedIndex: extra == 0 ? state.tab : 0,
         onDestinationSelected: (i) {
           setState(() => extra = 0);
           state.setTab(i);
         },
         destinations: [
-          NavigationDestination(icon: const Icon(Icons.home_outlined), selectedIcon: const Icon(Icons.home), label: state.t("nav.home")),
-          NavigationDestination(icon: const Icon(Icons.local_drink_outlined), selectedIcon: const Icon(Icons.local_drink), label: state.t("nav.order")),
-          NavigationDestination(icon: const Icon(Icons.person_outline), selectedIcon: const Icon(Icons.person), label: state.t("nav.account")),
+          NavigationDestination(
+            icon: const Icon(Icons.home_outlined),
+            selectedIcon: const Icon(Icons.home),
+            label: state.t("nav.home"),
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.local_drink_outlined),
+            selectedIcon: const Icon(Icons.local_drink),
+            label: state.t("nav.order"),
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.person_outline),
+            selectedIcon: const Icon(Icons.person),
+            label: state.t("nav.account"),
+          ),
         ],
       ),
     );
