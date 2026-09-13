@@ -30,31 +30,31 @@ class FarmColors {
   final Color btnText;
 
   static const light = FarmColors(
-    cream: Color(0xFFF5EFE0),
-    creamCard: Color(0xFFFDFBF3),
-    creamSunk: Color(0xFFEFE7D3),
-    forest: Color(0xFF1E4A2B),
-    leaf: Color(0xFF3C7D45),
-    gold: Color(0xFFBE8F35),
-    ink: Color(0xFF2A2A22),
-    muted: Color(0xFF6E6A5A),
-    line: Color(0xFFDCD2B9),
+    cream: Color(0xFFFBF8F2),
+    creamCard: Color(0xFFFFFFFF),
+    creamSunk: Color(0xFFF3EBE0),
+    forest: Color(0xFF3A2718),
+    leaf: Color(0xFFC45C26),
+    gold: Color(0xFFC4A35A),
+    ink: Color(0xFF2C241C),
+    muted: Color(0xFF75695D),
+    line: Color(0xFFE7DCCB),
     danger: Color(0xFFA6392B),
-    btnText: Color(0xFFFFFDF6),
+    btnText: Color(0xFFFFFAF4),
   );
 
   static const dark = FarmColors(
-    cream: Color(0xFF101C15),
-    creamCard: Color(0xFF17271C),
-    creamSunk: Color(0xFF12211A),
-    forest: Color(0xFFDDEAD7),
-    leaf: Color(0xFF58A55E),
-    gold: Color(0xFFD9B267),
-    ink: Color(0xFFECEFE4),
-    muted: Color(0xFF9AA893),
-    line: Color(0xFF2C3E30),
+    cream: Color(0xFF16110E),
+    creamCard: Color(0xFF201914),
+    creamSunk: Color(0xFF1B1511),
+    forest: Color(0xFFF4E7D8),
+    leaf: Color(0xFFD66B34),
+    gold: Color(0xFFD6B66F),
+    ink: Color(0xFFF5EEE7),
+    muted: Color(0xFFB9AA9C),
+    line: Color(0xFF3D3027),
     danger: Color(0xFFE0796A),
-    btnText: Color(0xFF0E1A12),
+    btnText: Color(0xFFFFFAF4),
   );
 }
 

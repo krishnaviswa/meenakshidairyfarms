@@ -20,25 +20,29 @@ const orderHref = localizePath("/order", lang);
 
 <Base lang={lang} path="/" title={seo.title} description={seo.description} settings={catalog.settings}>
   <section class="hero wrap">
-    <HeroScene />
-    <p class="eyebrow">{t("home.eyebrow")}</p>
-    <h1>{t("home.heroTitle")}</h1>
-    <p class="lede">{t("home.heroBody")}</p>
-    <div class="actions">
-      <a class="btn btn-primary" href={orderHref}>{t("home.heroCta")}</a>
-      <a class="btn btn-ghost" href={localizePath("/our-milk", lang)}>{t("home.heroSecondary")}</a>
-    </div>
-    <div class="chips">
-      {chips.map((c) => <span class="chip">{c}</span>)}
-    </div>
-    <div class="price-flags">
-      <div class="price-flag">
-        <b>{formatInr(cow.pricePerHalfLitre)}</b>
-        <small>{t("common.cow")} · {t("common.perHalfLitre")}</small>
-      </div>
-      <div class="price-flag">
-        <b>{formatInr(buf.pricePerHalfLitre)}</b>
-        <small>{t("common.buffalo")} · {t("common.perHalfLitre")}</small>
+    <div class="hero-panel">
+      <HeroScene />
+      <div class="hero-copy">
+        <p class="eyebrow">{t("home.eyebrow")}</p>
+        <h1>{t("home.heroTitle")}</h1>
+        <p class="lede">{t("home.heroBody")}</p>
+        <div class="actions">
+          <a class="btn btn-primary" href={orderHref}>{t("home.heroCta")}</a>
+          <a class="btn btn-ghost" href={localizePath("/our-milk", lang)}>{t("home.heroSecondary")}</a>
+        </div>
+        <div class="chips">
+          {chips.map((c) => <span class="chip">{c}</span>)}
+        </div>
+        <div class="price-flags">
+          <div class="price-flag">
+            <b>{formatInr(cow.pricePerHalfLitre)}</b>
+            <small>{t("common.cow")} · {t("common.perHalfLitre")}</small>
+          </div>
+          <div class="price-flag">
+            <b>{formatInr(buf.pricePerHalfLitre)}</b>
+            <small>{t("common.buffalo")} · {t("common.perHalfLitre")}</small>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -49,6 +53,7 @@ const orderHref = localizePath("/order", lang);
       <p class="lede">{t("home.breedsBody")}</p>
       <div class="grid cols-2" style="margin-top:26px">
         <article class="card breed-card">
+          <img class="breed-card-photo" src="/images/breeds/sahiwal.webp" alt="A reddish-brown Sahiwal cow" width="1800" height="1200" loading="lazy" />
           <span class="kicker">{cow.breed}</span>
           <h3>{cow.name}</h3>
           <p>{cow.tagline}</p>
@@ -62,6 +67,7 @@ const orderHref = localizePath("/order", lang);
           <a class="btn btn-primary" href={orderHref}>{t("common.orderCta")}</a>
         </article>
         <article class="card breed-card">
+          <img class="breed-card-photo" src="/images/breeds/murrah.webp" alt="A herd of black Murrah buffaloes" width="1800" height="1200" loading="lazy" />
           <span class="kicker">{buf.breed}</span>
           <h3>{buf.name}</h3>
           <p>{buf.tagline}</p>

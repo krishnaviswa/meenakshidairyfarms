@@ -165,25 +165,19 @@ const cfg = {
 </Base>
 
 <style>
+  #orderForm { padding:clamp(22px,4vw,34px); gap:18px !important; border-top:4px solid var(--leaf); }
   .field .q { display:block; font-size:12.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--forest); margin-bottom:6px; }
   :root[lang="hi"] .field .q, :root[lang="ta"] .field .q { text-transform:none; letter-spacing:normal; }
   .field .req { color:var(--danger); }
   .field .hint { font-weight:500; text-transform:none; letter-spacing:0; color:var(--muted); font-size:12px; }
-  input[type="text"], input[type="tel"], input[type="number"], input[type="date"], textarea, select {
-    width:100%; font:inherit; color:var(--ink); background:var(--cream);
-    border:1.5px solid var(--line); border-radius:12px; padding:11px 13px;
-    font-family:"Mulish","Noto Sans Tamil","Noto Sans Devanagari",sans-serif;
-  }
-  textarea { min-height:62px; resize:vertical; }
-  input:focus, textarea:focus, select:focus { outline:none; border-color:var(--leaf); box-shadow:0 0 0 3px rgba(78,154,84,.22); }
   .row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   @media (max-width:430px) { .row2 { grid-template-columns:1fr; } }
   .field.invalid input, .field.invalid textarea { border-color:var(--danger); }
   .err { display:none; color:var(--danger); font-size:12.5px; font-weight:600; margin-top:5px; }
   .field.invalid .err { display:block; }
   .milkrows { display:flex; flex-direction:column; gap:10px; }
-  .milkrow { display:flex; align-items:center; justify-content:space-between; gap:12px; border:1.5px solid var(--line); border-radius:14px; padding:12px 13px; background:var(--cream); }
-  .milkrow.has-qty { border-color:var(--leaf); background:color-mix(in srgb, var(--leaf) 10%, var(--cream)); }
+  .milkrow { display:flex; align-items:center; justify-content:space-between; gap:12px; border:1px solid var(--line); border-radius:14px; padding:14px; background:var(--cream-card); }
+  .milkrow.has-qty { border-color:var(--leaf); background:color-mix(in srgb, var(--leaf) 7%, var(--cream-card)); box-shadow:0 0 0 2px color-mix(in srgb, var(--leaf) 8%, transparent); }
   .milkrow .pname { font-weight:700; color:var(--forest); font-size:14.5px; }
   .milkrow .pbreed { display:block; font-size:12px; color:var(--muted); margin-top:2px; }
   .stepper { display:flex; max-width:150px; flex:none; }
@@ -193,7 +187,7 @@ const cfg = {
   .stepper input { border-radius:0; border-left:none; border-right:none; text-align:center; font-weight:700; -moz-appearance:textfield; }
   .stepper input::-webkit-outer-spin-button, .stepper input::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
   @media (max-width:430px) { .milkrow { flex-direction:column; align-items:stretch; } .stepper { max-width:100%; } }
-  .summary { display:flex; align-items:baseline; justify-content:space-between; gap:10px; padding:13px 15px; background:var(--cream-sunk); border:1px dashed var(--gold); border-radius:13px; }
+  .summary { display:flex; align-items:baseline; justify-content:space-between; gap:10px; padding:17px 18px; background:color-mix(in srgb, var(--gold) 10%, var(--cream-card)); border:1px solid color-mix(in srgb, var(--gold) 65%, var(--line)); border-radius:14px; }
   .summary .lbl { font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:700; }
   :root[lang="hi"] .summary .lbl, :root[lang="ta"] .summary .lbl { text-transform:none; letter-spacing:normal; }
   .summary .amt { font-family:"Fraunces",Georgia,serif; font-weight:700; font-size:1.5rem; color:var(--forest); }

@@ -9,42 +9,41 @@ Flutter app (`app/lib/theme`) both derive their theme from this file.
 
 | Token | Hex | Use |
 |---|---|---|
-| `cream` | `#F5EFE0` | page background |
-| `cream-card` | `#FDFBF3` | cards, raised surfaces |
-| `cream-sunk` | `#EFE7D3` | sunken panels, input fill |
-| `forest` | `#1E4A2B` | headings, primary text accents, dark buttons |
-| `leaf` | `#3C7D45` | primary action, links |
-| `leaf-bright` | `#4E9A54` | hover / active on leaf |
-| `gold` | `#BE8F35` | secondary accent, dashed borders, rules |
-| `ink` | `#2A2A22` | body text |
-| `muted` | `#6E6A5A` | secondary text |
-| `line` | `#DCD2B9` | borders, dividers |
+| `cream` | `#FBF8F2` | page background |
+| `cream-card` | `#FFFFFF` | cards, raised surfaces |
+| `cream-sunk` | `#F3EBE0` | sunken panels, input fill |
+| `forest` | `#3A2718` | cocoa headings, primary text accents, dark buttons |
+| `leaf` | `#C45C26` | terracotta primary action and links |
+| `leaf-bright` | `#D46A32` | hover / active on terracotta |
+| `gold` | `#C4A35A` | secondary accent, borders, rules |
+| `ink` | `#2C241C` | body text |
+| `muted` | `#75695D` | secondary text |
+| `line` | `#E7DCCB` | borders, dividers |
 | `danger` | `#A6392B` | errors, required marks |
-| `btn-text` | `#FFFDF6` | text on `leaf` / `forest` |
+| `btn-text` | `#FFFAF4` | text on `leaf` / `forest` |
 
 ### Dark
 
 | Token | Hex |
 |---|---|
-| `cream` | `#101C15` |
-| `cream-card` | `#17271C` |
-| `cream-sunk` | `#12211A` |
-| `forest` | `#DDEAD7` |
-| `leaf` | `#58A55E` |
-| `leaf-bright` | `#6DBE72` |
-| `gold` | `#D9B267` |
-| `ink` | `#ECEFE4` |
-| `muted` | `#9AA893` |
-| `line` | `#2C3E30` |
+| `cream` | `#16110E` |
+| `cream-card` | `#201914` |
+| `cream-sunk` | `#1B1511` |
+| `forest` | `#F4E7D8` |
+| `leaf` | `#D66B34` |
+| `leaf-bright` | `#E37B43` |
+| `gold` | `#D6B66F` |
+| `ink` | `#F5EEE7` |
+| `muted` | `#B9AA9C` |
+| `line` | `#3D3027` |
 | `danger` | `#E0796A` |
-| `btn-text` | `#0E1A12` |
+| `btn-text` | `#FFFAF4` |
 
 Theme resolution: explicit `data-theme="dark|light"` on `:root` wins; otherwise
 follow `prefers-color-scheme`. Persist the user's choice in `localStorage`
 (`meenakshi_theme`).
 
-Shadows: `--shadow: 0 10px 34px -14px rgba(30,55,31,.34)` ·
-`--shadow-sm: 0 4px 14px -8px rgba(30,55,31,.3)`.
+Shadows use warm cocoa-tinted low-opacity values, never green-tinted shadows.
 
 ## Type
 

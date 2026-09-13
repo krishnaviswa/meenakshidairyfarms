@@ -217,7 +217,7 @@ export function encode(text, opts = {}) {
 }
 
 /** Render a matrix into an <img> inside `box`. */
-export function drawQr(box, text, { scale = 10, dark = "#1E4A2B", light = "#ffffff", px = 190, alt = "QR code" } = {}) {
+export function drawQr(box, text, { scale = 10, dark = "#3A2718", light = "#ffffff", px = 190, alt = "QR code" } = {}) {
   const enc = encode(text, { ecl: "M" });
   const m = enc.matrix, n = enc.size, quiet = 4;
   const dim = (n + quiet * 2) * scale;
