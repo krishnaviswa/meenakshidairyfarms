@@ -5,20 +5,26 @@ Flutter app (`app/lib/theme`) both derive their theme from this file.
 
 ## Colour
 
+The palette is a balanced "nature-positive" mix: warm ivory surfaces, botanical
+forest green for headings and primary accents, fresh leaf green for actions and
+links, and warm sunlight gold as a secondary accent. Cream / white stays the
+dominant surface so the look never becomes an all-green wash. Cocoa and
+terracotta are intentionally avoided.
+
 ### Light (default)
 
 | Token | Hex | Use |
 |---|---|---|
-| `cream` | `#FBF8F2` | page background |
+| `cream` | `#FBF8F2` | warm ivory page background |
 | `cream-card` | `#FFFFFF` | cards, raised surfaces |
-| `cream-sunk` | `#F3EBE0` | sunken panels, input fill |
-| `forest` | `#3A2718` | cocoa headings, primary text accents, dark buttons |
-| `leaf` | `#C45C26` | terracotta primary action and links |
-| `leaf-bright` | `#D46A32` | hover / active on terracotta |
-| `gold` | `#C4A35A` | secondary accent, borders, rules |
-| `ink` | `#2C241C` | body text |
-| `muted` | `#75695D` | secondary text |
-| `line` | `#E7DCCB` | borders, dividers |
+| `cream-sunk` | `#F1ECDF` | sunken panels, input fill |
+| `forest` | `#1F3D2B` | botanical forest green — headings, primary text accents, dark buttons |
+| `leaf` | `#3E8B40` | fresh leaf green — primary action and links |
+| `leaf-bright` | `#4FA450` | hover / active on leaf |
+| `gold` | `#E0A82E` | warm sunlight gold — secondary accent, borders, rules |
+| `ink` | `#2A2A24` | body text |
+| `muted` | `#6E7A6A` | secondary text |
+| `line` | `#E3E6DD` | borders, dividers |
 | `danger` | `#A6392B` | errors, required marks |
 | `btn-text` | `#FFFAF4` | text on `leaf` / `forest` |
 
@@ -26,16 +32,16 @@ Flutter app (`app/lib/theme`) both derive their theme from this file.
 
 | Token | Hex |
 |---|---|
-| `cream` | `#16110E` |
-| `cream-card` | `#201914` |
-| `cream-sunk` | `#1B1511` |
-| `forest` | `#F4E7D8` |
-| `leaf` | `#D66B34` |
-| `leaf-bright` | `#E37B43` |
-| `gold` | `#D6B66F` |
-| `ink` | `#F5EEE7` |
-| `muted` | `#B9AA9C` |
-| `line` | `#3D3027` |
+| `cream` | `#14160E` |
+| `cream-card` | `#1C2117` |
+| `cream-sunk` | `#181D13` |
+| `forest` | `#EAF1E2` |
+| `leaf` | `#5DB85D` |
+| `leaf-bright` | `#6FC96F` |
+| `gold` | `#E8B84A` |
+| `ink` | `#EAF1E2` |
+| `muted` | `#A8B4A4` |
+| `line` | `#2E3527` |
 | `danger` | `#E0796A` |
 | `btn-text` | `#FFFAF4` |
 
@@ -43,7 +49,8 @@ Theme resolution: explicit `data-theme="dark|light"` on `:root` wins; otherwise
 follow `prefers-color-scheme`. Persist the user's choice in `localStorage`
 (`meenakshi_theme`).
 
-Shadows use warm cocoa-tinted low-opacity values, never green-tinted shadows.
+Shadows use warm low-opacity values tinted toward the forest green, never harsh
+black and never cocoa.
 
 ## Type
 

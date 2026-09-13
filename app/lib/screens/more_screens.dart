@@ -8,7 +8,11 @@ import "../state.dart";
 import "../theme.dart";
 
 class AccountScreen extends StatefulWidget {
-  const AccountScreen({super.key, required this.state, required this.onReorder});
+  const AccountScreen({
+    super.key,
+    required this.state,
+    required this.onReorder,
+  });
   final FarmState state;
   final ValueChanged<FarmOrder> onReorder;
 
@@ -66,7 +70,8 @@ class _AccountScreenState extends State<AccountScreen> {
 
   Future<void> _sendCode() async {
     final digits = _phone.text.replaceAll(RegExp(r"\D"), "");
-    if (digits.length < 10) return setState(() => _error = state.t("account.invalidPhone"));
+    if (digits.length < 10)
+      return setState(() => _error = state.t("account.invalidPhone"));
     setState(() {
       _busy = true;
       _error = null;
@@ -117,18 +122,27 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final c = Theme.of(context).brightness == Brightness.dark ? FarmColors.dark : FarmColors.light;
+    final c = Theme.of(context).brightness == Brightness.dark
+        ? FarmColors.dark
+        : FarmColors.light;
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
       children: [
-        Text(state.t("account.title"), style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: c.forest)),
+        Text(
+          state.t("account.title"),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall?.copyWith(color: c.forest),
+        ),
         const SizedBox(height: 8),
         if (!state.isLoggedIn) _loginCard(c) else ..._loggedInContent(c),
         const SizedBox(height: 20),
         Text(state.t("common.callWhatsApp"), style: TextStyle(color: c.muted)),
         TextButton(
           onPressed: () => launchUrl(
-            Uri.parse("https://wa.me/${state.catalog?.settings.waNumber ?? AppConfig.fallbackWa}"),
+            Uri.parse(
+              "https://wa.me/${state.catalog?.settings.waNumber ?? AppConfig.fallbackWa}",
+            ),
             mode: LaunchMode.externalApplication,
           ),
           child: Text(state.t("common.callWhatsApp")),
@@ -144,41 +158,74 @@ class _AccountScreenState extends State<AccountScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(state.t("account.loginTitle"), style: TextStyle(color: c.forest, fontWeight: FontWeight.w700, fontSize: 16)),
+            Text(
+              state.t("account.loginTitle"),
+              style: TextStyle(
+                color: c.forest,
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+              ),
+            ),
             const SizedBox(height: 6),
-            Text(_codeStep ? state.t("account.codeLabel") : state.t("account.loginBody"), style: TextStyle(color: c.muted)),
+            Text(
+              _codeStep
+                  ? state.t("account.codeLabel")
+                  : state.t("account.loginBody"),
+              style: TextStyle(color: c.muted),
+            ),
             const SizedBox(height: 12),
             if (_error != null)
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
-                child: Text(_error!, style: TextStyle(color: c.danger, fontWeight: FontWeight.w600)),
+                child: Text(
+                  _error!,
+                  style: TextStyle(
+                    color: c.danger,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             if (_devCode != null)
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
-                child: Text("${state.t("account.devCodeHint")} $_devCode", style: TextStyle(color: c.gold, fontWeight: FontWeight.w700)),
+                child: Text(
+                  "${state.t("account.devCodeHint")} $_devCode",
+                  style: TextStyle(color: c.gold, fontWeight: FontWeight.w700),
+                ),
               ),
             if (!_codeStep) ...[
               TextField(
                 controller: _phone,
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(labelText: state.t("account.phoneLabel")),
+                decoration: InputDecoration(
+                  labelText: state.t("account.phoneLabel"),
+                ),
               ),
               const SizedBox(height: 10),
               FilledButton(
                 onPressed: _busy ? null : _sendCode,
-                child: Text(_busy ? state.t("account.sendingCode") : state.t("account.sendCode")),
+                child: Text(
+                  _busy
+                      ? state.t("account.sendingCode")
+                      : state.t("account.sendCode"),
+                ),
               ),
             ] else ...[
               TextField(
                 controller: _code,
                 keyboardType: TextInputType.number,
                 maxLength: 6,
-                decoration: InputDecoration(labelText: state.t("account.codeLabel")),
+                decoration: InputDecoration(
+                  labelText: state.t("account.codeLabel"),
+                ),
               ),
               FilledButton(
                 onPressed: _busy ? null : _verify,
-                child: Text(_busy ? state.t("account.verifying") : state.t("account.verify")),
+                child: Text(
+                  _busy
+                      ? state.t("account.verifying")
+                      : state.t("account.verify"),
+                ),
               ),
               TextButton(
                 onPressed: () => setState(() {
@@ -199,17 +246,32 @@ class _AccountScreenState extends State<AccountScreen> {
     return [
       Align(
         alignment: Alignment.centerRight,
-        child: TextButton(onPressed: _logout, child: Text(state.t("account.signOut"))),
+        child: TextButton(
+          onPressed: _logout,
+          child: Text(state.t("account.signOut")),
+        ),
       ),
-      Text(state.t("account.ordersTitle"), style: Theme.of(context).textTheme.titleLarge?.copyWith(color: c.forest)),
+      Text(
+        state.t("account.ordersTitle"),
+        style: Theme.of(
+          context,
+        ).textTheme.titleLarge?.copyWith(color: c.forest),
+      ),
       const SizedBox(height: 8),
       if (_orders == null && state.recent.isNotEmpty)
         for (final o in state.recent)
           Card(
             child: ListTile(
-              title: Text(o.items.map((e) => "${e.litres} L ${e.key}").join(" + ")),
-              subtitle: Text("${state.t("order.pay_ref")} ${o.ref} · ₹${o.total}"),
-              trailing: TextButton(onPressed: () => widget.onReorder(o), child: Text(state.t("order.reorder"))),
+              title: Text(
+                o.items.map((e) => "${e.litres} L ${e.key}").join(" + "),
+              ),
+              subtitle: Text(
+                "${state.t("order.pay_ref")} ${o.ref} · ₹${o.total}",
+              ),
+              trailing: TextButton(
+                onPressed: () => widget.onReorder(o),
+                child: Text(state.t("order.reorder")),
+              ),
             ),
           )
       else if (_orders == null)
@@ -220,13 +282,23 @@ class _AccountScreenState extends State<AccountScreen> {
         for (final o in _orders!)
           Card(
             child: ListTile(
-              title: Text(o.items.map((e) => "${e.litres} L ${e.key}").join(" + ")),
+              title: Text(
+                o.items.map((e) => "${e.litres} L ${e.key}").join(" + "),
+              ),
               subtitle: Text("${o.ref} · ${o.createdAt.split("T").first}"),
-              trailing: Text("₹${o.total.round()}", style: TextStyle(color: c.forest, fontWeight: FontWeight.w700)),
+              trailing: Text(
+                "₹${o.total.round()}",
+                style: TextStyle(color: c.forest, fontWeight: FontWeight.w700),
+              ),
             ),
           ),
       const SizedBox(height: 18),
-      Text(state.t("account.paymentsTitle"), style: Theme.of(context).textTheme.titleLarge?.copyWith(color: c.forest)),
+      Text(
+        state.t("account.paymentsTitle"),
+        style: Theme.of(
+          context,
+        ).textTheme.titleLarge?.copyWith(color: c.forest),
+      ),
       const SizedBox(height: 8),
       if (_payments == null)
         Text(state.t("account.loadError"), style: TextStyle(color: c.muted))
@@ -251,7 +323,10 @@ class _AccountScreenState extends State<AccountScreen> {
                 },
                 child: Text(state.t("account.markPaid")),
               )
-            : Text(state.t("account.paidSelfReported"), style: TextStyle(color: c.leaf, fontWeight: FontWeight.w700)),
+            : Text(
+                state.t("account.paidSelfReported"),
+                style: TextStyle(color: c.leaf, fontWeight: FontWeight.w700),
+              ),
       ),
     );
   }
@@ -264,25 +339,49 @@ class MilkScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = Theme.of(context).brightness == Brightness.dark ? FarmColors.dark : FarmColors.light;
+    final c = Theme.of(context).brightness == Brightness.dark
+        ? FarmColors.dark
+        : FarmColors.light;
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
       children: [
-        Text(state.t("ourMilk.title"), style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: c.forest)),
+        Text(
+          state.t("ourMilk.title"),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall?.copyWith(color: c.forest),
+        ),
         Text(state.t("ourMilk.intro"), style: TextStyle(color: c.muted)),
         const SizedBox(height: 16),
-        Text(state.t("ourMilk.a2SectionTitle"), style: Theme.of(context).textTheme.titleLarge?.copyWith(color: c.forest)),
-        for (final p in state.i18n?.strings("ourMilk.a2Paras") ?? const <String>[])
-          Padding(padding: const EdgeInsets.only(top: 8), child: Text(p, style: const TextStyle(height: 1.45))),
+        Text(
+          state.t("ourMilk.a2SectionTitle"),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(color: c.forest),
+        ),
+        for (final p
+            in state.i18n?.strings("ourMilk.a2Paras") ?? const <String>[])
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(p, style: const TextStyle(height: 1.45)),
+          ),
         const SizedBox(height: 16),
-        Text(state.t("ourMilk.chooseTitle"), style: Theme.of(context).textTheme.titleLarge?.copyWith(color: c.forest)),
+        Text(
+          state.t("ourMilk.chooseTitle"),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(color: c.forest),
+        ),
         Text("• ${state.t("ourMilk.chooseCow")}"),
         Text("• ${state.t("ourMilk.chooseBuf")}"),
         Text("• ${state.t("ourMilk.chooseBoth")}"),
         const SizedBox(height: 16),
         Text(state.t("ourMilk.priceNote")),
         const SizedBox(height: 12),
-        FilledButton(onPressed: onOrder, child: Text(state.t("ourMilk.priceCta"))),
+        FilledButton(
+          onPressed: onOrder,
+          child: Text(state.t("ourMilk.priceCta")),
+        ),
       ],
     );
   }
@@ -294,23 +393,75 @@ class FarmScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = Theme.of(context).brightness == Brightness.dark ? FarmColors.dark : FarmColors.light;
+    final c = Theme.of(context).brightness == Brightness.dark
+        ? FarmColors.dark
+        : FarmColors.light;
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
       children: [
-        Text(state.t("ourFarm.title"), style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: c.forest)),
+        Text(
+          state.t("ourFarm.title"),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall?.copyWith(color: c.forest),
+        ),
         Text(state.t("ourFarm.intro"), style: TextStyle(color: c.muted)),
         const SizedBox(height: 16),
-        Text(state.t("ourFarm.sahiwalTitle"), style: Theme.of(context).textTheme.titleLarge?.copyWith(color: c.forest)),
-        for (final p in state.i18n?.strings("ourFarm.sahiwalBody") ?? const <String>[])
+        Text(
+          state.t("ourFarm.sahiwalTitle"),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(color: c.forest),
+        ),
+        const SizedBox(height: 10),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Image.asset(
+            "assets/images/sahiwal-natural.webp",
+            width: double.infinity,
+            height: 220,
+            fit: BoxFit.cover,
+            alignment: Alignment.center,
+            semanticLabel: state.t("ourFarm.sahiwalTitle"),
+          ),
+        ),
+        const SizedBox(height: 12),
+        for (final p
+            in state.i18n?.strings("ourFarm.sahiwalBody") ?? const <String>[])
+          Padding(padding: const EdgeInsets.only(top: 8), child: Text(p)),
+        const SizedBox(height: 20),
+        Text(
+          state.t("ourFarm.murrahTitle"),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(color: c.forest),
+        ),
+        const SizedBox(height: 10),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Image.asset(
+            "assets/images/murrah-natural.webp",
+            width: double.infinity,
+            height: 220,
+            fit: BoxFit.cover,
+            alignment: Alignment.center,
+            semanticLabel: state.t("ourFarm.murrahTitle"),
+          ),
+        ),
+        const SizedBox(height: 12),
+        for (final p
+            in state.i18n?.strings("ourFarm.murrahBody") ?? const <String>[])
           Padding(padding: const EdgeInsets.only(top: 8), child: Text(p)),
         const SizedBox(height: 16),
-        Text(state.t("ourFarm.murrahTitle"), style: Theme.of(context).textTheme.titleLarge?.copyWith(color: c.forest)),
-        for (final p in state.i18n?.strings("ourFarm.murrahBody") ?? const <String>[])
-          Padding(padding: const EdgeInsets.only(top: 8), child: Text(p)),
-        const SizedBox(height: 16),
-        Text(state.t("ourFarm.practicesTitle"), style: Theme.of(context).textTheme.titleLarge?.copyWith(color: c.forest)),
-        for (final p in state.i18n?.maps("ourFarm.practices") ?? const <Map<String, dynamic>>[])
+        Text(
+          state.t("ourFarm.practicesTitle"),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(color: c.forest),
+        ),
+        for (final p
+            in state.i18n?.maps("ourFarm.practices") ??
+                const <Map<String, dynamic>>[])
           ListTile(title: Text("${p["t"]}"), subtitle: Text("${p["d"]}")),
       ],
     );
@@ -323,16 +474,30 @@ class FaqScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = Theme.of(context).brightness == Brightness.dark ? FarmColors.dark : FarmColors.light;
+    final c = Theme.of(context).brightness == Brightness.dark
+        ? FarmColors.dark
+        : FarmColors.light;
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
       children: [
-        Text(state.t("faq.title"), style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: c.forest)),
+        Text(
+          state.t("faq.title"),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall?.copyWith(color: c.forest),
+        ),
         const SizedBox(height: 8),
-        for (final item in state.i18n?.maps("faq.items") ?? const <Map<String, dynamic>>[])
-          ExpansionTile(title: Text("${item["q"]}"), children: [
-            Padding(padding: const EdgeInsets.fromLTRB(16, 0, 16, 16), child: Text("${item["a"]}")),
-          ]),
+        for (final item
+            in state.i18n?.maps("faq.items") ?? const <Map<String, dynamic>>[])
+          ExpansionTile(
+            title: Text("${item["q"]}"),
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                child: Text("${item["a"]}"),
+              ),
+            ],
+          ),
       ],
     );
   }

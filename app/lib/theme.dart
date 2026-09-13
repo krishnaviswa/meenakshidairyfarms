@@ -32,27 +32,27 @@ class FarmColors {
   static const light = FarmColors(
     cream: Color(0xFFFBF8F2),
     creamCard: Color(0xFFFFFFFF),
-    creamSunk: Color(0xFFF3EBE0),
-    forest: Color(0xFF3A2718),
-    leaf: Color(0xFFC45C26),
-    gold: Color(0xFFC4A35A),
-    ink: Color(0xFF2C241C),
-    muted: Color(0xFF75695D),
-    line: Color(0xFFE7DCCB),
+    creamSunk: Color(0xFFF1ECDF),
+    forest: Color(0xFF1F3D2B),
+    leaf: Color(0xFF3E8B40),
+    gold: Color(0xFFE0A82E),
+    ink: Color(0xFF2A2A24),
+    muted: Color(0xFF6E7A6A),
+    line: Color(0xFFE3E6DD),
     danger: Color(0xFFA6392B),
     btnText: Color(0xFFFFFAF4),
   );
 
   static const dark = FarmColors(
-    cream: Color(0xFF16110E),
-    creamCard: Color(0xFF201914),
-    creamSunk: Color(0xFF1B1511),
-    forest: Color(0xFFF4E7D8),
-    leaf: Color(0xFFD66B34),
-    gold: Color(0xFFD6B66F),
-    ink: Color(0xFFF5EEE7),
-    muted: Color(0xFFB9AA9C),
-    line: Color(0xFF3D3027),
+    cream: Color(0xFF14160E),
+    creamCard: Color(0xFF1C2117),
+    creamSunk: Color(0xFF181D13),
+    forest: Color(0xFFEAF1E2),
+    leaf: Color(0xFF5DB85D),
+    gold: Color(0xFFE8B84A),
+    ink: Color(0xFFEAF1E2),
+    muted: Color(0xFFA8B4A4),
+    line: Color(0xFF2E3527),
     danger: Color(0xFFE0796A),
     btnText: Color(0xFFFFFAF4),
   );
@@ -118,8 +118,8 @@ ThemeData farmTheme(Brightness brightness) {
   );
 
   return base.copyWith(
-    textTheme: body.apply(bodyColor: c.ink, displayColor: c.forest).merge(
-          display.apply(bodyColor: c.ink, displayColor: c.forest),
-        ),
+    textTheme: body
+        .apply(bodyColor: c.ink, displayColor: c.forest)
+        .merge(display.apply(bodyColor: c.ink, displayColor: c.forest)),
   );
 }
